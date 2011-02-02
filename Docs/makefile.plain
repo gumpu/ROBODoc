@@ -1,0 +1,19 @@
+# $Id: makefile.plain,v 1.1 2007/06/23 16:29:59 gumpu Exp $
+
+SOURCE =  manual.xml preparing.xml options.xml tips.xml installing.xml examples.xml extracting.xml bugs.xml configuration.xml header_examples.xml
+
+# Manual as a single HTML file
+manual.html : $(SOURCE) manual.xsl
+	xsltproc manual.xsl manual.xml > manual.html
+
+header_examples.xml : header_specs.pl 
+	perl header_specs.pl
+
+
+clean :
+
+all : manual.html
+
+# Lint the manual to detect errors against the DTD.
+test :
+	xmllint --noent --noout manual.xml

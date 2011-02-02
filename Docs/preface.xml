@@ -1,0 +1,46 @@
+<!-- $Id: preface.xml,v 1.4 2007/05/11 08:16:44 thuffir Exp $ -->
+<section>
+    <title>Preface</title>
+
+    <para>ROBODoc is an API documentation tool for C, C++, Java, Assembler,
+        Basic, Fortran, LaTeX, Postscript, Tcl/Tk, LISP, Forth, Perl, Shell
+        Scripts, Makefiles, Occam, COBOL, DCL, Visual Basic, HTML, DB/C, XML,
+        and many other languages.  It can be made to work with any language that
+        supports comments.</para>
+
+    <para>ROBODoc works by extracting specially formatted headers from your
+        source code and writes these to documentation files. These files can be
+        formatted in HTML, ASCII, XML DocBook, or RTF; and indirectly to
+        PDF and HTML Help.</para>
+
+    <para>ROBODoc is similar to JavaDoc, though the idea is much
+        older than JavaDoc.  ROBODoc allows you to maintain a program and
+        its documentation in a single file.  This makes it easier to keep
+        your documentation up-to-date.</para>
+
+    <para>ROBODoc can be used to document anything you like,
+        functions, methods, variables, definitions, test cases, makefile
+        entries, and anything else you can think of.</para>
+
+    <para>It can create documentation consisting of many small files.
+        For instance in HTML format for easy browsing and publication on
+        the web.  It can also create a single file in LaTeX or RTF format
+        for inclusion into bigger design documents.  The RTF format is
+        suited to be included in Word documents.</para>
+
+    <para>ROBODoc allows you to separate internal documentation from
+        external documentation.  In singledoc mode it can create a section
+        layout based on the hierarchy of your modules.</para>
+
+    <para>ROBODoc is designed to work with a lot of different
+        programming languages.  It has no knowledge of the syntax of
+        programming languages.  It only has some knowledge about how
+        comments start and end in a lot of programming languages.  This
+        means that you sometimes have to do a little more work compared to
+        other tools that have detailed knowledge of the syntax of a
+        particular language.  They can use that knowledge to figure out
+        some of the information automatically.  This usually also means
+        that they work only with one or two languages.  </para>
+
+</section>
+

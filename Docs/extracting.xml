@@ -1,0 +1,121 @@
+<section>
+<title>Extracting Documentation with ROBODoc</title>
+
+    <para>Now that you have prepared your source code for use with
+    ROBODoc you are ready to extract the documentation.  There are
+    several choices to be made.</para>
+
+<section>
+<title>Single document or many smaller documents</title>
+
+    <para>First of all, ROBODoc can be used in three modes.</para>
+
+    <itemizedlist> 
+
+    <listitem><para>multidoc -- in this mode ROBODoc scans
+    all the source files in your source directory and creates a
+    separate document file for each of these in a document directory.
+    The document directory is created automatically. Its structure is
+    a mirror of the structure of your source directory.</para></listitem> 
+
+    <listitem><para>singledoc -- in this mode ROBODoc scans all the source
+    files in your source directory and creates a single documentation
+    file that contains all the documentation extracted from your
+    source files.  </para></listitem>
+
+    <listitem><para>singlefile -- in this mode ROBODoc scans a single source
+    file and creates a single documentation file.</para></listitem>
+
+    </itemizedlist>
+</section>
+
+<section>
+<title>multidoc</title>
+
+    <para>The multidoc mode is useful to create browsable documents.
+    For instance many small HTML files that can be viewed with a
+    web-browser.  This mode requires the following arguments:</para>
+
+    <para>
+    <command>robodoc
+    --src <replaceable>source directory</replaceable>
+    --doc <replaceable>document directory</replaceable>
+    --multidoc
+    other options
+    </command>
+</para>
+
+    <para>An additional option that is useful with this mode is
+    <option>--index</option>, this creates a series of index files,
+    one for each header type.</para>
+
+</section>
+
+
+<section>
+<title>singledoc</title>
+
+    <para> The singledoc mode is useful to create bulk documentation
+    that can be incorporated in other documents, or that can be
+    delivered to a client as a single document.  For instance a file
+    created in RTF format can be included into a larger design
+    document written in Word format.  This mode requires the following
+    arguments:</para>
+
+<para>
+    <command>robodoc
+        --src <replaceable>source directory</replaceable>
+        --doc <replaceable>document file without extension</replaceable>
+        --singledoc
+        <replaceable>other options</replaceable>
+    </command>
+</para>
+
+    <para>An additional option that is useful with this mode is
+    <option>--sections</option>, this causes the headers to follow a
+    section layout based on the module element hierarchy defined in the
+    header name.</para>
+
+</section>
+
+
+<section>
+<title>singlefile</title>
+
+    <para>The singlefile mode is not very useful.  It is mainly used
+    for debugging purposes.  This mode requires the following
+    arguments:</para>
+
+<para>
+    <command>robodoc
+    --src <replaceable>source file</replaceable>
+    --doc <replaceable>document file</replaceable>
+    --singlefile
+    other options
+</command>
+</para>
+
+</section>
+
+<section>
+<title>Output formats</title>
+
+    <para>Your next choice is the output format. ROBODoc can create
+    documentation in several formats:</para>
+
+    <itemizedlist> 
+    <listitem><para>HTML, option <option>--html</option></para></listitem> 
+    <listitem><para>RTF, option <option>--rtf</option></para></listitem> 
+    <listitem><para>LaTeX, option <option>--latex</option></para></listitem> 
+    <listitem><para>XML DocBook, option <option>--dbxml</option></para></listitem> 
+    </itemizedlist>
+
+    <para>What format to use depends on your wishes. If you want a
+    single printable document, use LaTeX or XML DocBook.  If you want
+    a document that can be included into a larger (Word) document use
+    RTF.  If you want something that is browsable use HTML, or use XML
+    DocBook and then convert it to HTML.</para>
+
+</section>
+</section>
+

@@ -1,0 +1,38 @@
+# Make the documentation under the CYGWIN environment...
+# $Id: makefile.cygwin,v 1.3 2006/08/06 20:46:21 thuffir Exp $
+
+CP = cp
+RM = rm -rf
+
+SOURCE =  manual.xml preparing.xml options.xml tips.xml installing.xml examples.xml extracting.xml bugs.xml configuration.xml header_examples.xml
+
+
+# Manual as a single HTML file
+manual.html : $(SOURCE) manual-cygwin.xsl
+	xsltproc manual-cygwin.xsl manual.xml > manual.html
+
+header_examples.xml : header_specs.pl 
+	perl header_specs.pl
+
+# Manual in Windows help format.
+htmlhelp.chm : $(SOURCE) manual_html_help-cygwin.xsl
+	xsltproc manual_html_help-cygwin.xsl manual.xml
+	-hhc htmlhelp.hhp
+	$(CP) htmlhelp.chm manual.chm
+
+# Clean up.
+clean :
+	$(RM) \
+	manual.html \
+	index.html \
+	ar*.html \
+	*.chm \
+	*.hhc \
+	*.hhp \
+	header_examples.xml \
+
+all : manual.html htmlhelp.chm
+
+# Lint the manual to detect errors against the DTD.
+test : manual.html
+	xmllint --noent --noout manual.xml

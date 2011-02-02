@@ -1,0 +1,30 @@
+# $Id: makefile.win32,v 1.5 2007/02/06 22:31:38 gumpu Exp $
+
+SOURCE =  manual.xml preparing.xml options.xml tips.xml installing.xml examples.xml extracting.xml bugs.xml configuration.xml header_examples.xml
+
+
+# Manual as a single HTML file
+manual.html : $(SOURCE) manual.xsl
+	xsltproc manual.xsl manual.xml > manual.html
+
+header_examples.xml : header_specs.pl 
+	perl header_specs.pl
+
+# Manual in Windows help format.
+htmlhelp.chm : $(SOURCE) manual_html_help.xsl
+	xsltproc manual_html_help.xsl manual.xml
+	-hhc htmlhelp.hhp
+	copy htmlhelp.chm manual.chm
+
+clean :
+	-del ar*.html
+	-del *.chm
+	-del *.hhc
+	-del *.hhp
+	-del header_examples.xml 
+
+all : manual.html htmlhelp.chm
+
+# Lint the manual to detect errors against the DTD.
+test :
+	xmllint --noent --noout manual.xml

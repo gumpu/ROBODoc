@@ -1,0 +1,25 @@
+## Process this file with automake to produce Makefile.in
+
+man_MANS = robodoc.1 robohdrs.1
+
+if FINK
+man1_MANS = robodoc.1 robohdrs.1
+else
+man1_MANS = robodoc.1 robohdrs.1
+endif
+
+#if FINK
+#docdir = $(prefix)/share/doc/$(PACKAGE)
+#else
+#docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
+#endif
+
+if FINK
+doc_DATA = manual.html manual.css robodoc_example.rc
+else
+doc_DATA = manual.html manual.css robodoc_example.rc
+endif
+
+#
+# End of automake
+#

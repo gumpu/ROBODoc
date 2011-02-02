@@ -1,0 +1,110 @@
+<!DOCTYPE article PUBLIC "-//OASIS//DTD Simplified DocBook XML V1.1//EN" "docbook-simple/sdocbook.dtd"
+[
+<!ENTITY bugs            SYSTEM "bugs.xml">
+<!ENTITY configuration   SYSTEM "configuration.xml">
+<!ENTITY header_examples SYSTEM "header_examples.xml">
+<!ENTITY examples        SYSTEM "examples.xml">
+<!ENTITY extracting      SYSTEM "extracting.xml">
+<!ENTITY installing      SYSTEM "installing.xml">
+<!ENTITY options         SYSTEM "options.xml">
+<!ENTITY preface         SYSTEM "preface.xml">
+<!ENTITY preparing       SYSTEM "preparing.xml">
+<!ENTITY tips            SYSTEM "tips.xml">
+] >
+
+<!-- $Id: manual.xml,v 1.67 2010/05/12 19:41:00 gumpu Exp $ -->
+
+<article lang="en">
+
+<articleinfo>
+    <title>ROBODoc 4.99.40 User Manual</title>
+    <authorgroup>
+        <author>
+            <firstname>Frans</firstname>
+            <surname>Slothouber</surname>
+        </author>
+        <author>
+            <firstname>Petteri</firstname>
+            <surname>Kettunen</surname>
+        </author>
+        <author>
+            <firstname>Gergely</firstname>
+            <surname>Budai</surname>
+        </author>
+    </authorgroup>
+    <edition>Users Guide $Revision: 1.67 $</edition>
+    <pubdate>May 2010</pubdate>
+    <copyright>
+        <year>1994-2010</year>
+        <holder>
+          Frans Slothouber, Petteri Kettunen,
+          Jacco van Weert, Gergely Budai
+        </holder>
+    </copyright>
+</articleinfo>
+
+&preface;
+<!-- ========== I N S T A L L I N G  ======= -->
+&installing;
+<!-- ========== P R E P A R I N G ======= -->
+&preparing;
+<!-- ========== E X T R A C T I N G ======= -->
+&extracting;
+<!-- ========== E X A M P L E S  =========== -->
+&examples;
+<!-- ========== O P T I O N S ======= -->
+&options;
+<!-- ========== C O N F I G U R A T I O N -->
+&configuration;
+<!-- ========== T I P S  =========== -->
+&tips;
+<!-- ========== H I S T O R Y  =========== -->
+<!-- TODO -->
+<!-- ========== A P P E N D I X =============-->
+<section id="defaultheaders">
+    <title id="defaultheaders.title">Languages Supported by Default</title>
+    <para>
+        ROBODoc support a whole range of languages by default.
+        These languages are listed in the following sections.
+        For each language two example headers are shown.
+        One example header without any source items and
+        one example header with source items.
+    </para>
+
+    <para> Any of these markers can be mixed, and they are not limited
+    to the languages listed.  So if you have a language that is not
+    listed but that has remarks that start with a <literal>#</literal>
+    you can use the Tcl markers, and create headers such as:
+    </para>
+
+<programlisting>
+#****f* Foo/Bar
+# FUNCTION
+#   Bar snarfs the Foo input and mangles it.  Given the right settings
+#   it might also do a bit of snu snu.
+#***
+</programlisting>
+
+    <para>
+        In addition for each language the corresponding entries in
+        the <filename>robodoc.rc</filename> are shown.
+        You do not need these, as ROBODoc has these entries
+        built-in.  They are shown to make it easier
+        to determine what needs to be specified for languages
+        that ROBODoc does not yet support.
+    </para>
+
+    <para>
+        You can also use these entries if you want to create
+        a <filename>robodoc.rc</filename> that supports only a limited
+        number of languages.
+        This because if you specify your own markers, ROBODoc
+        ignores any of the in-built markers.
+    </para>
+    &header_examples;
+</section>
+
+&bugs;
+
+</article>
+

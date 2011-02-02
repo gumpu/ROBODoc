@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ========== INSTALLING  ===========
+  -->
+<section id="installing">
+  <title id="installing.title">Installing ROBODoc</title>
+  <para>The easiest way to install ROBODoc is to use one of the
+    packages.  There are package for RedHat, Debian, OSX, and a precompiled
+    executable for Windows.</para>
+  <para>You can also compile --- from the sources.  On a system
+    with <command>autoconfig</command> it is as simple as:</para>
+  <programlisting>
+./configure
+make
+make install
+</programlisting>
+  <para>This currently does not work with cygwin.</para>
+  <para>Under Windows you can use one of the makefile. There is a makefile for Borland C, MINGW,
+       and Cygwin.  For other compilers you might want to try  <filename>makefile.plain</filename>.
+</para>
+  <para>For instance for cygwin goto <filename>Source</filename> and run:</para>
+  <programlisting>
+make -f makefile.mingw-cygwin
+</programlisting>
+  <para>To install <command>ROBODoc</command> put the generated executable somewhere in your path.</para>
+  <para>You can test your executable, by going to the
+       <filename>Examples/PerlExample</filename> directory in the
+       archive, and running <command>robodoc</command>.
+       This should create a directory
+       called <filename>Doc</filename>.  In there you should now
+       find a file called <filename>masterindex.html</filename>.
+</para>
+</section>

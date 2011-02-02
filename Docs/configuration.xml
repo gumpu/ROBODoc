@@ -1,0 +1,464 @@
+<!-- $Id: configuration.xml,v 1.9 2007/05/11 08:16:44 thuffir Exp $ -->
+
+<section id="customizing">
+<title id="customizing.title">Customizing ROBODoc</title>
+
+<para> ROBODoc can be configured with a configuration file called
+    <filename>robodoc.rc</filename>.  With it you can define item
+    names, frequently used options, and translations for English
+    terms. One should note that if a configuration file is specified,
+    its definitions over-ride ROBODoc internal (i.e. built-in) settings.
+    This is a feature; some arbitrary language may include syntax
+    which conflicts with ROBODoc's internal markers. By taking advantage
+    of a configuration file, these sort of issues and conflicts
+    can be circumvented.  An example is shown below.
+</para>
+
+<programlisting>
+# Example robodoc.rc
+#
+items:
+    NAME
+    FUNCTION
+    SYNOPSIS
+    INPUTS
+    OUTPUTS
+    SIDE EFFECTS
+    HISTORY
+    BUGS
+    EXAMPLE
+ignore items:
+    HISTORY
+    BUGS
+item order:
+    FUNCTION
+    SYNOPSIS
+    INPUTS
+    OUTPUTS
+source items:
+    SYNOPSIS
+preformatted items:
+    INPUTS
+    OUTPUTS
+format items:
+    FUNCTION
+    SIDE EFFECTS
+options:
+    --src ./source
+    --doc ./doc
+    --html
+    --multidoc
+    --index
+    --tabsize 8
+headertypes:
+    J  "Projects"          robo_projects    2
+    F  "Files"             robo_files       1
+    e  "Makefile Entries"  robo_mk_entries
+    x  "System Tests"      robo_syst_tests
+    q  Queries             robo_queries
+ignore files:
+    README
+    CVS
+    *.bak
+    *~
+    "a test_*"
+accept files:
+    *.c
+    *.h
+    *.pl
+header markers:
+    /****
+    #****
+remark markers:
+    *
+    #
+end markers:
+    ****
+    #****
+header separate characters:
+    ,
+header ignore characters:
+    [
+remark begin markers:
+    /*
+remark end markers:
+    */
+source line comments:
+    //
+keywords:
+    if
+    do
+    while
+    for
+</programlisting>
+
+<para>The configuration file consists of a number of blocks.
+    Each block starts with a name followed by a
+    <literal>:</literal>.
+    In each block you define a number of values.  Each value must
+    start with at least one space.
+</para>
+
+<section><title>items block</title>
+    <para>In this block you can define the names of items that
+        ROBODoc should recognize.  Item names can consist of more than
+        one word but should be written in all uppercase characters.
+        Define one item name per line.  You do not need to put quotes
+        around them if they contain spaces.
+    </para>
+
+    <para>If you do not define an items block ROBODoc uses its
+        default list of item names.  If you define an items block
+        ROBODoc uses only those item names, any of the default items names
+        (except SOURCE) are no longer recognized.</para>
+</section>
+
+<section><title>ignore items block</title>
+    <para>In this block you can define the names of items that
+        ROBODoc should ignore when generating documentation.
+        This can be useful if you want to create documentation
+        for a client, but for instance do not want to include
+        the history items and bugs items.</para>
+</section>
+
+<section><title>item order block</title>
+    <para>In this block you can define the order in which items
+        are to appear in the generated documentation.
+        The items listed here will appear in the given order in the
+        generated documentation.  Any remaining items appear
+        after these items in the order they were found in the header.
+        This allows you to make the documentation look more uniform.
+        </para>
+</section>
+
+<section id="sourceitems">
+<title id="sourceitems.title">source items block</title>
+    <para>In this block you can define the names of items that
+        ROBODoc handles in the same way as the SOURCE item.
+    </para>
+</section>
+
+<section><title>preformatted items block</title>
+  <para>
+    In this block you can define the names of items that should be always
+    preformatted. This is useful if you have the
+    <option><xref linkend="nopre" endterm="nopre.term" /></option> option
+    specified and want specific items (like input and output lists) to be
+    automatically preformatted. See
+    <xref linkend="formatting" endterm="formatting.title" /> for more
+    information.
+  </para>
+</section>
+
+<section><title>format items block</title>
+  <para>
+    In this block you can define the names of items that should be formatted by
+    the <xref linkend="formatting" endterm="formatting.title" /> feature
+    (like function descriptions) even if the
+    <option><xref linkend="nopre" endterm="nopre.term" /></option>
+    option has not been specified.
+  </para>
+</section>
+
+<section><title>options block</title>
+    <para>In this block you can define frequently used options.
+        The options you specify here are added to any options you
+        specify on the command line.</para>
+    <para>
+      See <xref linkend="options" endterm="options.title" />.
+    </para>
+</section>
+
+<section id="headertypes_block">
+<title id="headertypes_block.title">headertypes block</title>
+    <para>In this block you can define your own header types.
+        These are added to the existing header types.  Each new
+        header type requires three parameters: the character used to
+        indicate a header of this type, the title for this type as
+        used in the master index and the name of the file in which the
+        index of this type is stored.  If you use a character of an
+        existing header type, this header type is overwritten.
+    </para>
+    <para>
+        Additionally the sorting priority can also be specified for each header
+        type. Headers with higher priority will appear earlier in the
+        generated output. (For example you can make module definitions appear
+        at the beginning of a page.) If this parameter is omitted, the header
+        will have the priority 0 (lowest) by default. All pre-defined header
+        types have zero priority, except
+        "<xref linkend="header_type_h" endterm="header_type_h" />",
+        which has the sorting priority 1.
+        See <xref linkend="header_types" endterm="header_types.title" />.
+    </para>
+</section>
+
+<section><title>ignore files block</title>
+    <para>In this block you can define the names of files or
+        directories that ROBODoc should ignore while scanning
+        the directory tree for source files.  You can use the
+        wildcard symbols <literal>*</literal> and
+        <literal>?</literal>.  If you use spaces in the expression
+        enclose the expression in quotes.
+    </para>
+
+    <para> For instance, the rc file above causes ROBODoc
+        to skip all <filename>README</filename> files, all files with
+        the name <filename>CVS</filename> (these are usually
+        directories).  It also skips all files with a name that ends
+        with <filename>.bak</filename> or <filename>~</filename> or
+        that start with <filename>a test_</filename> </para>
+
+    <para>Normally you specify the names of directories here
+        and do the filtering of file names with a accept files block.
+    </para>
+</section>
+
+<section><title>accept files block</title>
+    <para>In this block you can define the names of files that
+        robodoc should accept. This test is carried out after the
+        'ignore files' filtering is performed.  Any files that do
+        not match the patterns in this block are ignored by ROBODoc.
+    </para>
+
+    <para>
+        If there is no accept files block all files are accepted.
+    </para>
+</section>
+
+<section><title>header markers block</title>
+    <para>
+        In this block you define what ROBODoc will recognize
+        as start of a header.  If you use this block ROBODoc only
+        recognizes these markers, any of the inbuilt markers will
+        be ignored.
+    </para>
+</section>
+
+<section><title>remark markers block</title>
+    <para>
+        In this block you define what ROBODoc will recognize
+        as start of remark.  If you use this block ROBODoc only
+        recognizes these markers, any of the inbuilt markers will
+        be ignored.
+    </para>
+</section>
+
+<section><title>end markers block</title>
+    <para>
+        In this block you define what ROBODoc will recognize
+        as end of a header.  If you use this block ROBODoc only
+        recognizes these markers, any of the inbuilt markers will
+        be ignored.
+    </para>
+</section>
+
+<section id="separate_characters_block">
+<title id="separate_characters_block.title">header separate characters block</title>
+  <para>
+    In this block you can specify the separation character(s) for multiple
+    header names. The default character is "<literal>,</literal>" (comma) if
+    this block is missing. See
+    <xref linkend="preparing" endterm="preparing.title" />
+    for more information.
+  </para>
+</section>
+
+<section id="header_ignore_characters_block">
+<title id="header_ignore_characters_block.title">header ignore characters block</title>
+  <para>
+    In this block you can specify character(s) where the evaluation of a header
+    should stop. The default character is "<literal>[</literal>" if this block
+    is missing. This is useful to supply additional information to the header
+    that ROBODoc should not care about.
+  </para>
+  <para>
+    For example one can include the version number of the function:
+<programlisting>
+  ****f* financial.library/StealMoney [2.0]
+</programlisting>
+  </para>
+</section>
+
+<section id="remark_begin_end"><title id="remark_begin_end.title">
+remark begin markers and remark end markers block</title>
+    <para>
+        Some languages allow remarks to span more than one line. They
+        start a remark with a begin marker and end it with another
+        marker.  For instance in C you can have:
+    </para>
+<programlisting>
+   /* This is a
+      multi-line remark.
+    */
+</programlisting>
+    <para>
+        Here the markers are <literal>/*</literal> and <literal>*/</literal>.
+        If you tell ROBODoc what these markers are in a remark begin
+        markers block and remark end markers block. ROBODoc can skip
+        them in source items.</para>
+
+        <para>We illustrate this with an example. Say we have a language
+        that start a remark with <literal>|*</literal> and
+        <literal>*|</literal>.  We define <literal>SYNOPSIS</literal>
+        to be a source like item.  If we now run ROBODoc on the
+        without a remark begin markers and
+        end markers block on the following piece of source, </para>
+
+<programlisting>
+|****f* Bar/foo
+ * FUNCTION
+ *   foo computes the foo factor.
+ * SYNOPSIS
+ *|
+int foo( float correction )
+|*
+ * BUGS
+ *   None
+ * SOURCE
+ *|  .
+{
+    return correction * 42.0;
+}
+|*****|
+</programlisting>
+
+<para>the extracted documentation will look like:</para>
+
+<literallayout class="monospaced">
+ FUNCTION
+   foo computes the foo factor.
+ SYNOPSIS
+   *|
+   int foo( float correction )
+   |*
+ BUGS
+   None
+ SOURCE
+   *|  .
+   {
+      return correction * 42.0;
+   }
+</literallayout>
+
+<para>because ROBODoc considers
+    <literal>|*</literal> and <literal>*|</literal>.to be part of the
+    source, and not part of the begin or end of a header.</para>
+
+<para> If you add</para>
+<programlisting>
+remark begin markers:
+       |*
+remark end markers:
+       *|
+</programlisting>
+<para>the output will look like:</para>
+<literallayout class="monospaced">
+ FUNCTION
+   foo computes the foo factor.
+ SYNOPSIS
+   int foo( float correction )
+ BUGS
+   None
+ SOURCE
+   {
+      return correction * 42.0;
+   }
+</literallayout>
+
+<para>
+    These markers will also be used to highlight block comments if the
+    <option>
+      <xref linkend="syntaxcolors_enable" endterm="syntaxcolors_enable.term" />
+      <xref linkend="syntaxcolors_enable_block_comments" endterm="syntaxcolors_enable_block_comments.option" />
+    </option>
+    option (or the
+    <option>
+      <xref linkend="syntaxcolors" endterm="syntaxcolors.term" />
+    </option>
+    option) is specified (Similar to
+    <xref linkend="linecomments" endterm="linecomments.title" />).
+</para>
+
+</section>
+
+<section id="linecomments"><title id="linecomments.title">source line comments block</title>
+    <para>
+        Here you can specify markers which start whole line comments.
+        (Comments that span until the end of line like "<literal>//</literal>",
+        "<literal>REM</literal>", "<literal>;</literal>", etc...)
+        These lines will be highlighted in the generated <literal>HTML</literal>
+        output if the
+        <option>
+          <xref linkend="syntaxcolors_enable" endterm="syntaxcolors_enable.term" />
+          <xref linkend="syntaxcolors_enable_line_comments" endterm="syntaxcolors_enable_line_comments.option" />
+        </option>
+        option (or the
+        <option>
+          <xref linkend="syntaxcolors" endterm="syntaxcolors.term" />
+        </option>
+        option) has been specified.</para>
+    <para>
+        You don't need this if you have the
+        <option>
+          <xref linkend="cmode" endterm="cmode.term" />
+        </option>
+        option specified.
+    </para>
+    <para>
+        The default highlighting color can be changed in the <literal>CSS</literal>
+        file (<literal>span.comment</literal>).
+    </para>
+</section>
+
+<section id="keywords"><title id="keywords.title">keywords block</title>
+    <para>
+        Here you can specify the keywords in your <literal>SOURCE</literal> items.
+        These keywords will be highlighted in the generated <literal>HTML</literal>
+        output if the
+        <option>
+          <xref linkend="syntaxcolors_enable" endterm="syntaxcolors_enable.term" />
+          <xref linkend="syntaxcolors_enable_keywords" endterm="syntaxcolors_enable_keywords.option" />
+        </option>
+        option (or the
+        <option>
+          <xref linkend="syntaxcolors" endterm="syntaxcolors.term" />
+        </option>
+        option) has been specified. Keywords meant to be the language native ones
+        (<literal>for</literal>, <literal>if</literal>, etc...).
+    </para>
+    <para>
+        You don't need this if you have the
+        <option>
+          <xref linkend="cmode" endterm="cmode.term" />
+        </option>
+        option specified.
+    </para>
+    <para>
+        The default highlighting color can be changed in the <literal>CSS</literal>
+        file (<literal>span.keyword</literal>).
+    </para>
+</section>
+
+    <section><title>Configuration file location</title>
+
+    <para>ROBODoc searches the your current directory for the
+    <filename>robodoc.rc</filename> file. If it can't find
+    it there it will search in <literal>$HOME/</literal>, then
+    <filename>$HOMEDRIVE$HOMEPATH/</filename>, and finally in
+    <filename>/usr/share/robodoc/</filename>.</para>
+
+    <para>With the <option>--rc</option> option you can tell ROBODoc to
+    use a different file than <filename>robodoc.rc</filename> as
+    configuration file.  This is handy if you want to create
+    documentation in different formats.  For instance: </para>
+
+<programlisting>
+robodoc --rc  htmlsingle.rc
+robodoc --rc  rtfsingle.rc
+robodoc --rc  htmlmulti.rc
+</programlisting>
+
+    </section>
+
+</section>
+

@@ -1,0 +1,442 @@
+<section>
+<title>Tips and Tricks</title>
+
+<section>
+<title>The SOURCE Item</title>
+
+    <para> With a little extra work you can include part of your
+    source code into your documentation too.  The following example
+    shows how this is done:</para>
+
+<programlisting>
+/****f* Robodoc/RB_Panic [2.0d]
+ * NAME
+ *   RB_Panic - Shout panic, free resources, and shut down.
+ * SYNOPSIS
+ *   RB_Panic (cause, add_info)
+ *   RB_Panic (char *, char *)
+ * FUNCTION
+ *   Prints an error message.
+ *   Frees all resources used by robodoc.
+ *   Terminates program.
+ * INPUTS
+ *   cause    - pointer to a string which describes the
+ *              cause of the error.
+ *   add_info - pointer to a string with additional information.
+ * SEE ALSO
+ *   RB_Close_The_Shop ()
+ * SOURCE
+ */
+
+  void RB_Panic (char *cause, char *add_info)
+  {
+    printf ("Robodoc: Error, %s\n",cause) ;
+    printf ("         %s\n", add_info) ;
+    printf ("Robodoc: Panic Fatal error, closing down..\n") ;
+    RB_Close_The_Shop () ; /* Free All Resources */
+    exit(100) ;
+  }
+
+/*******/
+</programlisting>
+
+<para>You can add a SOURCE item as the last item of your header. Then
+    instead of closing your header with an end marker, you close it
+    normally.  The end marker is instead placed at the end of the
+    fragment of source code that you want to include.  </para>
+
+<para>SOURCE items are included by default.  If you want to create a
+    document without the SOURCE items use the option
+    <option>--nosource</option>.</para>
+
+<para>You can also make normal items work like the source item,
+    see <xref linkend="sourceitems" endterm="sourceitems.title" />.
+</para>
+</section>
+
+
+<section>
+<title>Minimizing Duplicate Information</title>
+
+<para>It is always good to avoid having the same information in several different locations.
+    It is easy to create headers that have a lot information duplication.  Take for instance
+    the following header.
+</para>
+
+<programlisting>
+/****f* Robodoc/RB_Panic [2.0d]
+ * NAME
+ *   RB_Panic - Shout panic, free resources, and shut down.
+ * SYNOPSIS
+ *   RB_Panic (cause, add_info)
+ *   RB_Panic (char *, char *)
+ * FUNCTION
+ *   Prints an error message.
+ *   Frees all resources used by robodoc.
+ *   Terminates program.
+ * INPUTS
+ *   cause    - pointer to a string which describes the
+ *              cause of the error.
+ *   add_info - pointer to a string with additional information.
+ * SEE ALSO
+ *   RB_Close_The_Shop ()
+ * SOURCE
+ */
+
+  void RB_Panic (char *cause, char *add_info)
+  {
+    printf ("Robodoc: Error, %s\n",cause) ;
+    printf ("         %s\n", add_info) ;
+    printf ("Robodoc: Panic Fatal error, closing down..\n") ;
+    RB_Close_The_Shop () ; /* Free All Resources */
+    exit(100) ;
+  }
+
+/*******/
+</programlisting>
+
+<para>
+    The name <literal>RB_Panic</literal> occurs five times.  This is tedious to
+    type and difficult to maintain.
+    However with a the right <filename>robodoc.rc</filename> this can be changed
+    to:
+</para>
+
+<programlisting>
+/****f* Robodoc/RB_Panic [2.0d]
+ * SUMMARY
+ *   Shout panic, free resources, and shut down.
+ * SYNOPSIS
+ */
+
+void RB_Panic (char* cause, char *add_info)
+
+/*
+ * FUNCTION
+ *   Prints an error message.
+ *   Frees all resources used by robodoc.
+ *   Terminates program.
+ * INPUTS
+ *   cause    - pointer to a string which describes the
+ *              cause of the error.
+ *   add_info - pointer to a string with additional information.
+ * SEE ALSO
+ *   RB_Close_The_Shop ()
+ * SOURCE
+ */
+  {
+    printf ("Robodoc: Error, %s\n",cause) ;
+    printf ("         %s\n", add_info) ;
+    printf ("Robodoc: Panic Fatal error, closing down..\n") ;
+    RB_Close_The_Shop () ; /* Free All Resources */
+    exit(100) ;
+  }
+
+/*******/
+</programlisting>
+
+<para><literal>RB_Panic</literal> occurs only twice now. In addition changes
+to the function definition only have to be done once.</para>
+
+<para>The <filename>robodoc.rc</filename> required for this is: </para>
+
+<programlisting>
+# robodoc.rc file
+items:
+    SUMMARY
+    SYNOPSIS
+    INPUTS
+    OUTPUTS
+    SEE ALSO
+    BUGS
+source items:
+    SYNOPSIS
+remark begin markers:
+    /*
+remark end markers:
+    */
+</programlisting>
+
+</section>
+
+<!-- TODO explain about headers with more than one name -->
+
+<section>
+<title>Advanced formatting with raw HTML and LaTeX code</title>
+
+    <para> By default an item's body shows up in your documentation in
+    the same way as it is formatted in your source code.  All special
+    characters for the output mode are escaped.  For instance an &lt;
+    is translated to a &amp;lt; in HTML mode.  Sometimes however you
+    like to have some more control of what goes into the
+    documentation.  This is possible with the piping.  If a line of
+    your item's body starts with one of the special piping markers, the
+    text after this marker is copied verbatim into your documentation.
+    The following example shows how this is done, and how to add
+    equations to your documentation.
+    </para>
+
+<programlisting>
+/****m* pipe/pipetest
+ * NAME
+ *   pipetest
+ * DESCRIPTION
+ *   Simple header to show "piping" features in items.
+ * EXAMPLE
+ *   Only "pipes" which match selected output style are picked up.
+ *   |html &lt;CENTER&gt;This will be included in &lt;B&gt;HTML&lt;/B&gt; output.&lt;/CENTER&gt;
+ *   |latex \centerline{This will be included in \LaTeX output}
+ *   Space is mandatory following the pipe marker. The following is not a
+ *   valid pipe marker:
+ *   |html&lt;B&gt;Moi!&lt;/B&gt;
+ *   You should see an equation on the following line:
+ *   |html y = x^2 (sorry, plain HTML is not very powerful)
+ *   |latex \centerline{$y = x^2$}
+ *   How does this look like?
+ *   Here comes a multi-line equation array:
+ *    |latex \begin{eqnarray}
+ *    |latex \frac{\partial u}{\partial \tau} &amp; = &amp; D_u {\nabla}^2 u +
+ *    |latex \frac{1}{\epsilon}
+ *    |latex \left ( \hat{u}-{\hat{u}}^2-f\, {v} \, \frac{\hat{u}-q}{\hat{u}+q}
+ *    |latex \right ) \; ,  \label{diffspot:1} \\
+ *    |latex \frac{\partial v}{\partial \tau} &amp; = &amp; \hat{u}-v \; ,
+ *    |latex \label{diffspot:2} \\
+ *    |latex \frac{\partial r}{\partial \tau} &amp; = &amp; D_r {\nabla}^2 r \; .
+ *    |latex \label{diffspAot:3}
+ *    |latex \end{eqnarray}
+ *    |html &lt;I&gt;TODO: write this in html&lt;/I&gt;
+ *   End of the example.
+ ******
+ */
+</programlisting>
+</section>
+
+<section>
+<title>Linking to external documents (href, file, mailto, images)</title>
+
+    <para> In HTML mode ROBODoc recognizes the following links to
+    external documents.  </para>
+
+    <itemizedlist>
+
+    <listitem><para><literal>href:body</literal> -- This is replaced with
+      <literal>&lt;a href="body"&gt;body&lt;/A&gt;</literal>
+    </para></listitem>
+
+    <listitem><para><literal>file:/body</literal> -- This is replaced with
+    <literal>&lt;a href="file:/body"&gt;file:/body&lt;/A&gt;</literal>
+    </para></listitem>
+
+    <listitem><para><literal>mailto:body</literal> -- This is replaced with
+    <literal>&lt;a href="mailto:body"&gt;body&lt;/A&gt;</literal>
+    </para></listitem>
+
+    <listitem><para><literal>http://body</literal> -- This is replaced with
+    <literal>&lt;a href="http://body"&gt;http://body&lt;/A&gt;</literal>
+    </para></listitem>
+
+    <listitem><para><literal>image:body</literal> -- This is replaced with
+    <literal>&lt;image src="body"&gt;</literal>
+    </para></listitem>
+
+    </itemizedlist>
+</section>
+
+
+<section>
+<title>Linking from an external document</title>
+
+    <para>To link from an external document to one of the HTML
+    documents generated by ROBODoc you need a label.  ROBODoc creates
+    two labels for each header. The first one starts with
+    <literal>robo</literal> followed by a number.  You can not use
+    this one because the numbers will change each time you run
+    ROBODoc.  The second label is an escaped version of the whole
+    header name.  In this label all the non alphanumeric characters of
+    the name are replaced by their two digit hexadecimal code.</para>
+
+    <para>An example, if your header name is
+    <literal>Analyser/RB_ToBeAdded</literal> the label is
+    <literal>Analyser2fRB5fToBeAdded</literal>.  Here
+    <literal>/</literal> was replaced by <literal>2f</literal> and
+    <literal>_</literal> was replaced by <literal>5f</literal>.  As
+    long as you do not change the header name, this label stays the
+    same each time you run ROBODoc.</para>
+
+</section>
+
+<section id="tools">
+<title id="tools.title">Using external tools</title>
+    <para>
+    You can also execute external tools from <literal>ROBODoc</literal> and even
+    pass data to them.
+    The output of these tools can be included in your documentation for instance.
+    </para>
+    <para>
+    There are several types of external tools you can use:
+    </para>
+    <orderedlist>
+    <listitem>Arbitrary tool with passing data through stdin</listitem>
+    <listitem>Arbitrary tool without passing data through stdin</listitem>
+    <listitem>The <literal>DOT</literal> tool</listitem>
+    </orderedlist>
+    <para>
+    The following example shows how to use each of them.
+    </para>
+
+<programlisting>
+/****m* tools/tooltest
+ *
+ * NAME
+ *   Tooltest
+ *
+ * DESCRIPTION
+ *   Example showing how to invoke external tools.
+ *
+ * EXAMPLE
+ * This one sorts elements into the file href:nexus-6.txt
+ * The input data is passed through stdin.
+ *
+ * |tool sort &gt; nexus-6.txt
+ * Zhora
+ * Pris
+ * Leon Kowalski
+ * Roy Batty
+ * Rachel
+ * Rick Deckard?
+ * |tool end
+ *
+ * We can also execute tools without having any stdin data.
+ * In the following example the output is simply redirected into href:tears.txt
+ *
+ * |exec echo "All those moments will be lost in time like tears in rain." &gt; tears.txt
+ *
+ * You can also include neat DOT graphs in your documentation.
+ * This one shows a hash table.
+ *
+ * |dot start
+ * digraph G {
+ *   nodesep=.05;
+ *   rankdir=LR;
+ *   node [shape=record,width=.1,height=.1];
+ *
+ *   node0 [label = "&lt;f0&gt; |&lt;f1&gt; |&lt;f2&gt; |&lt;f3&gt; |&lt;f4&gt; |&lt;f5&gt; |&lt;f6&gt; | ",height=2.0];
+ *   node [width = 1.5];
+ *   node1 [label = "{&lt;n&gt; n14 | 719 |&lt;p&gt; }"];
+ *   node2 [label = "{&lt;n&gt; a1  | 805 |&lt;p&gt; }"];
+ *   node3 [label = "{&lt;n&gt; i9  | 718 |&lt;p&gt; }"];
+ *   node4 [label = "{&lt;n&gt; e5  | 989 |&lt;p&gt; }"];
+ *   node5 [label = "{&lt;n&gt; t20 | 959 |&lt;p&gt; }"] ;
+ *   node6 [label = "{&lt;n&gt; o15 | 794 |&lt;p&gt; }"] ;
+ *   node7 [label = "{&lt;n&gt; s19 | 659 |&lt;p&gt; }"] ;
+ *
+ *   node0:f0 -&gt; node1:n;
+ *   node0:f1 -&gt; node2:n;
+ *   node0:f2 -&gt; node3:n;
+ *   node0:f5 -&gt; node4:n;
+ *   node0:f6 -&gt; node5:n;
+ *   node2:p -&gt; node6:n;
+ *   node4:p -&gt; node7:n;
+ * }
+ * |dot end
+ *
+ * DOT graphs can be also included by specifying external DOT files.
+ *
+ * |dotfile tree.dot
+ *
+ ******
+ */
+</programlisting>
+
+    <para>
+    If you want to use the <literal>DOT</literal> tool, you need the
+    <literal>Graphviz</literal> package.
+    More information and the binaries can be found at
+    <ulink url="http://www.graphviz.org/">
+        <citetitle>http://www.graphviz.org/
+    </citetitle></ulink>.
+    The created graphs are automatically included in the documentation
+    (<literal>HTML</literal> and <literal>LaTeX</literal> only).
+    If you generate <literal>PDF</literal> output from your <literal>LaTeX</literal>
+    file and you want to include <literal>DOT</literal> graphs in it, you will also
+    need the <command>epstopdf</command> utility.
+    <literal>ROBODoc</literal> lets <literal>DOT</literal> generate
+    <literal>PNG</literal> images for <literal>HTML</literal> output and
+    <literal>PS</literal> images for <literal>LaTeX</literal> output.
+    (Don't forget to convert all the generated <literal>PS</literal> images to
+    <literal>PDF</literal> images with the <command>epstopdf</command> utility,
+    if you are generating <literal>PDF</literal> output.)
+    </para>
+</section>
+
+<section>
+<title>ROBODoc-ing an existing project</title>
+
+  <para>
+  The ROBODoc package includes also a standalone binary named
+  <literal>robohdrs</literal>.
+  This helper program can take clean source file and insert
+  ROBODoc headers to functions, global variables, and macros.
+  There are issues with this tool but it saves lots of cumbersome typing
+  when starting on documenting an existing code-base with ROBODoc.
+  Type
+<command>
+man robohdrs
+</command>
+  or
+<command>
+robohdrs -h
+</command>
+  for help.
+  Example:
+<command>
+robohdrs -s -p testproj -i "MODIFICATION HISTORY" -i IDEAS testproj.c
+</command>
+</para>
+
+  <para>
+  Note that <literal>robohdrs</literal> is supported on UNIX-like platforms only.
+  It requires <literal>fork()</literal> and  Exuberant Ctags 5.3.1 or newer.
+  </para>
+
+</section>
+
+
+<section>
+<title>Using ROBODoc under Windows</title>
+    <para>When you use ROBODoc under windows, don't forget that it is
+    a command line tool.  ROBODoc relies on the console window to
+    inform you about problems and errors.</para>
+
+    <para>An easy mistake to make is to create a shortcut to
+    <literal>robodoc.exe</literal> and then click on the icon to
+    generate the documentation each time you made some changes to your
+    source code.  If you have a fast machine a console window pops up
+    quickly and after that your documentation is ready.</para>
+
+    <para>This works very fine until you make a mistake in one of your
+    headers.  The console window still pops up, but before you have a chance
+    to read any of the error messages it is gone again.  Most likely
+    you won't even have noticed there were error messages.  You will
+    end up with empty documentation or old documentation.  </para>
+
+    <para>It is Better to create a batch file with the following commands
+    and to store all the options in a <filename>robodoc.rc</filename>
+    file:</para>
+<programlisting>
+robodoc.exe
+pause
+</programlisting>
+    <para>Now the console window stays open and you have the
+    opportunity to read the error messages.</para>
+
+    <para>While the window is open, right click on the title bar,
+    go to properties->layout and set the buffer size to something
+    like 2500. That way, the next time you run it, you can scroll back
+    and view all error messages.
+    </para>
+
+</section>
+
+</section>
+

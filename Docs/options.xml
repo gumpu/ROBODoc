@@ -1,0 +1,404 @@
+
+
+
+<section id="options">
+    <title id="options.title">Options</title>
+
+    <para>The behavior of ROBODoc can be further fine-tune with a large number of
+        options.</para>
+
+    <variablelist>
+        <!-- TODO make a varlist from this -->
+        <varlistentry><term>-c</term><listitem>
+                <para>Show the copyright message.</para>
+        </listitem></varlistentry>
+
+        <varlistentry id="cmode"><term id="cmode.term">--cmode</term><listitem>
+                <para>Use ANSI C grammar in SOURCE items and use this
+                    for syntax highlighting (<literal>HTML</literal> only).</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--css</term><listitem>
+                <para> Use the content of the specified file to create the
+                    <filename>robodoc.css</filename>.  The content of the file is
+                    copied into <filename>robodoc.css</filename>.  </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--dbxml</term><listitem>
+                <para>Generate documentation in XML DocBook format.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--debug</term><listitem>
+                <para>Works like --tell, bug gives a lot more information.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--doc</term><listitem>
+                <para>Define the path to the documentation directory or
+                    documentation file.  A path can start with
+                    <literal>./</literal> or <literal>/</literal>.  Do not use
+                    <literal>..</literal> in the path.  The documentation
+                    directory can be a subdirectory of the source directory,
+                    or be parallel to the source directory,
+                    however they can not be equal. So
+                    <command>--src ./sources</command>
+                    together with
+                    <command>--doc ./documents</command>
+                    is fine,
+                    but
+                    <command>--src ./Everything</command>
+                    together with
+                    <command>--doc ./Everything</command>
+                    is not.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--doctype_name</term><listitem>
+                <para>DocBook output requires a <literal>&lt;!DOCTYPE&gt;</literal> tag.
+                    With this option you can specify your own version of it.  You have
+                    to use it in combination with <command>--doctype_location</command>.
+                    An example:
+                </para>
+<programlisting>
+    robodoc --src test --doc test
+        --doctype_location "-//OASIS//DTD Simplified DocBook XML V1.1//EN"
+        --doctype_name docbook-simple/sdocbook.dtd
+        --dbxml
+</programlisting>
+                <para>
+                    results in the following docbook file with the following head:
+                </para>
+<programlisting>
+&lt;!DOCTYPE article PUBLIC "-//OASIS//DTD Simplified DocBook XML V1.1//EN"
+"docbook-simple/sdocbook.dtd"&gt;
+</programlisting>
+
+        </listitem></varlistentry>
+
+        <varlistentry><term>--doctype_location</term><listitem>
+            <para>See <command>--doctype_name</command>.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--headless</term><listitem>
+                <para>Do not create the head of a document. This allows you to
+                    create documents that can be included in other documents, or
+                    to which you can add your own style.</para>
+
+                <para>For html output this means that no
+                    <literal>&lt;html&gt;&lt;head&gt; ..... &lt;body&gt;</literal>
+                    is generated.
+                </para>
+
+                <para>For LaTeX output this means none of the document
+                    initialization code is generated, such as
+                    <literal>\documentclass{article}</literal> or
+                    <literal>\begin{document}</literal> is generated.  If you use
+                    this option in combination with <option> --footless</option>
+                    you can use <literal>\include</literal> or
+                    <literal>\input</literal> commands to include the ROBODoc
+                    generated documents in a larger document.</para>
+
+                <para>For XML DocBook output this means no
+                    <literal>&lt;!DOCTYPE&gt;</literal>,
+                    <literal>&lt;article&gt;</literal>, and
+                    <literal>&lt;articleinfo&gt;</literal> is generated.
+                </para>
+
+        </listitem></varlistentry>
+
+        <varlistentry><term>--first_section_level</term><listitem>
+                <para>Make the first section start at the specified level
+                    instead of 1.  This is useful if you want to include the
+                    generated documentation in another document.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--footless</term><listitem>
+                <para>Do not create the foot of a document. This allows you to
+                    create documents that can be included in other documents, or
+                    to which you can add your own style.</para>
+
+                <para>For html output this means that no
+                    <literal>&lt;/body&gt;&lt;/html&gt;</literal>
+                    is generated.
+                </para>
+
+                <para>For LaTeX output this means no
+                    <literal>\end{document}</literal> is generated.
+                </para>
+
+                <para>For XML DocBook output this means no
+                    <literal>&lt;/article&gt;</literal> is generated.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--html</term><listitem>
+                <para>Generate documentation in HTML format.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--ignore_case_when_linking</term><listitem>
+                <para>Ignore differences in case when creating cross links.
+                    This is handy for languages such as Fortran or Pascal, but
+                    in most cases it is better not to use it.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--internal</term><listitem>
+                <para>Also include headers marked internal.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--internalonly</term><listitem>
+                <para>Only include headers marked internal.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--index</term><listitem>
+                <para>Also create a master index file.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--lock</term><listitem>
+                <para> Per source file robodoc locks on the first header marker
+                    it finds and will recognize only that particular header marker
+                    for the remaining part of the file.  In addition it locks on
+                    the first remark marker in each header and will recognize only
+                    that particular remark marker for the remaining part of the
+                    header.  </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--multidoc</term><listitem>
+                <para>Generate one document per source file, and copy the
+                    directory hierarchy.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--nosource</term><listitem>
+                <para>Do not include the SOURCE items.</para>
+        </listitem></varlistentry>
+
+
+        <varlistentry><term>--no_subdirectories</term><listitem>
+                <para>Do not create any subdirectories in the documentation directory
+                instead write all the documentation files in the root directory. The root directory is the one specified with <option>--doc</option>.</para>
+        </listitem></varlistentry>
+
+
+        <varlistentry><term>--nodesc</term><listitem>
+                <para>Do not scan any subdirectories, scan only the top level
+                    directory of the source tree.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--nosort</term><listitem>
+                <para>Do not sort the headers when generating the
+                    documentation. The headers will appear in the same order in
+                    the documentation as they appear in the source code.</para>
+        </listitem></varlistentry>
+
+        <varlistentry id="nopre">
+        <term id="nopre.term">--nopre</term><listitem>
+                <para>With this option ROBODoc does not generate preformatted
+                    text when creating the item documentation. (Using
+                    the <literal>&lt;PRE&gt;</literal> and
+                    <literal>&lt;/PRE&gt;</literal> construction in HTML format
+                    for instance). Instead ROBODoc tries to deduce
+                    the formatting from the indentation and special
+                    characters. See <xref linkend="formatting"
+                        endterm="formatting.title" />. This creates much better
+                    looking documentation.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--nogeneratedwith</term><listitem>
+                <para>Do not add the "generated with robodoc" message at the
+                    top of each documentation file.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--one_file_per_header</term><listitem>
+                <para>Create a separate documentation file for each header.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--rc</term><listitem>
+                <para>Use the specified file instead of <filename>robodoc.rc</filename>.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--rtf</term><listitem>
+                <para>Generate documentation in RTF format.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--sections</term><listitem>
+                <para>Create sections based on the module hierarchy.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--sectionnameonly</term><listitem>
+                <para>ROBODoc generates the section headers with names only,
+                    no chapter numbers, no parent section names.</para>
+        </listitem></varlistentry>
+
+
+        <varlistentry><term>--singledoc</term><listitem>
+                <para> Define the documentation directory or documentation
+                    file.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--singlefile</term><listitem>
+                <para> Generate a single document from a single file </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--src</term><listitem>
+                <para> Define the path for the source directory or source
+                    file.  The path can start with <literal>./</literal> or
+                    <literal>/</literal>.  Do not use <literal>..</literal> in the
+                    path.  </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--tabsize</term><listitem>
+                <para>Lets you specify the tab size.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--tabstops</term><listitem>
+                <para>Specify tab stop locations in a comma separated list.</para>
+                <para>
+                  Example: <option>--tabstops 10,20,40,80</option>
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--toc</term><listitem>
+                <para>Add a table of contents. This works in multidoc mode as
+                    well as singledoc mode.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--latex</term><listitem>
+                <para>Generate documentation in <literal>LaTeX</literal> format.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--tell</term><listitem>
+                <para>ROBODoc tells you what steps it is taking.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--documenttitle</term><listitem>
+                <para>Specify the Title of the whole documentation.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--altlatex</term><listitem>
+                <para>Alternate <literal>LaTeX</literal> file format
+                (bigger / clearer than normal).
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--latexparts</term><listitem>
+                <para>Make the first module level as <literal>PART</literal>
+                in <literal>LaTeX</literal> output
+                (Gives you one more subsection level).</para>
+        </listitem></varlistentry>
+
+        <varlistentry id="syntaxcolors_enable">
+        <term id="syntaxcolors_enable.term">--syntaxcolors_enable</term><listitem>
+                <para>Enable only specific syntax highlighting features in
+                <literal>SOURCE</literal> items (<literal>HTML</literal> only).</para>
+                <para>Usage:
+                  <option>--syntaxcolors_enable
+                  quotes,squotes,line_comments,block_comments,keywords,non_alpha</option>
+                </para>
+                <para><itemizedlist>
+                  <listitem><option>quotes</option>
+                    -- Enable highlighting of <literal>"string literals"
+                  </literal></listitem>
+                  <listitem><option>squotes</option>
+                    -- Enable highlighting of <literal>'string literals'
+                  </literal></listitem>
+                  <listitem id="syntaxcolors_enable_line_comments">
+                    <option id="syntaxcolors_enable_line_comments.option">line_comments</option>
+                    -- Enable highlighting of comments that span until the end of lines
+                    (See <xref linkend="linecomments" endterm="linecomments.title" />)
+                  </listitem>
+                  <listitem id="syntaxcolors_enable_block_comments">
+                  <option id="syntaxcolors_enable_block_comments.option">block_comments</option>
+                    -- Enable highlighting of block comments
+                    (See <xref linkend="remark_begin_end" endterm="remark_begin_end.title" />)
+                  </listitem>
+                  <listitem id="syntaxcolors_enable_keywords">
+                    <option id="syntaxcolors_enable_keywords.option">keywords</option>
+                    -- Enable highlighting of keywords
+                    (See <xref linkend="keywords" endterm="keywords.title" />)
+                  </listitem>
+                  <listitem><option>non_alpha</option>
+                    -- Enable highlighting of non alphanumeric characters
+                    (like: <literal>#</literal>, <literal>$</literal>, <literal>%</literal>, etc...)
+                  </listitem>
+                </itemizedlist></para>
+                <para>You don't need this if you have the
+                  <option><xref linkend="cmode" endterm="cmode.term" /></option>
+                  option specified.
+                </para>
+                <para> See also the
+                  <option><xref linkend="syntaxcolors" endterm="syntaxcolors.term" /></option>
+                  option.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry id="syntaxcolors">
+        <term id="syntaxcolors.term">--syntaxcolors</term><listitem>
+                <para>Turn on all syntax highlighting features in <literal>SOURCE</literal>
+                items (<literal>HTML</literal> only).</para>
+                <para>This option equals to:
+                  <option>--syntaxcolors_enable
+                  quotes,squotes,line_comments,block_comments,keywords,non_alpha</option>
+                </para>
+                <para>You don't need this if you have the
+                  <option><xref linkend="cmode" endterm="cmode.term" /></option>
+                  option specified.
+                </para>
+                <para> See also the
+                  <option><xref linkend="syntaxcolors_enable" endterm="syntaxcolors_enable.term" /></option>
+                  option.
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--dotname</term><listitem>
+                <para>Specify the name (and path / options) of
+                <literal>DOT</literal> tool.</para>
+                <para>See <xref linkend="tools" endterm="tools.title" />.</para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--masterindex</term><listitem>
+                <para>Specify the title and filename of the master index page
+                </para>
+                <para>Usage:
+                  <option>--masterindex
+                  <replaceable>title</replaceable>,<replaceable>filename</replaceable>
+                  </option>
+                </para>
+                <para>Example:
+                  <option>--masterindex "Index Page,index"</option>
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--sourceindex</term><listitem>
+                <para>Specify the title and filename of the source files index
+                page</para>
+                <para>Usage:
+                  <option>--sourceindex
+                  <replaceable>title</replaceable>,<replaceable>filename</replaceable>
+                  </option>
+                </para>
+                <para>Example:
+                  <option>--sourceindex "Source files,sources"</option>
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--header_breaks</term><listitem>
+                <para>If a header has multiple names, ROBODoc can insert line breaks after every
+                specified number of header names to improve readability. If you do not specify this
+                option, ROBODoc will insert a line break after every two header names. Set it to
+                zero to disable the line breaks.</para>
+                <para>
+                  Example: <option>--header_breaks 3</option>
+                </para>
+        </listitem></varlistentry>
+
+        <varlistentry><term>--source_line_numbers</term><listitem>
+                <para>Display original source line numbers for SOURCE items.</para>
+        </listitem></varlistentry>
+
+    </variablelist>
+
+</section>
+
+

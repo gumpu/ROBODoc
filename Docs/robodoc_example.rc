@@ -1,0 +1,113 @@
+#
+# $Id: robodoc_example.rc,v 1.1 2008/06/17 11:49:26 gumpu Exp $
+#
+# Example robodoc.rc file.
+#
+options:
+    --doc MultiDocOPHHtml
+    --one_file_per_header
+    --src Source
+    --html
+    --multidoc
+    --documenttitle "ROBODoc API"
+    --index
+    --cmode
+    --tabsize 8
+    --nopre
+    --sections
+source items:
+    SYNOPSIS
+items:
+    SOURCE
+    NAME
+    COPYRIGHT
+    SYNOPSIS
+    USAGE
+    FUNCTION
+    DESCRIPTION
+    PURPOSE
+    AUTHOR
+    CREATION DATE
+    MODIFICATION HISTORY
+    HISTORY
+    INPUTS
+    INPUT
+    ARGUMENTS
+    OPTIONS
+    PARAMETERS
+    SWITCHES
+    OUTPUT
+    SIDE EFFECTS
+    RESULTS
+    RESULT
+    RETURN VALUE
+    EXAMPLE
+    NOTE
+    NOTES
+    DIAGNOSTICS
+    WARNINGS
+    ERRORS
+    BUGS
+    TODO
+    IDEAS
+    PORTABILITY
+    SEE ALSO
+    METHODS
+    NEW METHODS
+    ATTRIBUTES
+    NEW ATTRIBUTES
+    TAGS
+    COMMANDS
+    DERIVED FROM
+    DERIVED BY
+    USES
+    CHILDREN
+    USED BY
+    PARENTS
+ignore items:
+    HISTORY
+headertypes:
+    u  Unittests robo_unittest
+    x  "System tests"  robo_sys_tests
+    e  "Makefile entries"  robo_mk_entries
+ignore files:
+    t
+    makefile.am
+    README
+    CVS
+    Doc
+    Doc1
+    Doc2
+    Doc3
+    FileFilterSrc
+    FileFilterSrc_2
+    RoboHeaders
+    Scr1
+    Scr2
+    SortSource
+    *.dat
+    *.html
+    *.rc
+    late*
+    troff*
+    sgml*
+    *.css
+    *.refs
+    *.in
+    *.txt
+    *~
+    *.stderr
+    Scr1
+    Scr2
+    Doc1
+    Doc2
+    SortSource
+    RoboHeaders
+    FileFilterSrc
+remark begin markers:
+    /*
+    #
+remark end markers:
+    */
+    #
+

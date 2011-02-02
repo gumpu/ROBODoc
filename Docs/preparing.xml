@@ -1,0 +1,784 @@
+<!-- $Id: preparing.xml,v 1.5 2007/05/11 08:16:44 thuffir Exp $ -->
+
+<section id="preparing">
+<title id="preparing.title">Preparing your source code for ROBODoc</title>
+
+    <para> ROBODoc allows you to mix the program documentation with
+    the source code.  It does require though that this documentation
+    has a particular layout so ROBODoc can recognize it.  There are
+    three key concepts: headers, items, and sections.  </para>
+
+<section>
+<title>Headers</title>
+
+    <para>Headers are the building blocks of the documentation. Lets
+    look at an example. The following header was taken from the
+    documentation of the predecessor of ROBODoc, AutoDoc.</para>
+
+<example id="robodocheader">
+    <title>A ROBODoc header in C.</title>
+<programlisting>
+ /****f* financial.library/StealMoney
+  *  NAME
+  *    StealMoney -- Steal money from the Federal Reserve Bank. (V77)
+  *  SYNOPSIS
+  *    error = StealMoney( userName, amount, destAccount, falseTrail )
+  *  FUNCTION
+  *    Transfer money from the Federal Reserve Bank into the
+  *    specified interest-earning checking account.  No records of
+  *    the transaction will be retained.
+  *  INPUTS
+  *    userName    - name to make the transaction under.  Popular
+  *                  favorites include "Ronald Reagan" and
+  *                  "Mohamar Quadaffi".
+  *    amount      - Number of dollars to transfer (in thousands).
+  *    destAccount - A filled-in AccountSpec structure detailing the
+  *                  destination account (see financial/accounts.h).
+  *                  If NULL, a second Great Depression will be
+  *                  triggered.
+  *    falseTrail  - If the DA_FALSETRAIL bit is set in the
+  *                  destAccount, a falseTrail structure must be
+  *                  provided.
+  *  RESULT
+  *    error - zero for success, else an error code is returned
+  *           (see financial/errors.h).
+  *  EXAMPLE
+  *    Federal regulations prohibit a demonstration of this function.
+  *  NOTES
+  *    Do not run on Tuesdays!
+  *  BUGS
+  *    Before V88, this function would occasionally print the
+  *    address and home phone number of the caller on local police
+  *    976 terminals.  We are confident that this problem has been
+  *    resolved.
+  *  SEE ALSO
+  *    CreateAccountSpec(),security.device/SCMD_DESTROY_EVIDENCE,
+  *    financial/misc.h
+  ******
+  * You can use this space for remarks that should not be included
+  * in the documentation.
+  */
+</programlisting>
+</example>
+    <para>A header consists of three different elements: a
+    begin marker, a number of items, and an end marker.  The begin marker
+    in the example is:</para>
+
+<programlisting>
+  ****f* financial.library/StealMoney
+</programlisting>
+
+<para>It marks the beginning of a header.  It also tells ROBODoc
+</para>
+<itemizedlist>
+    <listitem><para>the name of the element that is being documented, StealMoney,</para></listitem>
+    <listitem><para>the module it is part of, financial.library,</para></listitem>
+    <listitem><para>the kind of element, <literal>f</literal>, which stands for function.</para></listitem>
+</itemizedlist>
+
+<para>
+    ROBODoc always expects that a <literal>/</literal> separates the module name and an element name.
+    So <literal>ModFoo/funcBar</literal>
+    is a valid name, but <literal>funcBar</literal> is not.
+    See <xref linkend="sections" endterm="sections.title" /> for more
+    information.
+</para>
+
+<para>
+    Names can also contain spaces but ROBODoc won't create links to names with
+    embedded spaces.
+</para>
+
+<para>
+    You can also have multiple names for a header. This is useful if you
+    document similar objects together in one header (for example assembly
+    subroutines with multiple jump-in points). Multiple names are separated by
+    commas and can span over more than one line.
+<programlisting>
+  ****f* financial.library/StealMoney, Steal_Money
+</programlisting>
+    In the above example all references found to <literal>StealMoney</literal>
+    and <literal>Steal_Money</literal> in other headers will be automatically
+    linked to this header.
+    The separation character(s) can be specified by the
+    <xref linkend="separate_characters_block" endterm="separate_characters_block.title" />.
+    See <xref linkend="customizing" endterm="customizing.title" /> for more
+    information.
+</para>
+
+<para>
+The end marker:
+</para>
+
+<programlisting>
+  ******
+</programlisting>
+
+    <para>
+    marks the end of a header.
+    </para>
+
+    <para>Items begin with an item name and are followed by the
+    item's body.  An example: </para>
+
+<programlisting>
+  *  FUNCTION
+  *    Transfer money from the Federal Reserve Bank into the
+  *    specified interest-earning checking account.  No records of
+  *    the transaction will be retained.
+</programlisting>
+
+    <para>
+    In this case the item's name is FUNCTION.
+    </para>
+
+    <para>
+    Each line of an item starts with a remark marker.  In this case
+    <literal>*</literal>.
+    </para>
+
+<para>That what ROBODoc needs to recognize a header is therefore:</para>
+
+<example>
+    <title>The markers needed by ROBODoc to recognize a header.</title>
+<programlisting>
+ /****f* financial.library/StealMoney
+  *  NAME
+  *
+  *  SYNOPSIS
+  *
+  *  FUNCTION
+  *
+  *
+  *
+  *  INPUTS
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *
+  *  RESULT
+  *
+  *
+  *  EXAMPLE
+  *
+  *  NOTES
+  *
+  *  BUGS
+  *
+  *
+  *
+  *
+  *  SEE ALSO
+  *
+  *
+  ******
+</programlisting>
+</example>
+
+    <para>
+    The above example is in C.  ROBODoc supports many more
+    languages though.  See <xref linkend="defaultheaders" endterm="defaultheaders.title" />.
+    </para>
+
+</section>
+
+
+<section id="header_types">
+<title id="header_types.title">Header Types</title>
+
+    <para> ROBODoc defines a number of header types.  You don't need
+    to use them but they can be useful for sorting information.  The
+    header type tells ROBODoc what kind of object you are documenting.
+    This information allows ROBODoc to create more useful index
+    tables.</para>
+
+    <para>The type is identified by one or two characters.  ROBODoc
+    expects to find them after the fourth <literal>*</literal> in the
+    begin marker.  So <literal>#****f</literal> is a valid marker,
+    but <literal>#**f**</literal> is not.</para>
+
+    <para>If a single character is given, the type is defined as
+    listed in the following table</para>
+
+<table frame="all"><title>Default header types</title>
+    <tgroup cols='2' align='left' colsep='1' rowsep='1'>
+        <colspec colname='c1'/>
+        <colspec colname='c2'/>
+        <tbody>
+            <row><entry>c</entry><entry>Header for a class </entry></row>
+            <row><entry>d</entry><entry>Header for a constant (from define)</entry> </row>
+            <row><entry>f</entry><entry>Header for a function</entry></row>
+            <row><entry>h</entry>
+            <entry id="header_type_h">Header for a module in a project</entry></row>
+            <row><entry>m</entry><entry>Header for a method</entry> </row>
+            <row><entry>s</entry><entry>Header for a structure</entry>  </row>
+            <row><entry>t</entry><entry>Header for a types</entry> </row>
+            <row><entry>u</entry><entry>Header for a unit test</entry> </row>
+            <row><entry>v</entry><entry>Header for a variable</entry>  </row>
+            <row><entry>*</entry><entry>Generic header for everything else</entry> </row>
+        </tbody>
+    </tgroup>
+</table>
+
+    <para>If two characters are given, the first character should be
+    <literal>i</literal> and the second can be any of the other
+    characters from the table above.  This creates an internal header
+    of the type specified by the second character.  Internal headers
+    are special.  They can be used to hide certain headers. They are
+    only extracted if requested. You can use them to document internal
+    functions, classes, etc. that you do not want clients to see,
+    creating what might be a programmer's manual as opposed to a
+    user's manual.</para>
+
+    <para>So <literal>/****if* Module/func1</literal> defines an
+    internal function called <literal>func1</literal>.
+    </para>
+
+    <para>Headers marked internal are by default not included in the
+    generated documentation.  If you want to include them use the
+    option <option>--internal</option>.   You can also generate the
+    documentation from only the internal headers with the option
+    <option>--internalonly</option>.
+    </para>
+
+    <para>You can define your own header types using the ROBODoc
+    configuration file, <filename>robodoc.rc</filename>.
+    See <xref linkend="headertypes_block" endterm="headertypes_block.title" />.
+    This way you can document anything you like, for instance makefile
+    entries, system tests, or exceptions.
+    </para>
+
+</section>
+
+<section> <title>Items</title>
+
+    <para> By default ROBODoc recognizes the following items: </para>
+
+    <variablelist>
+        <varlistentry>
+            <term>
+                NAME
+            </term>
+            <listitem>
+                <para>Item name plus a short description.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                COPYRIGHT
+            </term>
+            <listitem>
+                <para>Who own the copyright : "(c) &lt;year&gt;-&lt;year&gt; by
+                    &lt;company/person&gt;"
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                SYNOPSIS
+            </term>
+            <term>
+                USAGE
+            </term>
+            <listitem>
+                <para>
+                    How to use it.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                FUNCTION
+            </term>
+            <term>
+                DESCRIPTION
+            </term>
+            <term>
+                PURPOSE
+            </term>
+            <listitem>
+                <para>
+                    What does it do.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                AUTHOR
+            </term>
+            <listitem>
+                <para>
+                    Who wrote it.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                CREATION DATE
+            </term>
+            <listitem>
+                <para>When did the work start.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                MODIFICATION HISTORY
+            </term>
+            <term>
+                HISTORY
+            </term>
+            <listitem>
+                <para>Who has done which changes and when.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                INPUTS
+            </term>
+            <term>
+                ARGUMENTS
+            </term>
+            <term>
+                OPTIONS
+            </term>
+            <term>
+                PARAMETERS
+            </term>
+            <term>
+                SWITCHES
+            </term>
+            <listitem>
+                <para>
+                    What can we feed into it.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                OUTPUT
+            </term>
+            <term>
+                SIDE EFFECTS
+            </term>
+            <listitem>
+                <para>What output is made.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                RESULT
+            </term>
+            <term>
+                RETURN VALUE
+            </term>
+            <listitem>
+                <para>
+                    What do we get returned.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                EXAMPLE
+            </term>
+            <listitem>
+                <para>
+                    A clear example of the items use.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                NOTES
+            </term>
+            <listitem>
+                <para>
+                    Any annotations
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                DIAGNOSTICS
+            </term>
+            <listitem>
+                <para> Diagnostic output.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                WARNINGS
+            </term>
+            <term>
+                ERRORS
+            </term>
+            <listitem>
+                <para>Warning and error-messages.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                BUGS
+            </term>
+            <listitem>
+                <para>Known bugs.
+                </para>
+            </listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                TODO
+            </term>
+            <term>
+                IDEAS
+            </term>
+            <listitem><para>What to implement next and ideas. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                PORTABILITY
+            </term>
+            <listitem><para>Where does it come from, where will it work. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                SEE ALSO
+            </term>
+            <listitem><para>References to other functions, man pages, other documentation. </para></listitem>
+        </varlistentry>
+
+
+        <varlistentry>
+            <term>
+                METHODS
+            </term>
+            <term>
+                NEW METHODS
+            </term>
+            <listitem><para>OOP methods.</para></listitem>
+
+        </varlistentry>
+
+
+        <varlistentry>
+            <term>
+                ATTRIBUTES
+            </term>
+            <term>
+                NEW ATTRIBUTES
+            </term>
+            <listitem><para>OOP attributes.</para></listitem>
+        </varlistentry>
+
+
+        <varlistentry>
+            <term>
+                TAGS
+            </term>
+            <listitem>
+                <para>Tag-item description.
+            </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                DERIVED FROM
+            </term>
+            <listitem><para>OOP super class. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                DERIVED BY
+            </term>
+            <listitem><para>OOP sub class. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                USES
+            </term>
+            <term>
+                CHILDREN
+            </term>
+            <listitem><para>What modules are used by this one. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                USED BY
+            </term>
+            <term>
+                PARENTS
+            </term>
+            <listitem><para>Which modules do use this one. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                COMMANDS
+            </term>
+            <listitem><para>Command description. </para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+            <term>
+                SOURCE
+            </term>
+            <listitem><para>Source code inclusion. </para></listitem>
+        </varlistentry>
+
+    </variablelist>
+
+    <para>You can define your own items using the ROBODoc
+    configuration file, <filename>robodoc.rc</filename>.  See <xref
+    linkend="customizing" endterm="customizing.title" />.  </para>
+
+</section>
+
+<section id="sections">
+<title id="sections.title">Sections</title>
+
+    <para>The structure of source code for a project is usually
+    hierarchical.  A project might consists of several applications,
+    an application of several modules, a module of several functions
+    or even sub modules.  ROBODoc allows you to show this hierarchy in
+    your documentation.  For this you specify the hierarchy in the
+    header name.  For instance,  you have a project that is going to
+    create a new language called D.  The D Language project might
+    consists of three applications: a preprocessor, a compiler, and a
+    linker.  The compiler consists of two modules, a parser and a
+    generator.  The parser module consists of several
+    functions.</para>
+
+    <para>The following three headers show how this hierarchy can be
+    defined in the header name.</para>
+
+<programlisting>
+#****h* D-Language/Compiler
+# FUNCTION
+#   The compiler takes a preprocessed source file and
+#   turns it into an object file.
+#***
+</programlisting>
+
+<programlisting>
+#****h* D-Language/Linker
+# FUNCTION
+#   The linker module contains functions that scan a
+#   object file and build the executable.
+#***
+</programlisting>
+
+<programlisting>
+#****h* Compiler/Parser
+# FUNCTION
+#   The parser module contains functions that scan a
+#   preprocessed source file and build the syntax tree.
+#***
+</programlisting>
+
+<programlisting>
+#****f* Parser/ReadToken
+# FUNCTION
+#   ReadToken reads the next token from the input
+#   file.
+#***
+</programlisting>
+
+    <para>When you generate documentation with the option
+    <option>--section</option>, ROBODoc uses the hierarchical
+    information when generating the table of contents and document
+    section information. For instance in HTML sections are started
+    with &lt;H1&gt;,  &lt;H2&gt;,  &lt;H3&gt; depending on the level
+    in the hierarchy.  The table of contents will also contain levels.  The
+    table of contents for the above example will be: </para>
+
+<programlisting>
+1. D-Language/Compiler
+1.1 Compiler/Parser
+1.1.1 Parser/ReadToken
+2. D-Language/Linker
+</programlisting>
+
+</section>
+
+<section id="formatting"> <title id="formatting.title">Smart Text Formatting</title>
+
+<para>By default ROBODoc creates preformatted text in the output
+documentation for all the text it finds in an item.  This means
+that the formatting of the output looks the same as the formatting of
+the text of an item.  Line-breaks and indentation stay the same.
+This is easy but does not always create the best looking
+output.</para>
+
+<para>ROBODoc can also try to deduce the formatting of your text based
+on the layout and indentation of your text and on special characters in the text.
+It works a bit similar to the input method of Wikis.  In the context of this
+manual this is called Smart Formatting.
+</para>
+
+<para>You switch this on with the option <option>--nopre</option>.
+ROBODoc now tries to find three kind of elements: paragraphs,
+lists, and preformatted text.</para>
+
+<para>Paragraphs are separated by empty lines.  So the following item
+has two paragraphs.</para>
+
+<example>
+    <title>Two paragraphs.</title>
+<programlisting>
+  FUNCTION
+    This function does something.
+
+    And it then does something else
+    and a bit more.
+</programlisting>
+</example>
+
+<para> A List starts with a line that ends with a ':' which is then
+followed by one or more list items. List items should start with '*',
+'-', or 'o'.   So the following item contains a valid list: </para>
+
+<example>
+    <title>A list.</title>
+<programlisting>
+  FUNCTION
+     This function does:
+     * a lot of foo
+     * some snafuing
+     * and a bit of foobarring.
+</programlisting>
+</example>
+
+<para> A list item can span more than one line if the second and following
+lines are indented.  So this is also a valid list:</para>
+
+<example>
+    <title>A list where one of the items spans more than one line.</title>
+<programlisting>
+  FUNCTION
+     This function does:
+     * a lot of foo and preprocessing of the
+       raw input with the aid
+       of the some magic
+     * some snafuing
+     * and a bit of foobarring.
+</programlisting>
+</example>
+
+
+<para>If list items directly follow the name of a robodoc item they
+also form a valid list.  So this is a valid list:</para>
+
+<example>
+    <title>an implicit list</title>
+<programlisting>
+  INPUTS
+    * inputname -- the name of the input file
+    * outputname -- the name of the output file
+    * n -- the number of characters to be written
+</programlisting>
+</example>
+
+<para> Preformatted text is indicated by indenting it more that the
+surrounding text.  The first non-empty line in an item determines the
+base indenting.  Any lines with an indentation larger than this are
+preformatted.  An example:</para>
+
+<example>
+    <title>Preformatted text</title>
+<literallayout class="monospaced">
+   FUNCTION
+     The following lines are preformatted
+        +--------+
+        | A box  |
+        |        |
+        +--------+
+     End of the preformatted text.
+</literallayout>
+</example>
+
+<para>The following is a complete example.</para>
+
+<example id="fullsmart">
+    <title>All three elements of smart formatting.</title>
+<literallayout class="monospaced">
+    This is some example text.
+    And some more.
+
+    This is even more, and we start a list:
+    * a list item
+    * a list item
+    * a list item
+
+    And we can also do preformatted stuff
+    by indenting
+        +--------+
+        |        |
+        +--------+
+    The box will stay.
+</literallayout>
+</example>
+
+<para>will be turn into</para>
+
+<example id="fulloutput">
+    <title>The corresponding HTML output.</title>
+<literallayout class="monospaced">
+    &lt;p&gt;This is some example text.
+    And some more.&lt;/p&gt;
+
+    &lt;p&gt;This is even more, and we start a list:&lt;/p&gt;
+    &lt;ul&gt;
+    &lt;li&gt;a list item&lt;/li&gt;
+    &lt;li&gt;a list item&lt;/li&gt;
+    &lt;li&gt;a list item&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;And we can also do preformatted stuff
+    by indenting&lt;/p&gt;
+    &lt;pre&gt;
+        +--------+
+        |        |
+        +--------+
+    &lt;/pre&gt;
+    &lt;p&gt; The box will stay.&lt;/p&gt;
+</literallayout>
+</example>
+
+</section>
+
+</section>
+
+

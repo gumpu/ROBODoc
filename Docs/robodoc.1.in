@@ -1,0 +1,121 @@
+.de EX          \"Begin example
+.ne 5
+.if n .sp 1
+.if t .sp .5
+.nf
+.in +.5i
+..
+.de EE
+.fi
+.in -.5i
+.if n .sp 1
+.if t .sp .5
+..
+.TH ROBODoc "1" "May 2010" "@PACKAGE_STRING@"
+
+.SH NAME
+ROBODoc \- Extract documentation from source code.
+
+.SH SYNOPSIS
+.B robodoc
+.I --src
+<source>
+.I --doc
+<destination>
+.B [options]
+
+.SH DESCRIPTION
+
+ROBODoc extracts specially formated documentation from the source code.
+It allows you to maintain a program and its documentation in a single
+file.
+
+.SH OPTIONS
+
+.IP -c
+Show the copyright message.
+
+.IP --version
+Print version information and exit.
+
+.IP --doc
+Define the documentation directory or documentation file.  
+A directory should start with a '/' or a './' and 
+should not include any '..'.
+
+.IP --src
+Define the source directory or source file.  A directory should start
+with a '/' or a './' and should not include any '..'.
+
+.IP --ascii
+Generate documentation in ASCII format.
+
+.IP --html
+Generate documentation in HTML format.
+
+.IP --dbxml
+Generate documentation in XML DocBook format.
+
+.IP --latex
+Generate documentation in LaTeX format.
+
+.IP --rtf
+Generate documentation in RTF format.
+
+.IP --index
+Create an additional master index file.
+
+.IP --multidoc
+Store all documentation in seperate files.
+
+.IP --singledoc
+Store all documentation in a single file.
+
+.IP --singlefile
+Generate a single document from a single file
+
+.EE
+The complete list of options can be found in the HTML documentation.
+(Reference at the end of this page.)
+
+.SH EXAMPLES
+
+.EX
+robodoc --src ./ --doc myproject --singledoc --html
+.EE
+
+Creates a document called myproject.html from all source files
+in the current directory.
+
+.EX
+robodoc --src ./myproject/ 
+      --doc ./myprojectdoc --multidoc --html --index
+.EE
+
+Creates seperate documents for all the source files found in
+the directory ./myproject they are stored in the directory ./myprojectdoc.
+A master index file called ./myprojectdoc/masterindex.html is also
+created.  This provides links to all the individual files.
+
+.SH COPYRIGHT
+
+Copyright \(co 1994-2008 Frans Slothouber, Petteri Kettunen, Gergely Budai
+and Jacco van Weert.
+
+.br
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+.SH AUTHORS
+
+Frans Slothouber, Jacco van Weert, Petteri Kettunen, Bernd Koesling,
+Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner, Sasha Vasko,
+Nathan Prewitt, Gergely Budai and Dennis Stampfer.
+
+.SH SEE ALSO
+
+The documentation in HTML format that comes with ROBODoc. Latest
+version can be found from http://www.xs4all.nl/~rfsber/Robo/ or from
+http://sourceforge.net/projects/robodoc/.
+
+.BR robohdrs(1)

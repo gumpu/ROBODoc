@@ -1,0 +1,507 @@
+<section>
+<title>C</title>
+
+
+<example>
+<title>A simple header without any source items in C.</title>
+<programlisting>
+/****f* ModuleName/Foo
+* FUNCTION
+*   Foo computes the foo factor
+*   using a fudge factor.
+****
+*/
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in C.</title>
+<programlisting>
+/****f* ModuleName/Foo
+* FUNCTION
+*   Foo computes the foo factor
+*   using a fudge factor.
+* SYNOPSIS
+*/
+int Foo( int fudge )
+/*
+* INPUTS
+*   fudge -- the fudge factor
+* SOURCE
+*/
+
+ more source code..
+
+/*****/
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for C if it were not supported by default.</title>
+<programlisting>
+header markers:
+  /****
+remark markers:
+  *
+end markers:
+  ****
+  /****
+remark begin markers:
+  /*
+remark end markers:
+  */
+</programlisting>
+</example>
+</section>
+<section>
+<title>Modula-2</title>
+
+
+<example>
+<title>A simple header without any source items in Modula-2.</title>
+<programlisting>
+(****f* ModuleName/Foo
+* FUNCTION
+*   Foo computes the foo factor
+*   using a fudge factor.
+****
+*)
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Modula-2.</title>
+<programlisting>
+(****f* ModuleName/Foo
+* FUNCTION
+*   Foo computes the foo factor
+*   using a fudge factor.
+* SYNOPSIS
+*)
+int Foo( int fudge )
+(*
+* INPUTS
+*   fudge -- the fudge factor
+* SOURCE
+*)
+
+ more source code..
+
+(*****)
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Modula-2 if it were not supported by default.</title>
+<programlisting>
+header markers:
+  (****
+remark markers:
+  *
+end markers:
+  ****
+  (****
+remark begin markers:
+  (*
+remark end markers:
+  *)
+</programlisting>
+</example>
+</section>
+<section>
+<title>Pascal</title>
+
+
+<example>
+<title>A simple header without any source items in Pascal.</title>
+<programlisting>
+{****f* ModuleName/Foo
+* FUNCTION
+*   Foo computes the foo factor
+*   using a fudge factor.
+****
+*}
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Pascal.</title>
+<programlisting>
+{****f* ModuleName/Foo
+* FUNCTION
+*   Foo computes the foo factor
+*   using a fudge factor.
+* SYNOPSIS
+*}
+int Foo( int fudge )
+{*
+* INPUTS
+*   fudge -- the fudge factor
+* SOURCE
+*}
+
+ more source code..
+
+{*****}
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Pascal if it were not supported by default.</title>
+<programlisting>
+header markers:
+  {****
+remark markers:
+  *
+end markers:
+  ****
+  {****
+remark begin markers:
+  {*
+remark end markers:
+  *}
+</programlisting>
+</example>
+</section>
+<section>
+<title>C++</title>
+
+
+<example>
+<title>A simple header without any source items in C++.</title>
+<programlisting>
+//****f* ModuleName/Foo
+// FUNCTION
+//   Foo computes the foo factor
+//   using a fudge factor.
+//****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in C++.</title>
+<programlisting>
+//****f* ModuleName/Foo
+// FUNCTION
+//   Foo computes the foo factor
+//   using a fudge factor.
+// SYNOPSIS
+int Foo( int fudge )
+// INPUTS
+//   fudge -- the fudge factor
+// SOURCE
+
+ more source code..
+
+//****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for C++ if it were not supported by default.</title>
+<programlisting>
+header markers:
+  //****
+remark markers:
+  //
+end markers:
+  //****
+</programlisting>
+</example>
+</section>
+<section>
+<title>Tcl</title>
+
+
+<example>
+<title>A simple header without any source items in Tcl.</title>
+<programlisting>
+#****f* ModuleName/Foo
+# FUNCTION
+#   Foo computes the foo factor
+#   using a fudge factor.
+#****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Tcl.</title>
+<programlisting>
+#****f* ModuleName/Foo
+# FUNCTION
+#   Foo computes the foo factor
+#   using a fudge factor.
+# SYNOPSIS
+int Foo( int fudge )
+# INPUTS
+#   fudge -- the fudge factor
+# SOURCE
+
+ more source code..
+
+#****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Tcl if it were not supported by default.</title>
+<programlisting>
+header markers:
+  #****
+remark markers:
+  #
+end markers:
+  #****
+</programlisting>
+</example>
+</section>
+<section>
+<title>Perl</title>
+
+
+<example>
+<title>A simple header without any source items in Perl.</title>
+<programlisting>
+#****f* ModuleName/Foo
+# FUNCTION
+#   Foo computes the foo factor
+#   using a fudge factor.
+#****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Perl.</title>
+<programlisting>
+#****f* ModuleName/Foo
+# FUNCTION
+#   Foo computes the foo factor
+#   using a fudge factor.
+# SYNOPSIS
+int Foo( int fudge )
+# INPUTS
+#   fudge -- the fudge factor
+# SOURCE
+
+ more source code..
+
+#****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Perl if it were not supported by default.</title>
+<programlisting>
+header markers:
+  #****
+remark markers:
+  #
+end markers:
+  #****
+</programlisting>
+</example>
+</section>
+<section>
+<title>LaTeX/TeX</title>
+
+
+<example>
+<title>A simple header without any source items in LaTeX/TeX.</title>
+<programlisting>
+%****f* ModuleName/Foo
+% FUNCTION
+%   Foo computes the foo factor
+%   using a fudge factor.
+%****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in LaTeX/TeX.</title>
+<programlisting>
+%****f* ModuleName/Foo
+% FUNCTION
+%   Foo computes the foo factor
+%   using a fudge factor.
+% SYNOPSIS
+int Foo( int fudge )
+% INPUTS
+%   fudge -- the fudge factor
+% SOURCE
+
+ more source code..
+
+%****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for LaTeX/TeX if it were not supported by default.</title>
+<programlisting>
+header markers:
+  %****
+remark markers:
+  %
+end markers:
+  %****
+</programlisting>
+</example>
+</section>
+<section>
+<title>Postscript</title>
+
+
+<example>
+<title>A simple header without any source items in Postscript.</title>
+<programlisting>
+%****f* ModuleName/Foo
+% FUNCTION
+%   Foo computes the foo factor
+%   using a fudge factor.
+%****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Postscript.</title>
+<programlisting>
+%****f* ModuleName/Foo
+% FUNCTION
+%   Foo computes the foo factor
+%   using a fudge factor.
+% SYNOPSIS
+int Foo( int fudge )
+% INPUTS
+%   fudge -- the fudge factor
+% SOURCE
+
+ more source code..
+
+%****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Postscript if it were not supported by default.</title>
+<programlisting>
+header markers:
+  %****
+remark markers:
+  %
+end markers:
+  %****
+</programlisting>
+</example>
+</section>
+<section>
+<title>Occam</title>
+
+
+<example>
+<title>A simple header without any source items in Occam.</title>
+<programlisting>
+__****f* ModuleName/Foo
+__ FUNCTION
+__   Foo computes the foo factor
+__   using a fudge factor.
+__****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Occam.</title>
+<programlisting>
+__****f* ModuleName/Foo
+__ FUNCTION
+__   Foo computes the foo factor
+__   using a fudge factor.
+__ SYNOPSIS
+int Foo( int fudge )
+__ INPUTS
+__   fudge -- the fudge factor
+__ SOURCE
+
+ more source code..
+
+__****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Occam if it were not supported by default.</title>
+<programlisting>
+header markers:
+  __****
+remark markers:
+  __
+end markers:
+  __****
+</programlisting>
+</example>
+</section>
+<section>
+<title>Fortran 90</title>
+
+
+<example>
+<title>A simple header without any source items in Fortran 90.</title>
+<programlisting>
+__****f* ModuleName/Foo
+__ FUNCTION
+__   Foo computes the foo factor
+__   using a fudge factor.
+__****
+</programlisting>
+</example>
+
+
+<example>
+<title>A header with source items in Fortran 90.</title>
+<programlisting>
+__****f* ModuleName/Foo
+__ FUNCTION
+__   Foo computes the foo factor
+__   using a fudge factor.
+__ SYNOPSIS
+int Foo( int fudge )
+__ INPUTS
+__   fudge -- the fudge factor
+__ SOURCE
+
+ more source code..
+
+__****
+</programlisting>
+</example>
+
+
+<example>
+<title>The robodoc.rc file required for Fortran 90 if it were not supported by default.</title>
+<programlisting>
+header markers:
+  __****
+remark markers:
+  __
+end markers:
+  __****
+</programlisting>
+</example>
+</section>
