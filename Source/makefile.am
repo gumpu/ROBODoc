@@ -1,0 +1,37 @@
+# vi: ff=unix
+# $Id: makefile.am,v 1.25 2008/06/19 22:21:24 gumpu Exp $
+# Process this file with automake to produce Makefile.in
+
+bin_PROGRAMS = robodoc robohdrs
+
+robohdrs_SOURCES = \
+     robohdrs.c headers.c util.c globals.c roboconfig.c \
+     headertypes.c
+
+robohdrs_DEPENDENCIES = headers.h
+
+robodoc_SOURCES = \
+     optioncheck.c optioncheck.h \
+     analyser.c analyser.h \
+     generator.c generator.h \
+     headers.c headers.h \
+     headertypes.c headertypes.h \
+     items.c items.h \
+     links.c links.h \
+     globals.c globals.h \
+     robodoc.c robodoc.h \
+     util.c util.h \
+     html_generator.c html_generator.h \
+     xmldocbook_generator.c xmldocbook_generator.h \
+     latex_generator.c latex_generator.h \
+     rtf_generator.c rtf_generator.h \
+     test_generator.c test_generator.h \
+     ascii_generator.c ascii_generator.h \
+     troff_generator.c troff_generator.h \
+     lua_generator.c lua_generator.h \
+     document.c document.h \
+     directory.c directory.h \
+     file.c file.h \
+     part.c part.h \
+     path.c path.h \
+     roboconfig.c roboconfig.h 

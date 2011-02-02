@@ -1,0 +1,80 @@
+.de EX          \"Begin example
+.ne 5
+.if n .sp 1
+.if t .sp .5
+.nf
+.in +.5i
+..
+.de EE
+.fi
+.in -.5i
+.if n .sp 1
+.if t .sp .5
+..
+.TH robohdrs "1" "August 2003" "robohdrs 0.01"
+.SH NAME
+robohdrs \- insert ROBODoc headers to source code.
+.SH SYNOPSIS
+.B robohdrs
+.B [options]
+<source file>
+
+.SH DESCRIPTION
+
+robohdrs inserts ROBODoc headers to source code files.  This program
+processes one source file at the time. Existing ROBODoc headers, if
+any, are not checked for. Beware since this may result in double
+headers. Current working directory should be the same as where the
+source file is located.
+
+By default NAME and SYNOPSIS items are included in the template
+header.
+
+.SH OPTIONS
+
+.IP -h
+Show brief help on usage and exit.
+.IP -i
+Specify an extra header item to be included in template header. Repeat
+if multiple extra items are desired.
+.IP -l
+Specify source code language (default C/C++) Supported options are:
+fortran, fortran90, script, and tex.
+.IP -p
+Specify project name for source file header.
+.IP -s
+Include SOURCE item.
+.IP -t
+Specify version control tag to be included in the main header.
+.IP -x
+Specify path to ctags binary which is used.
+
+.SH EXAMPLES
+
+.EX
+robohdrs -s -p myproj -i "MODIFICATION HISTORY" -i IDEAS test.c
+.EE
+
+Specifies project name myproj and inserts extra items MODIFICATION
+HISTORY, IDEAS, and SOURCE to all template headers (excluding source
+file header).
+
+.EX
+robohdrs -s -p myproj -l script test.tcl
+.EE
+
+Insert headers to a Tcl/Tk script.
+
+.SH COPYRIGHT
+
+Copyright \(co 2003 Frans Slothouber and Petteri Kettunen and Jacco van Weert.
+.br
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+.SH SEE ALSO
+
+.BR robodoc(1)
+
+
+
