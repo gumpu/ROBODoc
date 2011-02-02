@@ -1,0 +1,67 @@
+dnl Process this file with autoconf to produce a configure script.
+
+dnl TODO FS   Document this.
+dnl TODO FS   Figure out how this really works.
+
+AC_INIT(robodoc, 4.99.40)
+AC_CONFIG_SRCDIR(Source/robodoc.h)
+
+dnl XXX Work around some autoconf bugs.
+if test "x$prefix" = "xNONE"; then
+   prefix="${ac_default_prefix}"
+fi
+ROBO_INSTALL_PREFIX=$prefix
+dnl The value of --prefix is used in the sources
+dnl so make a define for it.
+AC_DEFINE_UNQUOTED([ROBO_PREFIX], "$ROBO_INSTALL_PREFIX", [default location for robodoc.rc])
+
+AM_CONFIG_HEADER(Source/config.h)
+AM_INIT_AUTOMAKE(robodoc, 4.99.40)
+
+AC_PROG_MAKE_SET
+
+dnl Checks for programs.
+AC_PROG_CC
+# use the results of this to create a define for
+# the compiler used for the --version option.
+#
+dnl Checks for libraries.
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CANONICAL_HOST
+
+dnl Test for Mac OS X
+case ${host} in
+*-apple-darwin*)
+	OSTYPE="DARWIN"
+
+	;;
+esac
+
+AM_CONDITIONAL([FINK], [test "x$OSTYPE" = "xDARWIN"])
+
+dnl Add DARWIN flag for Mac OS X
+if test "x$OSTYPE" = "xDARWIN";then
+	CFLAGS="$CFLAGS -DDARWIN"
+fi
+
+
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+AC_TYPE_SIZE_T
+
+dnl Checks for library functions.
+AC_FUNC_STRFTIME
+AC_FUNC_VPRINTF
+AC_FUNC_FORK
+AC_CHECK_FUNCS(strstr snprintf symlink)
+
+# configuration info
+AC_DEFINE_UNQUOTED([ROBO_CFLAGS], "$CFLAGS", [compiler flags])
+AC_DEFINE_UNQUOTED([ROBO_HOST], "$host", [on which host robodoc was compiled])
+
+AC_CONFIG_FILES([makefile Docs/makefile Docs/robodoc.1 Docs/robohdrs.1 Source/makefile])
+AC_OUTPUT
+

@@ -1,0 +1,739 @@
+# vi: spell ff=unix ft=none
+
+May 2010 - V4.99.40
+  o Applied a fix by Luis Alejandro Muzzachiodi to fix a problem
+    in troff_generator.c that prevented compilation under cygwin.
+
+Mar 2009 - V4.99.38
+  Frans Slothouber
+  o Merged patch by Ralf Meister to improve troff output.
+  o Added --config option that show build and configuration information.
+  o Removed all uses of '//' to make ROBODoc compile on older compilers.
+  o fixed a bug in the configure that caused ROBODoc to look
+    in "/NONE/...." for robodoc.rc files.
+  o make install no longer installs a roboboc.rc but a
+    robodoc_example.rc
+  o Ran valgrind on the code and fixed various problems.
+  o Fixed bug 1754770, "Circular references". Which caused
+    ROBODoc to hang if there was a 'loop' in the headers.
+
+Mar 2008 - V4.99.36
+  Gergely Budai
+  o Added option --source_line_numbers to include original source line numbers
+    in the documentation.
+  o Minor RTF format bugfix.
+  o Fixed bug 1888454, "dot files are placed in the wrong directory".
+  o Replaced the CRC32 based string hash algorithm with the one written by
+    Bob Jenkins. It supposed to be faster.
+  o Included some new and fixed some older test cases.
+  o Removed the implicit generation of DOT pdf images for latex output.
+  o Merged patch: [ 1845277 ] "Fix for unclosed <a> tags". (Thanks to m-35.)
+
+Jun 2007 - V4.99.34
+  Gergely Budai
+  added option --header_breaks, which allows ROBODoc to insert line breaks
+  after every specified number of header names to improve readability.
+
+  Frans Slothouber
+  o Merged path by Tom Keal that Fixes bug in parsing of the robodoc.rc file.
+    (The wrong number of items is recorded for the preformatted_items and
+     format_items block.)
+
+Apr 2007 - V4.99.32
+  o Fixed bug 1706446, --sectionnameonly and --rtf format problem
+  o Fixed bug 1679101, "robodoc crashed on a faulty header".
+  o Added the option --no_subdirectories.
+  o output mode pipes at the end of an item don't result in broken
+    formatting anymore.
+  o Items that start with non-ascii characters are now recognized.
+  o makefile.plain works again
+  o the item names in the 'item order', 'ignore items', and other items blocks
+    in the robodoc.rc file are checked against the list of allowed item names.
+  o the options --sections and --toc do no longer lead
+    to an assert() with --ascii
+  o Added item sorting.  The order in which items are to
+    appear in the documentation can be specified in the
+    robodoc.rc file.
+
+Feb 2007 - V4.99.30
+  Frans Slothouber
+  o Removed form-feed from ASCII output
+  o Applied patch from Christian Vigh to make ROBODoc compile
+    under MSVC++ V7
+  o Applied patch from Wim van Hoydonck to fix a bug
+    in the escaping of '_' in the names internal artifacts
+    for LaTeX output.
+  o Fixed makefile.plain
+  o ROBODoc compiles without warnings using
+      make -f makefile.plain
+
+  Gergely Budai
+  o Using bitfields in stead of and-ing with a define.
+  o Function name separator can be configured to be something
+    different than ','
+  o Added a configuration block that allows the used to 
+    specify which items are pre-formatted by default.
+
+Sep 2006
+  Frans Slothouber
+  o Corrected return value of main()
+  
+Sep 2006 - V4.99.28
+  Michèle Garoche
+  o Improved Mac support (for FINK)
+
+Aug 2006 - V4.99.28
+  Gergely Budai
+  o Fixed many compiler warnings.
+  o More readable .css file
+  o makefile for mingw under cygwin
+  o Better syntax colouring support
+
+  Frans Slothouber
+  o Moved most of the HTML formatting to the .css file
+  o Fixed a bug that caused the second list in a paragraph not
+    to be recognized.
+  o Added more documentation to the source.
+  o Removed code for SGML docbook
+  o Removed makefile and project file for MS VC++
+  o Added functions to check for duplicate and
+    mutual exclusive options.
+
+Jun 2006 - V4.99.26
+  o Merged patch from Gergely Budai. (Adds syntax colouring, better
+    Latex output, and better tab control).
+  o changed output of --test format to xml. (Easier to parse).
+  o Masterindex no longer contains links to source files when 
+    --one_file_per_header is used.
+
+Jun 2006 - V4.99.24
+  o Added option --one_file_per_header (experimental: this splits
+    the documentation into many files, one per header).
+  o Added header examples to documentation.
+
+Dec 2005 - V4.99.23
+  o Made it compile again under MingW
+  o Fixed a bug in the reporting of a missing robodoc.rc file
+
+Dec 2005 - V4.99.21
+  o Fixed crash on empty source items.
+  o Merged patch from cdumke for handling long lines
+
+Dec 2005 - V4.99.19
+  o Merged a patch from Friedrich Haase that allows  '--src .'
+    and adds the options --sectionnameonly
+  o Merged a patch from Andreas Weder for better LaTeX output
+  o Added configuration options to allow some items
+    to work in the same way as a SOURCE item.
+  o ROBODoc now allows module and function names
+    that include white space.
+
+Frans Slothouber
+Apr 2005 - V4.99.17
+  o Added patch by Thierry Pierron for troff output.
+
+Feb 2005 - V4.99.15
+  o Documented more tests.
+  o Changed timestamp format.
+  o Added check on fork(). If fork() is not found only a stub for robohdrs
+    is compiled.
+  o Added patch by Thierry Pierron for aliasses. A single
+    header can now be used to documents several similar functions/
+    classes/variables etc.
+
+Frans Slothouber
+Feb 2005 - V4.99.10
+  o Fixed a bug in the compilation under mingw
+
+Jan 2005 - V4.99.8
+Frans Slothouber
+  o ROBODoc will look in different locations for the robodoc.rc file.
+    ( $HOME/robodoc.rc,  $HOMEDRIVE$HOMEPATH/robodoc.rc, and
+      /usr/share/robodoc/robodoc.rc )
+  o Added option --nogeneratedwith to enable users to remove the
+    generated with robodoc line for the generated documentation.
+  o Fixed the makefile for mingw (thanks to Brian Elmegaard)
+  o Fixed a bug that caused robodoc to find headers even if
+    there were none. [1055886]
+  o Fixed a bug that caused robodoc to crash if single line source 
+    item was found. [1056681]
+
+Sep 2004 - V4.99.6
+  o Fixed a bug that caused robodoc to crash when no files
+    are found.  [1033913]
+
+Sep 2004 - V4.99.4
+Frans Slothouber
+  o Fixed a bug that caused robodoc to die with an assert
+    when an absolute path is used under windows.  [1033644]
+  o Updated the man page.
+  o Fixed a bug that caused links to be created for 'Foo' in
+    Bar_Foo.
+
+Aug 2004 - V4.99.3
+Frans Slothouber
+o If paths such as c:\doc\foo\bar are used as parameters
+  they are first translated to c:/doc/foo/bar before
+  they are further processed.
+o Added patch send in by Ernst Bokkelkamp that adds
+  the header type to each headers documentation.
+o Updated documentation.
+
+May 2004 - V4.99.1
+ o Merged a patch by Bernhard Schoenhammer that adds a 
+    accept files: 
+   block to the robodoc.rc file.
+ o Solved bug [972456] Case problem with creating links.
+ o Fixed a bug [975543] that caused the Doc dir to be included when it was
+   a subdir of the sourcedir and the sourcedir was specified to
+   be '.'
+
+May 2004 - V4.99.0
+ o Fixed XML DocBook output, it appears that 4.0.24 created
+   invalid XML files.
+ o Added smart formatting.  Instead of using preformatted text,
+   that is copying the header text verbatim into the output document,
+   ROBODoc tries to determine the structure of the text from
+   the indentation and use of special characters.
+
+    For instance
+       This is a list:
+       o list item 1,
+       o list item 2.
+
+    Will be translated into the appropriate commands to create a similar
+    list in the output format.
+
+May 2004 - V4.0.25
+ Frans Slothouber
+ o Added --headless and --footless option to create documents that can be
+ included into large documents.  (Works for LaTeX and HTML).
+
+May 2004 - V4.0.24
+ Frans Slothouber
+ o Added --nosort option
+ o With the define IGNORE_CASE_FILENAMES one can make robodoc case-insensitve
+   when it comes to filenames.
+ o Fixed bug [924530] False warning with empty lines
+ o Fixed bug [925920] broken robodoc.rc file;  robodoc ignored end markers or
+   remark markers if there was no header marker block.
+
+March 2004 - V4.0.23
+ Frans Slothouber
+ o When sorting module headers come before headers
+   of other types.
+ o Fixes a bug in the sorting of headers.
+ o Fixes a bug in linking
+ o Sourcefiles that do not contain headers are not shown.
+
+February 2004 - V4.0.21
+ Frans Slothouber
+ o Added navigation bar for every header. It allows one to jump
+   to the parent header, the top of the document, and the index
+   when available.
+ o ROBODoc will continue parsing the other headers if it finds
+   a header it can not parse.
+ o Better formatted warnings.
+ o The sourcefile index is now always sorted
+ o Everything is sorted according to a non case sensitive string
+   compare.
+
+January 2004 - V4.0.19
+ Frans Slothouber
+ o Fixed bug 874567 No crosslinks for names that start with '-'
+ o Fixed bug 875533 No bolding for names starting with ::
+ o Added configurable header markers, remark markers,
+   and end markers.  ROBODoc is now usable with
+   _any_ language.
+
+ Hermann Hueni
+ o Fixed broken configure on Solaris.
+
+January 2004 - V4.0.18
+ Frans Slothouber
+ o Update of the user manual and documentation
+ o Note that:
+    If you were using an 'extensions:' block in your robodoc.rc file, 
+    you have to replace this with an 'ignore files:' block with all
+    extensions prefixed with '*'.  So, if you were using
+
+    extensions:
+        .txt
+        .obj
+
+    replace this with
+
+    ignore files:
+        *.txt
+        *.obj
+
+December 2003 - V4.0.17
+ Frans Slothouber
+ o Added directory tree shaped master index for the sourcefiles.
+ o Added filtering of files and directories based on wildcard
+   expressions.
+ Michael Felke 
+ o Support for lotus script, clean-up of headers.c and headers.h
+
+December 2003 - V4.0.15
+ Frans Slothouber
+ o Added support for DB/C
+
+December 2003 - V4.0.14
+ John Rouillard
+ o Bug fix.  no index file was generated for headertypes of which
+             there were only internal headers.
+ Frans Slothouber
+ o More tests
+
+December 2003 - V4.0.13
+ Skipped
+
+December 2003 - V4.0.12
+ David White
+ o Updated makefile for borland C
+ o Added marker for Aspen Custom Modeller (ACM) 
+ Frans Slothouber
+ o Added more documentation
+ o a .css file is now also used in singledoc mode
+ o each header in the html documentation now has a permanent
+   "a name" based on the full name of a header.
+ o fixed the title of singledoc documents.
+ o files or directories specified with --src or --doc
+   are now automatically prefixed with a ./
+ o It is now allowed to have a Doc directory that is a subdirectory
+   of the source directory.  This Doc directory is skipped while robodoc
+   scans for sourcefiles.
+ o Added headermarker !**** for Fortran
+ o ROBODoc now warns if it finds something that looks like an item name but is
+   not in the list of item names.  This catches spelling mistakes like NAEM,
+   IMPUTS, VALEU, etc
+ o Fixed bug 830868 no error message for misspelled options
+ o Fixed bug 767034 a slash at the end of a path confuses robodoc
+ o Fixed bug 772213 assert fires if header is not closed
+ o Added user configurable header types (section "header types"
+   in robodoc.rc file).
+ o Added lock mode (--lock). Per source file robodoc locks on the 
+   first headermarker it finds and will recognize only that particular headermarker 
+   for the remaining part of the file.
+   In addition it locks on the first remark marker in each header and 
+   will recognize only that particular remark marker for the remaining
+   part of the header.
+ Petteri Kettunen
+ o First implementation of piping in generator.c
+
+September 2003 - V4.0.11
+ Frans Slothouber
+ o Added a table for header types. This will allow custom 
+   header types.
+ o The master index table for HTML output is split up in
+   several pages.  One for each header type.
+ Petteri Kettunen
+ o added --version option
+ o fixed regex in bump.pl
+
+September 2003 - V4.0.10
+  Skipped.
+
+Augustus 2003 - V4.0.9
+ Frans Slothouber
+ o Removed some obsolete functions.
+ o Added project file for MSVC++
+ o Merged patch from Brian P. Hanley:
+   + the option --rc to specify an alternate robodoc.rc file.
+   + the option --css to specify an alternate css file.
+     (The content of this file will be copied into the
+      robodoc.css file).
+
+Augustus 2003 - V4.0.8
+ Skipped.
+
+July 2003 - V4.0.7
+ Frans Slothouber
+ o Indented all source code with indent
+ o Added markers for VB
+ o Added a Perl example to the Examples directory (bug 779560)
+ o Fixed layout of the man pages. (bug 779553)
+ Petteri Kettunen
+ o signed/unsigned char changes and UTF-8 output in SGML and DBXML modes
+ o robohdrs/-t option, macro (#define) created as `d' type header
+
+July 2003 - V4.0.6
+ David White
+ o Added a makefile for Borland C compiler
+ Frans Slothouber
+ o Fix for bug 761686, space in .rc file confuses robodoc
+ o Added a section on how to use robodoc under win32 to
+   the manual.
+ o Fix for bug 770251, Absolute filename causes an assertion to fail
+ Kai
+ o Added a makefile for djgpp GCC under win32.
+
+July 2003 - V4.0.5 
+ Frans Slothouber
+ o Fix for bug 761688, rtf output goes only 4 sections deep.
+ o Added the option --tabsize n
+ o Lines that do not start with a remark marker are skipped,
+   unless they are part of a source item.
+ o Re-enabled ascii output.
+
+ Kai Hofmann
+ o Fix for many compiler warnings.
+
+June 2003 - V4.0.4
+ Frans Slothouber
+ o Merged changes to the html generator from Kai.
+
+June 2003 - V4.0.3  
+ Frans Slothouber
+ o Fix for bug -- ./configure crashes.
+ o Fix for bug -- Wrong version number is shown when compiled without using
+                  autoconfig.
+
+ Jacco van Weert
+ o Added image: tag to html output.
+
+May 2003 - V4.0.2
+ o Fix for bug        -- robodoc chokes on empty lines in
+                         the robodoc.rc file.
+ o Fix for bug        -- Bad formatting of the 'unknown section' error.
+ o Fix for bug 721685 -- TOC appears twice in a RTF Doc
+ o Fix for bug 721690 -- TOC in mutidoc files are wrong.
+ o Added support for DCL.
+
+April 2003 - V4.0.1
+ o Fix for bug 715778 -- on some machines the d_type of the
+   struct dirent is always DT_UNKNOWN. This caused ROBODoc
+   to skip all files. (Thanks to Je'rome Laheurte).
+ o Merged a patch by Andreas Signer that add a number of
+   new headr types.
+ o Merged a patch by Janusz Piwowarski that allows users
+   to specify (1) the extension of the output file and
+   (2) html character encoding.
+
+April 2003 - V4.0.0
+ o Support for XML DocBook output.
+ o A new tool, robohdrs, is included -- it can insert empty headers
+   in the source code.
+ o Support for cascading style sheets (CSS) in HTML mode.
+ o Complete rework of the commandline interface.
+ o ROBODoc can now work with directories and subdirectories,
+   and does not need xref files anymore.
+ o All documentation can be created with a single command, you
+   no longer need a makefile to create your documentation.
+ o The manual is now in docbook format and much more extensive.
+ o Lots of refactoring, code should be easier to extend and understand
+   now.
+ o There is now some design documentation.
+ o Support for single file and multiple file documentation.
+ o Dropped support for Amiga Guide format.
+ o More unittests.
+ o Support for packaging under RedHat and OS-X
+ o C++ and C examples have been removed.
+
+July 2002 - V3.2.4
+ o Indented headers
+ o 2 character header types
+ Modifications by Nathan Prewitt  
+ o To allow further classification
+   of internal headers as internal functions, internal classes,
+   internal variables, etc.
+ o Added export into TROFF format with man macros -
+  suitable for Unix man pages.
+ o Fixed HTML generation to skip table of contents
+   if there were no TOC requested at command line.
+ o Fixed analyzer to correctly handle empty headers.
+
+March 2002 - Frans Slothouber (V3.2.4Beta2)
+ o More unittests
+ o Documentation update
+ o Added automatic detection of file:/
+ o Merged back the changes by Sasha Vasko.after I had
+   accidently deleted them when merging the DocBook changes.
+ o Indented most of the sourcecode.
+
+March 2002 - Frans Slothouber (V3.2.4Beta1)
+ o Documentation updates.  
+ o added a target docclean in the makefile in Source/ to clean
+   all temporary files.
+ o updated documentation
+ o added testframework
+
+August 2001  DCD Changes - V3.2.4 with docbook support:
+  o Added support for Docbook SGML - Robodoc can now produce
+    output in Docbook SGML using the DBSGML command line switch,
+    allowing standardized conversion to a host of formats
+    including HTML (single and multiple), RTF, ASCII, LATEX, 
+    and PDF. Docbook also
+    allows you to use external style sheets in which you can
+    change the look of your document. See www.docbook.org for more
+    on DocBook
+  o Added -rh switch which causes Robodoc to scan for a single header
+    defined as *ROBODOC* (char *robo_header) instead of header_markers
+    and uses *ROBODOC_END* as the end marker.
+    This prevents problems with Robodoc becoming confused with
+    normal comments uing *. It is particularly helpful in scanning
+    PHP source. It will only work with languages that support
+    multiline c-style comments
+  o Added -nt switch. Only used in DBSGML mode when creating a master
+    index. This causes Robodoc to list the Master Index functions as
+    a section 3 level item rather than as part of a table.
+  o Added genrd, a Unix bash shell script which simplifies the use
+    of Robodoc when generating documents from multiple source files
+    and when creating crossreferences and a master index.
+    Whole directories and subdirectories of source code can be
+    scanned and documented with a one line statement rather than
+    having to construct a makefile or using multiple
+    robodoc statements. See genrd -h for more info.
+
+Sepetember 2000 - Frans Slothouber (V3.2.3)
+ o Added a descrip.mms file for compilation under VMS
+ o make install installs additional documentation.
+ o Fixed a bug that caused links of the type
+  "someword/anotherword," to be ignored, while
+  "someword/anotherword" was recognized.
+
+July 2000 - Frans Slothouber (V3.2.2)
+ o Documentation explains how to use ROBODoc when your sources are
+   in several subdirectories.
+ o Documentation explains master index file for LaTeX, how to view
+   the generated documentation, and the new options, NOSOURCE, SINGLEDOC
+   and TITLE.
+ o example makefile includes commands to view the
+   generated documentation.
+ o Updated the man page
+ o Added option SINGLEDOC
+     For LaTeX output this generates documentation without
+     the start and end headers.  This way the generated file
+     can be included in a master file.
+ o Added master index file for LaTeX output.  The documentation
+     gathered from several source files can now be included into
+     one big file.
+ o Added the option NOSOURCE.  With this option the SOURCE item
+   is not included in the documentation.
+ o Added the TITLE option. This allows to set the title for
+   the master index file.
+ o Made the search for headermarkers case insensitve.
+   REM == Rem == rem
+
+December 1999 - v3.1f
+ o added RB_TimeStamp() to include time stamps in the documentation.
+ o Documentation is now generated in LaTeX2e format.
+ o added '|****' as begin marker, '|' as remark marker and '|***' as
+   end marker for GNU assembler support.
+ o ran ident on all source. Using the GNU standard now.
+ o Added new fold markers provided by Petteri
+
+December 1999 - Frans Slothouber (v3.1e)
+ o Moved the C example in Examples to Examples/C
+ o Added an C++ example in Examples/CPP
+ o Added empty headers for C++ in Headers/ 
+ o More documentation.
+ o added markers for HTML.
+ o modified the RB_Find_Link() function to also words that include
+   "::". This is used for C++ methods.
+ o added a RB_Function_Name() function that correctly extracts the
+   function name (or the name of any other object that is documented)
+   from the header name.  The old code used RB_FilePart which failed
+   on C++ method names.
+ o Fixed a core-dumping bug in RB_Set_Doc_Base()
+
+December 1999 - Frans Slothouber (v3.1d)
+ o Added list of possible item names to the robodoc man page.
+ o Added list of possible header types to the robodoc man page.
+ o Updated manual with information on the generation of the
+   master index file and new header types.
+ o added new header types for, classes, methods, variables,
+   functions, strutures and constants. (Idea of Stefan Kost)
+ o added a command to create a master index file that contains
+   sorted pointers to all classes, methods, variables,
+   functions, strutures and constants.
+
+December 1999 - Frans Slothouber (v3.1c)
+ o Added testheader.c for debug purposes.
+ o Split the source code into serveral files.
+ o Fixed numerous typos in the documentation.
+ o Using m4 to create the html documentation (for table of contents ect).
+ o Added cross links between the documentation and examples.
+ From patches that I received from Stefan Kost
+ o renamed BEAST METHODS -> METHODS
+ o renamed BEAST ATTRIBUTES -> ATTRIBUTES
+ o added new items useful for object oriented programming; some of
+   these items are already used in os3.1 autodocs
+   TAGS, COMMANDS, DERIVED FROM, DERIVED BY, USES,
+   CHILDREN, USED BY, PARENTS, USAGE, PURPOSE
+ o commented the item names
+ o changed item-type enums to end all with _ITEM
+ o changed RB_Find_Link to accept names ending with '...'
+ o changed copyright comment to be a style-guide conform version string.
+ o changed RB_VER[] to be a style-guide conform version string
+ o changed AMIGA into _AMIGA, because the first one does not exists,
+   when compiling with NOANSI on SAS C/C++
+
+November 1999 - Frans Slothouber (v3.1b)
+  o Added a man page
+  o Cleaned-up html documentation.
+  o <A NAME="source code file name"> is generated at the beginning of
+    each document. A mention of the source code name in another
+    document creates a link to this name (provided you use xrefs).
+ o Moved most #defines and enums to robodoc.h
+ o Made ROBODoc more forgiving in reading the xrefs file. Empty
+   lines are allowed and also spaces at the end of a file name.
+
+August 1999 - Frans Slothouber: v3.1
+ o Added GPL licence
+ o Added INSTALL, README, and TODO
+ o Converted the documentation to HTML
+ o Spell-checked all documentation
+ o More documentation and a more informative usage() function.
+ o robodoc -c prints licence
+ o removed a number of Source items from the documentation to reduce
+   the size of the robodoc.c.html file...  no fun for people
+   to download a >100k file.
+ o removed the warning about not using a robodoc default file.
+ o indent -orig -i2 -nbc -ncdb -bad -bap
+ o Fixed the warnings.
+ o Fixed some occurrences of (evil cast)malloc  (thou shalt not
+   cast malloc :)
+ o ROBODoc now returns EXIT_FAILURE or  EXIT_SUCCESS, as defined
+   in <stdlib.h>
+ o Fixed a memory leak in RB_Analyse_Document()
+
+Modifications by Petteri Kettunen  
+August 1999 - v3.0m+
+  o Support for folding in SOURCE items, HTML only.
+  o indent -kr
+  o Added options FOLD and C
+
+Modifications by Petteri Kettunen
+Feb 1999      - v3.0m
+  o Changed background color to white
+  o Changed size of Table of Contents title. (H3 instead of H1)
+  o The reverse function also reversed the sorted header list,
+    fixed this.
+
+Modifications by FNC Slothouber.
+   Feb-1999    - v3.0l * Added function to reverse the header list.
+14-Aug-1998    - v3.0k * Tcl/Tk '#' handling added;
+
+
+Modifications by agi
+15-Dec-1997    - v3.0j
+  o cleaned the HTML-output, so it now conforms to the DTD for HTML-3.2
+  o TOC now is an ordered list (<OL> and <LI>)
+  o added "<!DOCTYPE..>"
+  o added quotes to values of some HTML-attributes
+  o more compatible implementation of the SGML-comment containing
+    copyright-info replaced all occurrences of <B><PRE>.. by <PRE><B>
+  o replaced <H2/3> by <H1/2>
+  o fixed two minor warnings reported by gcc -Wall
+
+Modifications by FNC Slothouber.
+10-July-1996   - v3.0i
+  o Bug Fix, Both the options INTERNAL and INTERNALONLY did not
+    work correctly.
+01-April-1996  - v3.0h
+  o Added ';' to &gt and &lt so lynx also recognizes them.
+  o Fancied up the HTML output.
+
+Modifications by apang
+ 08-Mar-1996   - v3.0f
+ o Cleaner build for Borland C++ 4.52
+ o Added more markers (C++, Pascal, Modula-2, COBOL)
+ o Added more item types/names
+ o Added #defines for the preamble (COMMENT_ROBODOC and
+   COMMENT_COPYRIGHT)
+ o BLANK_HEADER for detection of asterisk'd lines
+ o RB_Say() the GENERIC header warning instead of using printf()
+ o Indents SOURCE body in output
+ o ASCII respects the TOC flag; removed extraneous newline after
+   formfeed (so it's more like AutoDoc)
+ o HTML output fixed to handle '<', '>', and '&'
+ o LaTeX attributes and '%' handling added; fancied up the output a bit
+ o RTF support added
+ o Changed some fprintf()'s to fputc()'s for potentially lower overhead
+ o Fixed line eater bug
+ o More general fix to the TOC problem of including internal links
+  when it wasn't selected
+
+Modifications by FNC Slothouber.
+04-Feb-1996   - v3.0e
+ o fixed the problem with the TOC that included links to headers that
+   were not selected. (i.e internal)
+08-Oct-1995   - v3.0d
+ o Bug fixes
+16-Sep-1995   - v3.0c
+ o Bug fixes
+27-Aug-1995   - v3.0b
+ o Fixed a bug with the defaults file
+ o Improved search algorithm RoboDoc is now 5.8 times faster.
+18-Aug-1995   -  v3.0
+ o New scanner that searches for a set default markers
+   that define what is a comment or what is not and that
+   define what or what is not a header/end marker.
+ o Added Beast Support
+
+08-Aug-1995 - Koessi  -
+ o a lot of while instead of for
+ o a lot of switch() instead of ifelse
+ o version defined
+ o RB_Say, RB_Panic now useable like printf()
+ o new formats for nearly all output-strings
+ o char *whoami is global copy of argv[0]
+ o BOLD <- MAKE_LARGE && AMIGAGUIDE
+ o succesfully compiled&tested on HPUX (HP9000/800)
+ o optimized listfunctions
+ o encapsulated header- and link- allocating and freeing
+ o RB_Find_Function_Name() replaced with RB_FilePart()
+
+07-Aug-1995 - Koessi   -
+ o automated foldmarks "\***"
+ o ! GoldEd's foldmarks == RoboDoc marker !
+ o quoted source parsing enhanced
+
+01-Aug-1995 - Koessi  - v2.0?  
+ o more robust parsing, less enforcer-hits
+ o removed self-referencing links !
+ o remarked most changes with *koessi*
+ o added GoldEd-foldmarks
+ o compiled successfully with SAS-C 6.3
+
+24-May-1995 - Frans Slothouber - v2.0e  
+ o Fixed a bug that cause the CleanUp Routine to lock up.
+ o Improved the HTML output, should work faster now.
+
+15-May-1995 - Frans Slothouber - v2.0d  
+ o New Defaults file.
+ o Added Verbose option.
+
+12-May-1995 - Frans Slothouber - v2.0c  
+ o Bug fixes.
+
+10-May-1995 - Frans Slothouber -  v2.0a  
+ o Program completely rewritten
+ o added SOURCE item and LaTeX output.
+ o added TAB converter.
+
+20-Apr-95 - Jacco van Weert    -  v1.1a:  
+ o INTERNALONLY option added.
+ o Sort problem solved.
+
+2-Apr-95 - Jacco van Weert     -  v1.0b:  Bug fixes
+ o Procedure header search bug solved.
+ o Print 'created procedure' text
+
+Mar-95  - Jacco van Weert      -  v1.0a:  Final version
+
+2-Feb-95  - Jacco van Weert    -  v0.93:  
+ o Mungwall hit, solved.
+ o When item headers, are also available in body then parts are 
+   duplicated solved.
+
+26-Jan-95     -  v0.92:  2nd test beta-version
+
+19-January-95 - Jacco van Weert  (v0.8)
+  o First test beta-version
+
+December 1994 - Jacco van Weert -- creation date.
+
+

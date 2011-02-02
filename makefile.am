@@ -1,0 +1,79 @@
+# vi: ff=unix
+## Process this file with automake to produce Makefile.in
+# $Id: makefile.am,v 1.32 2010/05/12 12:38:14 gumpu Exp $
+#
+# Information for automake
+# TODO: Figure out how this works, and how this works with
+# the different version of the automake tool set.
+#
+
+AUTOMAKE_OPTIONS = dist-zip dist-bzip2
+
+SUBDIRS = Source Docs
+
+# TODO: if we define docdir configure.in do we still need to define 
+#       it here and in Docs/makefile.am ?
+
+#if FINK
+#docdir = $(prefix)/share/doc/$(PACKAGE)
+#else
+#docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
+#endif
+
+doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README UPGRADE
+
+if FINK
+contributiondir = ${docdir}/Contributions
+dist_contribution_DATA = \
+	Contributions/robodoc2pod.pl \
+	Contributions/robodoc.kaptn
+exampledir = ${docdir}/Examples/PerlExample
+dist_example_DATA = \
+	Examples/PerlExample/robodoc.rc
+examplesubdir = ${docdir}/Examples/PerlExample/Source
+dist_examplesub_DATA = \
+	Examples/PerlExample/Source/Box/RectangularBox.pm \
+	Examples/PerlExample/Source/Box/SquareBox.pm \
+	Examples/PerlExample/Source/Box.pm \
+	Examples/PerlExample/Source/Cargo.txt \
+	Examples/PerlExample/Source/Loader.txt \
+	Examples/PerlExample/Source/SmartLoader.pm \
+	Examples/PerlExample/Source/TruckPacker.pl
+endif
+
+if FINK
+EXTRA_DIST = \
+	UPGRADE \
+	Docs/robodoc_example.rc \
+	Docs/manual.html \
+	Docs/manual.css
+else
+EXTRA_DIST = \
+	INSTALL.cygwin \
+	INSTALL.Debian \
+	UPGRADE \
+	Docs/robodoc_example.rc \
+	Docs/manual.html \
+	Docs/manual.css \
+	Contributions/robodoc2pod.pl \
+	Contributions/robodoc.kaptn \
+	Source/makefile.plain \
+	Source/makefile.mingw \
+	Source/makefile.mingw-cygwin \
+	Examples/PerlExample/robodoc.rc \
+	Examples/PerlExample/Source/Box/RectangularBox.pm \
+	Examples/PerlExample/Source/Box/SquareBox.pm \
+	Examples/PerlExample/Source/Box.pm \
+	Examples/PerlExample/Source/Cargo.txt \
+	Examples/PerlExample/Source/Loader.txt \
+	Examples/PerlExample/Source/SmartLoader.pm \
+	Examples/PerlExample/Source/TruckPacker.pl \
+	Win32/robodoc.dsp \
+	Win32/robodoc.dsw \
+	Win32/robodoc.sln \
+	Win32/robodoc.vcproj
+endif
+
+#
+# End of automake stuff
+#
