@@ -169,7 +169,7 @@ char               *dot_name = DEFAULT_DOT_NAME;
 
 
 /* Name of item to add source comments */
-char               *use_source_comments = "";
+char               *use_source_comments = NULL;
 
 /****i* Globals/RB_Close_The_Shop [3.0b]
  * NAME
