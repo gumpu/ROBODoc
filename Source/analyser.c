@@ -1353,13 +1353,13 @@ static int Analyse_Items(
     enum ItemType       item_type = NO_ITEM;
     struct RB_Item     *new_item;
     struct RB_Item     *cur_item;
-/*RZ variables for source comment adding */
-int isSource=0;
-struct RB_Item *use_item = NULL;
-unsigned int marker;
-char *cur_mchar = NULL;
-char *cur_char = NULL;
-int length;
+    /*RZ variables for source comment adding */
+    int isSource=0;
+    struct RB_Item *use_item = NULL;
+    unsigned int marker;
+    char *cur_mchar = NULL;
+    char *cur_char = NULL;
+    int length;
 
     RB_Item_Lock_Reset(  );
 
@@ -1378,19 +1378,19 @@ int length;
     {
         new_item = RB_Create_Item( item_type );
         new_item->begin_index = line_nr;
-/*RZ add source comments to this item */
-if (use_source_comments) {
-  if (strcmp(configuration.items.names[item_type],use_source_comments)==0) {
-    use_item = new_item;
-  } else {
-    isSource = !strcmp(configuration.items.names[item_type],"SOURCE");
-  }
-}
+        /*RZ add source comments to this item */
+        if (use_source_comments) {
+            if (strcmp(configuration.items.names[item_type],use_source_comments)==0) {
+                use_item = new_item;
+            } else {
+                isSource = !strcmp(configuration.items.names[item_type],"SOURCE");
+            }
+        }
         /* Add the item to the end of the list of items. */
         if ( arg_header->items )
         {
             for ( cur_item = arg_header->items; cur_item->next;
-                  cur_item = cur_item->next )
+                    cur_item = cur_item->next )
             {
                 /* Empty */
             }
@@ -1403,36 +1403,36 @@ if (use_source_comments) {
         /* Find the next item */
         for ( ++line_nr; line_nr < arg_header->no_lines; ++line_nr )
         {
-/*RZ add comment line to item */
-if (isSource) {
-  cur_char = RB_Skip_Whitespace (arg_header->lines[line_nr].line);
-  for (marker = 0; marker < configuration.source_line_comments.number;
-	 marker++) {
-    cur_mchar = configuration.source_line_comments.names[marker];
-    length = strlen(cur_mchar);
-    if (strncmp(cur_char,cur_mchar,length) == 0) {
-      /* create item if not already existing */
-      if (use_item == NULL) {
-        item_type = RB_Get_Item_Type (use_source_comments);
-        if ( item_type != NO_ITEM ) {
-          use_item = RB_Create_Item( item_type );
-          use_item->no_lines = 0;
-          /* Add the item to the end of the list of items. */
-          if ( arg_header->items ) {
-              for ( cur_item = arg_header->items; cur_item->next;
-                    cur_item = cur_item->next ) {
-                  /* Empty */
-              }
-              cur_item->next = use_item;
-          } else {
-              arg_header->items = use_item;
-          }
-        }
-      }
-      Add_Lines_To_Item( use_item, &cur_char[length]);
-    }
-  }
-}
+            /*RZ add comment line to item */
+            if (isSource) {
+                cur_char = RB_Skip_Whitespace (arg_header->lines[line_nr].line);
+                for (marker = 0; marker < configuration.source_line_comments.number;
+                        marker++) {
+                    cur_mchar = configuration.source_line_comments.names[marker];
+                    length = strlen(cur_mchar);
+                    if (strncmp(cur_char,cur_mchar,length) == 0) {
+                        /* create item if not already existing */
+                        if (use_item == NULL) {
+                            item_type = RB_Get_Item_Type (use_source_comments);
+                            if ( item_type != NO_ITEM ) {
+                                use_item = RB_Create_Item( item_type );
+                                use_item->no_lines = 0;
+                                /* Add the item to the end of the list of items. */
+                                if ( arg_header->items ) {
+                                    for ( cur_item = arg_header->items; cur_item->next;
+                                            cur_item = cur_item->next ) {
+                                        /* Empty */
+                                    }
+                                    cur_item->next = use_item;
+                                } else {
+                                    arg_header->items = use_item;
+                                }
+                            }
+                        }
+                        Add_Lines_To_Item( use_item, &cur_char[length]);
+                    }
+                }
+            }
             item_type = RB_Is_ItemName( arg_header->lines[line_nr].line );
             if ( item_type != NO_ITEM )
             {
@@ -1452,10 +1452,10 @@ if (isSource) {
          *   Dump_Item( new_item );
          */
     }
-/*RZ*/
-if (use_item) {
-  Analyse_Item_Format( use_item );
-}
+    /*RZ*/
+    if (use_item) {
+        Analyse_Item_Format( use_item );
+    }
     return 0;
 }
 
