@@ -1,0 +1,9 @@
+
+#****h* TruckPacker/Cargo
+# FUNCTION 
+#
+#    The Cargo module consist of a number of classes that represent
+#    that cargo that can be loaded into a truck.
+#    The most important one is Box.
+#
+#****

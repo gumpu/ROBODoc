@@ -1,0 +1,255 @@
+#****h* ROBODoc/Makefile.mingw
+# NAME
+#   Makefile.mingw -- Plain makefile that does not need autoconf 
+# SYNOPSIS
+#   make -f makefile.mingw robodoc
+#   make -f makefile.mingw count
+#   make -f makefile.mingw test
+#   make -f makefile.mingw clean
+# PURPOSE
+#   The makefile for MingW Minimalist GNU for Windows
+#   See http://www.mingw.org
+#
+#   You can use it if you are on a win32 system.
+#
+#   The following targets are the most useful for the user.
+#
+#   robodoc -  makes the robodoc executable.
+#
+#   Developers might try:
+#   test    -
+#   count   -
+#   clean   -  
+#
+#****
+#
+# $Id: makefile.mingw,v 1.7 2007/05/14 15:41:19 petterik Exp $
+#
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+#--------------------------------------
+# use gcc (generic)
+#--------------------------------------
+
+CC = gcc
+CFLAGS = -pedantic -O3 -Wall -W -std=c99 # -ansi
+LIBS=
+
+#
+#
+#
+
+ROBODOC=robodoc.exe
+RM=rm -f
+all: robodoc.exe
+
+# currently does not compile: robohdrs
+
+#--------------------------------------
+# sources for the robodoc executable
+#--------------------------------------
+
+SOURCES = analyser.c \
+          ascii_generator.c \
+          directory.c \
+          generator.c \
+          document.c \
+          globals.c \
+          headertypes.c \
+          headers.c \
+          html_generator.c \
+          items.c \
+          links.c \
+          file.c \
+          latex_generator.c \
+          part.c \
+          path.c \
+          roboconfig.c \
+          robodoc.c \
+          optioncheck.c \
+          rtf_generator.c \
+          sgmldocbook_generator.c \
+          troff_generator.c \
+          util.c \
+          test_generator.c \
+          xmldocbook_generator.c
+
+HEADERS= analyser.h \
+         ascii_generator.h \
+         directory.h \
+         dirwalk.h \
+         document.h \
+         file.h \
+         generator.h \
+         globals.h \
+         headertypes.h \
+         headers.h \
+         html_generator.h \
+         items.h \
+         latex_generator.h \
+         links.h \
+         optioncheck.h \
+         part.h \
+         path.h \
+         roboconfig.h \
+         robodoc.h \
+         rtf_generator.h \
+         sgmldocbook_generator.h \
+         troff_generator.h \
+         unittest.h \
+         util.h \
+         test_generator.h \
+         xmldocbook_generator.h
+
+OBJECTS= $(SOURCES:.c=.o)
+
+#****e* Makefile.mingw/robodoc
+# NAME
+#   robodoc --
+# NOTE
+#   This assumes that you version of make knows how to make an .o file
+#   out of an .c file.
+# SOURCE
+#
+
+$(ROBODOC) : $(OBJECTS) 
+	$(CC) $(OBJECTS) -o robodoc $(LIBS)
+
+#****
+
+#****e* Makefile.mingw/robohdrs
+# NAME
+#   robohdrs --
+# SOURCE
+#
+
+robohdrs : robohdrs.o headers.o
+	$(CC) robohdrs.o headers.o -o robohdrs
+
+#****
+
+html : robodoc.html
+
+robodoc.html : $(ROBODOC)
+	./$(ROBODOC) --src ./ --doc robodoc --singledoc --html --sections --toc
+
+#----------------------------
+# Development
+#----------------------------
+
+
+#****e* Makefile.mingw/test
+# NAME
+#   test -- run some tests
+# FUNCTION
+#   Runs robodoc on file with a number of different headers.
+# HISTORY
+#   2002-05-19/PetteriK: test cases in Test directory run with this rule
+#
+#****
+
+test : $(ROBODOC)
+	(cd Test; $(MAKE))
+
+#****e* Makefile.mingw/clean
+# NAME
+#   clean -- Clean up the mess we made.
+# FUNCTION
+#   Cleans up the mess we made.
+#*****
+
+clean :
+	$(RM) $(OBJECTS)
+	$(RM) robodoc 
+	$(RM) robohdrs
+	$(RM) *~
+	$(RM) *.o 
+	$(RM) *.tex 
+	$(RM) *.toc 
+	$(RM) *.dvi 
+	$(RM) *.aux 
+	$(RM) *.log 
+	$(RM) *.ps
+	$(RM) robodoc.html
+	$(RM) testheaders.html
+	$(RM) stamp-h* 
+	$(RM) makefile.in 
+	$(RM) config.h
+
+
+#------------------------------
+# Construction of the makefile
+#------------------------------
+
+depend :
+	makedepend -Y"" -f makefile.mingw $(SOURCES) $(HEADERS)
+
+depend2:
+	$(CC) -MM $(SOURCES)
+
+# DO NOT DELETE
+
+analyser.o: robodoc.h globals.h headers.h headertypes.h items.h util.h
+analyser.o: links.h document.h analyser.h file.h path.h part.h
+ascii_generator.o: ascii_generator.h headers.h util.h robodoc.h globals.h
+ascii_generator.o: items.h generator.h document.h
+directory.o: robodoc.h directory.h file.h path.h links.h headertypes.h
+directory.o: headers.h document.h util.h globals.h roboconfig.h
+generator.o: globals.h robodoc.h headers.h items.h util.h links.h
+generator.o: headertypes.h document.h generator.h part.h file.h path.h
+generator.o: roboconfig.h html_generator.h latex_generator.h
+generator.o: sgmldocbook_generator.h xmldocbook_generator.h rtf_generator.h
+generator.o: troff_generator.h ascii_generator.h test_generator.h analyser.h
+document.o: robodoc.h document.h part.h path.h directory.h file.h links.h
+document.o: headertypes.h headers.h util.h generator.h
+globals.o: robodoc.h globals.h links.h headertypes.h headers.h document.h
+headertypes.o: headertypes.h util.h headers.h
+headers.o: robodoc.h headers.h globals.h roboconfig.h util.h
+html_generator.o: html_generator.h headers.h items.h document.h robodoc.h
+html_generator.o: util.h globals.h links.h headertypes.h generator.h
+html_generator.o: directory.h file.h path.h part.h
+items.o: globals.h robodoc.h items.h roboconfig.h util.h headers.h
+links.o: globals.h robodoc.h headers.h util.h links.h headertypes.h
+links.o: document.h part.h file.h path.h
+file.o: file.h path.h links.h headertypes.h headers.h document.h robodoc.h
+file.o: util.h
+latex_generator.o: generator.h robodoc.h headers.h document.h util.h links.h
+latex_generator.o: headertypes.h latex_generator.h globals.h
+part.o: headers.h file.h path.h links.h headertypes.h document.h robodoc.h
+part.o: part.h util.h
+path.o: path.h robodoc.h headers.h util.h
+roboconfig.o: headertypes.h util.h headers.h roboconfig.h
+robodoc.o: robodoc.h globals.h headers.h util.h links.h headertypes.h
+robodoc.o: document.h part.h analyser.h generator.h directory.h file.h path.h
+robodoc.o: roboconfig.h
+rtf_generator.o: rtf_generator.h headers.h util.h robodoc.h globals.h
+rtf_generator.o: generator.h document.h
+sgmldocbook_generator.o: sgmldocbook_generator.h headers.h
+sgmldocbook_generator.o: xmldocbook_generator.h document.h robodoc.h util.h
+sgmldocbook_generator.o: globals.h links.h headertypes.h generator.h items.h
+troff_generator.o: troff_generator.h headers.h util.h robodoc.h items.h
+troff_generator.o: generator.h document.h
+util.o: robodoc.h globals.h links.h headertypes.h headers.h document.h util.h
+test_generator.o: test_generator.h headers.h document.h robodoc.h globals.h
+test_generator.o: util.h
+xmldocbook_generator.o: xmldocbook_generator.h headers.h document.h robodoc.h
+xmldocbook_generator.o: globals.h util.h
+analyser.o: document.h robodoc.h
+ascii_generator.o: headers.h
+directory.o: file.h path.h links.h headertypes.h headers.h document.h
+directory.o: robodoc.h
+document.o: robodoc.h
+file.o: path.h links.h headertypes.h headers.h document.h robodoc.h
+generator.o: robodoc.h headers.h document.h
+globals.o: robodoc.h
+html_generator.o: headers.h items.h document.h robodoc.h
+latex_generator.o: headers.h
+links.o: headertypes.h headers.h document.h robodoc.h
+rtf_generator.o: headers.h
+sgmldocbook_generator.o: headers.h
+troff_generator.o: headers.h
+util.o: headers.h
+test_generator.o: headers.h document.h robodoc.h
+xmldocbook_generator.o: headers.h document.h robodoc.h

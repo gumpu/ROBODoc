@@ -1,0 +1,11 @@
+options:
+    --src ./Source
+    --doc ./Doc
+    --html
+    --multidoc
+    --sections
+    --tell
+    --toc
+    --index
+ignore files:
+    CVS

@@ -1,0 +1,9 @@
+#****h* TruckPacker/Loader
+# FUNCTION
+#    The Loader module consist of a number of classes that represent
+#    that various algorithms to pack Cargo into a truck..
+# 
+#    Currently only on algorithm (SmartLoader) has been implemented.
+#
+#****
+

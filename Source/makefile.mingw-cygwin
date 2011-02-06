@@ -1,0 +1,298 @@
+# vi: spell ff=unix
+#****h* ROBODoc/makefile.mingw-cygwin
+# NAME
+#   makefile.mingw-cygwin -- Plain makefile that does not need autoconf 
+# PURPOSE
+#   The makefile for MingW Minimalist GNU for Windows under the Cygwin
+#   environment, See:
+#   * http://www.mingw.org,
+#   * http://www.cygwin.com
+#
+#   You can use it if you are on a win32 system.
+#
+#   The following targets are the most useful for the user:
+#   * robodoc -  makes the robodoc executable.
+#
+#   Developers might try:
+#   * test  - run system tests
+#   * clean - clean all results.
+#
+# EXAMPLES
+#   make -f makefile.mingw-cygwin robodoc
+#   make -f makefile.mingw-cygwin test
+#   make -f makefile.mingw-cygwin clean
+# 
+#****
+#
+# $Id: makefile.mingw-cygwin,v 1.25 2008/03/20 15:02:46 thuffir Exp $
+#
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+#--------------------------------------
+# use gcc (generic)
+#--------------------------------------
+
+CC = gcc
+#DEBUG = 1
+
+#****v* makefile.mingw-cygwin/CFLAGS
+# FUNCTION
+#   Defined the flags used for the C compiler:
+#   *  -W, -Wall and -std=gnu99 --
+#      This turns on all warnings based on the C99 standard.
+#      Making the source warning free for an earlier standard is
+#      not necessary as this code is compiled on Unix, Windows, and
+#      Mac systems that all have C99 compliant C compilers.
+#      It also allows some gnu extensions.
+#      Using -std=c99 gives some spurious warnings about popen()
+#   * -O3 -- optimize, turning optimization on finds more errors and 
+#      warnings.
+#   * -mno-cygwin -- Tells gcc not to link with cygwin1.dll but use the
+#      windows standard C library. (make mingw windows native executable
+#      under cygwin)
+#   * -s -- Strip debug info out from objects, making the executable smaller
+#   * -g -- Include all debugger info for GDB
+# SOURCE
+
+# Use CYGWIN = 1 to compile under native cygwin mode
+ifdef CYGWIN
+CYGFLAGS = -DHAVE_FORK -DHAVE_SYMLINK
+else
+CYGFLAGS = -mno-cygwin
+endif
+
+# Use DEBUG = 1 to include debugging symbols and to turn off optimisations
+ifdef DEBUG
+DFLAGS = -g
+else
+DFLAGS = -s -O3
+endif
+
+# Effective compiler flags
+CFLAGS = -W -Wall -std=gnu99 -DHAVE_SNPRINTF $(DFLAGS) $(CYGFLAGS)
+
+#*****
+
+LIBS=
+
+#
+#
+#
+
+ROBODOC=robodoc.exe
+ROBOHDRS=robohdrs.exe
+RM=rm -f
+all: robodoc.exe robohdrs.exe
+
+# robohdrs currently only compiles under the CYGWIN environment (CYGWIN=1)
+
+#****v* makefile.mingw-cygwin/SOURCES, HEADERS
+# FUNCTION
+#   All source files needed to compile ROBODoc
+# SOURCE
+#
+SOURCES = \
+          analyser.c \
+          ascii_generator.c \
+          directory.c \
+          document.c \
+          file.c \
+          generator.c \
+          globals.c \
+          headers.c \
+          headertypes.c \
+          html_generator.c \
+          items.c \
+          latex_generator.c \
+          links.c \
+          optioncheck.c \
+          part.c \
+          path.c \
+          roboconfig.c \
+          robodoc.c \
+          rtf_generator.c \
+          test_generator.c \
+          troff_generator.c \
+          util.c \
+          xmldocbook_generator.c
+
+HEADERS= analyser.h \
+         ascii_generator.h \
+         directory.h \
+         dirwalk.h \
+         document.h \
+         file.h \
+         generator.h \
+         globals.h \
+         headertypes.h \
+         headers.h \
+         html_generator.h \
+         items.h \
+         latex_generator.h \
+         links.h \
+         optioncheck.h \
+         part.h \
+         path.h \
+         roboconfig.h \
+         robodoc.h \
+         rtf_generator.h \
+         troff_generator.h \
+         unittest.h \
+         util.h \
+         test_generator.h \
+         xmldocbook_generator.h
+
+#*****
+
+OBJECTS= $(SOURCES:.c=.o)
+
+#****e* makefile.mingw-cygwin/robodoc
+# NAME
+#   robodoc --
+# NOTE
+#   This assumes that your version of make knows how to make an .o file
+#   out of an .c file.
+# SOURCE
+#
+
+$(ROBODOC) : $(OBJECTS) 
+	$(CC) $(CFLAGS) $(OBJECTS) -o $(ROBODOC) $(LIBS)
+
+#****
+
+#****e* makefile.mingw-cygwin/robohdrs
+# NAME
+#   robohdrs --
+# SOURCE
+#
+
+ifdef CYGWIN
+ROBOHRDS_SOURCES = robohdrs.o headers.o util.o globals.o roboconfig.o \
+                   headertypes.o
+else
+ROBOHRDS_SOURCES = robohdrs.o
+endif
+
+$(ROBOHDRS) : $(ROBOHRDS_SOURCES)
+	$(CC) $(CFLAGS) $(ROBOHRDS_SOURCES) -o $(ROBOHDRS)
+
+#****
+
+html : robodoc.html
+
+robodoc.html : $(ROBODOC)
+	./$(ROBODOC) --src ./ --doc robodoc --singledoc --html --sections --toc
+
+#----------------------------
+# Development
+#----------------------------
+
+
+#****e* makefile.mingw-cygwin/test
+# NAME
+#   test -- run some tests
+# FUNCTION
+#   Runs robodoc on file with a number of different headers.
+# HISTORY
+#   2002-05-19/PetteriK: test cases in Test directory run with this rule
+#
+#****
+
+test : all
+	(cd Test; $(MAKE))
+
+#****e* makefile.mingw-cygwin/clean
+# NAME
+#   clean -- Clean up the mess we made.
+# FUNCTION
+#   Cleans up the mess we made.
+#*****
+
+clean :
+	$(RM) \
+	$(OBJECTS) \
+	$(ROBODOC) \
+	$(ROBOHDRS) \
+	*~ \
+	*.o \
+	*.tex \
+	*.toc \
+	*.dvi \
+	*.aux \
+	*.log \
+	*.ps \
+	robodoc.html \
+	testheaders.html \
+	stamp-h* \
+	makefile.in \
+	config.h \
+
+
+#------------------------------
+# Construction of the makefile
+#------------------------------
+
+# TODO Figure out how to get rid of all the warnings about
+#      standard includes such as <stdio.h> etc
+depend :
+	makedepend -Y"" -f makefile.mingw-cygwin $(SOURCES) $(HEADERS)
+
+depend2:
+	$(CC) -MM $(SOURCES)
+
+# DO NOT DELETE
+
+analyser.o: analyser.c robodoc.h globals.h headers.h headertypes.h \
+  items.h util.h document.h links.h analyser.h file.h path.h part.h \
+  roboconfig.h
+ascii_generator.o: ascii_generator.c ascii_generator.h headers.h util.h \
+  robodoc.h document.h globals.h items.h headertypes.h generator.h
+directory.o: directory.c robodoc.h directory.h file.h path.h links.h \
+  headertypes.h headers.h document.h util.h globals.h roboconfig.h
+document.o: document.c robodoc.h document.h part.h path.h directory.h \
+  file.h links.h headertypes.h headers.h util.h generator.h globals.h
+file.o: file.c file.h path.h links.h headertypes.h headers.h document.h \
+  robodoc.h util.h
+generator.o: generator.c globals.h robodoc.h headers.h items.h util.h \
+  document.h links.h headertypes.h generator.h part.h file.h path.h \
+  roboconfig.h html_generator.h latex_generator.h xmldocbook_generator.h \
+  rtf_generator.h troff_generator.h ascii_generator.h test_generator.h \
+  analyser.h
+globals.o: globals.c robodoc.h globals.h links.h headertypes.h headers.h \
+  document.h
+headers.o: headers.c robodoc.h headers.h globals.h roboconfig.h util.h \
+  document.h
+headertypes.o: headertypes.c headertypes.h util.h robodoc.h headers.h \
+  document.h
+html_generator.o: html_generator.c html_generator.h headers.h items.h \
+  robodoc.h document.h util.h globals.h links.h headertypes.h generator.h \
+  directory.h file.h path.h part.h roboconfig.h
+items.o: items.c globals.h robodoc.h items.h roboconfig.h util.h \
+  headers.h document.h
+latex_generator.o: latex_generator.c generator.h robodoc.h headers.h \
+  document.h util.h links.h headertypes.h latex_generator.h globals.h
+links.o: links.c globals.h robodoc.h headers.h util.h document.h links.h \
+  headertypes.h part.h file.h path.h
+optioncheck.o: optioncheck.c robodoc.h optioncheck.h roboconfig.h util.h \
+  headers.h document.h
+part.o: part.c headers.h file.h path.h links.h headertypes.h document.h \
+  robodoc.h part.h util.h
+path.o: path.c path.h robodoc.h headers.h util.h document.h
+roboconfig.o: roboconfig.c headertypes.h util.h robodoc.h headers.h \
+  document.h roboconfig.h globals.h optioncheck.h
+robodoc.o: robodoc.c robodoc.h globals.h headers.h util.h document.h \
+  links.h headertypes.h part.h analyser.h generator.h directory.h file.h \
+  path.h roboconfig.h optioncheck.h
+rtf_generator.o: rtf_generator.c rtf_generator.h headers.h util.h \
+  robodoc.h document.h globals.h generator.h
+test_generator.o: test_generator.c test_generator.h headers.h document.h \
+  robodoc.h globals.h util.h
+troff_generator.o: troff_generator.c troff_generator.h headers.h items.h \
+  robodoc.h util.h document.h generator.h file.h path.h links.h \
+  headertypes.h part.h
+util.o: util.c robodoc.h globals.h links.h headertypes.h headers.h \
+  document.h path.h util.h
+xmldocbook_generator.o: xmldocbook_generator.c xmldocbook_generator.h \
+  headers.h document.h robodoc.h globals.h util.h

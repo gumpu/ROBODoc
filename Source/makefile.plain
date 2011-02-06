@@ -1,0 +1,265 @@
+# -*-makefile-*-
+# vi: ff=unix
+#
+#****h* ROBODoc/Makefile.plain
+# NAME
+#   Makefile.plain -- Plain makefile that does not need autoconf 
+# SYNOPSIS
+#   * make -f makefile.plain robodoc
+#   * make -f makefile.plain html
+#   * make -f makefile.plain count
+#   * make -f makefile.plain test
+#   * make -f makefile.plain clean
+#   * make -f makefile.plain xcompile
+#
+# PURPOSE
+#   The makefile GCC.
+#   You can use it if you are on a non Unix system or a system
+#   that does not support autoconfiguration.
+#
+#   The following targets are the most useful for the user:
+#   * robodoc -  makes the robodc executable.
+#   * example -  makes robodoc and shows you the autodocs
+#                generated from the ROBODoc source code
+#                using browser.
+#   * html    -  makes autodocs for robodoc in html format.
+#
+#   To build robodoc use:
+#   * make -f makefile.plain robodoc
+#
+#   Developers might try:
+#   * depend  - create dependencies
+#   * test    -
+#   * count   -
+#   * clean   -
+#
+# NOTES
+#   This documentation is not complete. It is just a test to see
+#   how to best use ROBODoc with makefiles.
+#
+#****
+#
+# $Id: makefile.plain,v 1.68 2010/05/02 20:16:14 gumpu Exp $
+#
+
+SHELL = /bin/sh
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+#--------------------------------------
+# use gcc (generic)
+#--------------------------------------
+
+CC = gcc
+# CFLAGS = -g -Wall -Wshadow -Wbad-function-cast -Wconversion -Wredundant-decls 
+# -Wunreachable-code
+# TODO try to get this to compile with -Wconversion
+
+CFLAGS = -g -Wall -Wshadow -Wbad-function-cast -Wredundant-decls -D 'ROBO_COMPILER="$(CC)"' \
+		 -D ROBO_MAKEFILE_PLAIN
+LIBS=
+
+#
+
+BROWSER=netscape
+ROBODOC=./robodoc
+ETAGS=/usr/bin/etags
+EGREP=/bin/egrep
+RM=/bin/rm
+#MINGW_CC=/usr/bin/i586-mingw32msvc-gcc
+MINGW_CC= /usr/local/bin/i386-mingw32-gcc
+VERS=4.99.40
+RELEASE=1
+all: robodoc robohdrs
+
+#--------------------------------------
+# sources for the robodoc executable
+#--------------------------------------
+
+SOURCES = \
+          analyser.c \
+          ascii_generator.c \
+          directory.c \
+          generator.c \
+          document.c \
+          globals.c \
+          headers.c \
+          headertypes.c \
+          html_generator.c \
+          items.c \
+          links.c \
+          file.c \
+          latex_generator.c \
+          optioncheck.c \
+          part.c \
+          path.c \
+          roboconfig.c \
+          robodoc.c \
+          rtf_generator.c \
+          test_generator.c \
+          troff_generator.c \
+          util.c \
+          xmldocbook_generator.c
+
+HEADERS= \
+         analyser.h \
+         ascii_generator.h \
+         directory.h \
+         dirwalk.h \
+         document.h \
+         file.h \
+         generator.h \
+         globals.h \
+         headers.h \
+         headertypes.h \
+         html_generator.h \
+         items.h \
+         latex_generator.h \
+         links.h \
+         optioncheck.h \
+         part.h \
+         path.h \
+         roboconfig.h \
+         robodoc.h \
+         rtf_generator.h \
+         test_generator.h \
+         troff_generator.h \
+         unittest.h \
+         util.h \
+         xmldocbook_generator.h
+
+OBJECTS = $(SOURCES:.c=.o)
+DEPENDS = $(OBJECTS:.o=.d)
+
+#****e* Makefile.plain/robodoc
+# NAME
+#   robodoc --
+# NOTE
+#   This assumes that you version of make knows how to make an .o file
+#   out of an .c file.
+# SOURCE
+#
+
+robodoc : $(OBJECTS) 
+	$(CC) $(OBJECTS) -o robodoc$(EXE) $(LIBS)
+
+#****
+
+#****e* Makefile.plain/robohdrs
+# NAME
+#   robohdrs --
+# SOURCE
+#
+
+robohdrs : robodoc robohdrs.o headers.o
+	$(CC) $(CFLAGS) util.o globals.o robohdrs.o headers.o roboconfig.o headertypes.o -o robohdrs$(EXE)
+
+#****
+
+html : robodoc.html
+
+robodoc.html : robodoc
+	./robodoc --src ./ --doc robodoc --singledoc --html --sections --toc
+
+#****e* Makefile.plain/example
+# NAME
+#   example -- create and show autodocs extracted from ROBODoc source.
+# FUNCTION
+#
+#****
+
+example : html 
+	$(BROWSER) robodoc.html
+
+#----------------------------
+# Development
+#----------------------------
+
+tags :
+	$(ETAGS) *.c *.h
+
+#****e* Makefile.plain/count
+# NAME
+#   count -- count the number of lines of the ROBODoc source.
+#****
+
+count :
+	$(EGREP) -v -G "^ \*" *.c *.h | egrep -v -G "/\*"  | wc
+
+
+#****e* Makefile.plain/test
+# NAME
+#   test -- run some tests
+# FUNCTION
+#   Runs robodoc on file with a number of different headers.
+# HISTORY
+#   2002-05-19/PetteriK: test cases in Test directory run with this rule
+#
+#****
+
+test : $(ROBODOC)
+	(cd Test; $(MAKE))
+
+#****e* Makefile.plain/clean
+# NAME
+#   clean -- Clean up the mess we made.
+# FUNCTION
+#   Cleans up the mess we made.
+#*****
+
+clean :
+	$(RM) -f $(DOCS) $(XREF)
+	$(RM) -f robodoc robohdrs
+	$(RM) -f *~
+	$(RM) -f *.o *.tex *.toc *.dvi *.aux *.log *.ps *.exe
+	$(RM) -f robodoc.html
+	$(RM) -f testheaders.html
+	$(RM) -f stamp-h* makefile.in config.h
+
+#****e* Makefile.plain/xcompiler-test
+# NAME
+#   xcompiler-test
+# SYNOPSIS
+#   make -f makefile.plain xcompiler-test
+# NOTE
+#   Used by do.sh.  
+# RESULT
+#   Exit status 0 if cross-compiler is found.
+# SOURCE
+#
+
+xcompiler-test:
+	test -x $(MINGW_CC)
+	zip -h > /dev/null 2>&1
+
+#****
+
+#****e* Makefile.plain/xcompile
+# NAME
+#   xcompile
+# SYNOPSIS
+#   make -f makefile.plain xcompile
+#   make -f makefile.plain MINGW_CC=/path/to/mingwcc xcompile
+# NOTE
+#   Cross-compile Wintel binary.
+#   Consider `apt-get install mingw32' before running this.
+# RESULT
+#   Excutable `robodoc.exe' is created.
+# SOURCE
+#
+
+xcompile:
+	$(MAKE) -f makefile.plain CC=$(MINGW_CC) EXE=.exe robodoc
+
+#***** 
+# end xcompile
+
+#------------------------------
+# Construction of the makefile
+#------------------------------
+
+-include $(DEPENDS)
+
+depend:
+	$(CC) -MMD -E $(SOURCES) > /dev/null
+

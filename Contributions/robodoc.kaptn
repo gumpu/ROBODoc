@@ -1,0 +1,292 @@
+#!/usr/bin/env kaptain
+# $Id: robodoc.kaptn,v 1.3 2007/01/29 22:28:20 gumpu Exp $
+# NAME
+#   robodoc.kaptn - robodoc.rc gui composer
+# COPYRIGHT
+# Copyright (C) 2003 gian paolo ciceri <gp.ciceri@acm.org>
+# 
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA  02111-1307  USA
+# 
+#
+# HISTORY
+#   Sep, 9th 2003: v0.1.0 - initial, tentative release (borrowed from procmail.kaptn).
+#
+
+
+#############################################################
+#
+# main wizard
+#
+start :wizard "Robodoc Configuration Wizard" ->  intro setup finish;
+#############################################################
+
+#############################################################
+#
+# into page
+#
+intro "robodoc.rc builder" -> intro1 intro2;
+intro1 -> text1 introa;
+text1 -> @text("This is a graphical front-end for creating robodoc.rc \
+configuration files made using Kaptain, the Universal graphical front-end.");
+intro2 "" -> @;
+introa "" -> workdir @fill;
+workdir "Choose Working Directory" -> "\nWORKDIR=" @directory="$PWD";
+#############################################################
+
+#############################################################
+#
+# finish page, where I write the robodoc.rc file
+#
+finish "Finish" -> text3 other_settings;
+text3 -> @text("Now press the Preview button to see the settings you have made.\
+ Don't forget to press Write button in order to save the setting in the given file.");
+other_settings -> filename @fill @preview(allfile)="Preview" @action(writetofile)="Write";
+writetofile-> "echo '" allfile "' > " filename ;
+filename -> @outfile="$PWD/robodoc.rc";
+#############################################################
+
+#############################################################
+#
+# setup page, here's the beef!
+#
+setup :horizontal "Settings" -> recipe;
+recipe :framed :horizontal -> recipe1 recipe2;
+recipe1 :framed "Main documentation options" -> outputtype sourcedir docdir cssfile ;
+recipe2 :framed "Items and misc. options" -> items ignoreitems ignoreext flags;
+#recipe :framed -> outputtype sourcedir docdir cssfile items ignoreitems ignoreext flags regexp;
+
+outputtype :horizontal "Output Types" -> !these_output | more_output ;
+  these_output :beside -> "--html\n" @string="--html";
+  more_output :beside -> "\n" more_output0;
+  
+sourcedir  "Sources Directory" -> "--src\n" @directory="$PWD"; 
+
+docdir  "Documents Directory" -> "--doc\n" @directory="$PWD"; 
+
+cssfile  "CSS stylesheet" -> "--css\n" @infile("*.css"); 
+
+items :horizontal  "Items" -> !these_items | more_items;
+  these_items :beside -> @string;
+  more_items :beside -> more_items0;
+  
+ignoreitems :horizontal  "Ignore Items" -> !these_iitems | more_iitems;
+  these_iitems :beside -> @string;
+  more_iitems :beside -> more_iitems0;
+
+ignoreext :horizontal  "Ignore file Extensions" -> these_iexts | !more_iexts;
+  these_iexts :beside -> @string="*.bkp\n ~";
+  more_iexts :beside -> more_iexts0;
+
+###########################################################
+#@list('NAME', 'SYNOPSIS', 'INPUTS', 'OUTPUTS', 'HISTORY') ;
+#ignoreitems "Ignore Items" -> "ignore items:\n" @combow('HISTORY', 'BUGS', 'AUTHORS', 'TODO', 'NEWS');
+#ignoreext "Ignore Extensions" -> "extensions:\n" @combow('*.bkp', '~');  
+###########################################################
+
+
+  
+flags :horizontal "Misc.Options" -> these_flags | !more_flags ;
+  these_flags :beside -> ":0 " @string;
+  more_flags :beside -> ":0 " more_flags0;
+#############################################################
+
+
+#############################################################
+#
+# robodoc.rc file setup, in the `allfile` variable
+#
+allfile -> "#This file was created by Kaptain\n\n" 
+   "#options" "\n"
+   options  "\n" 
+
+   "#output types" "\n"
+   out_options  "\n" 
+
+   "#source directory" "\n"   
+   sourcedir "\n"
+
+   "#document directory" "\n"   
+   docdir "\n"
+
+   "#stylesheet" "\n"   
+   cssfile "\n"
+
+   "#items" "\n"  
+   "items" "\n" 
+   items "\n"
+
+   "#ignore items" "\n"  
+   "ignore items:\n" 
+   ignoreitems "\n"
+
+   "#ignore files by extension" "\n"   
+   "extensions:" "\n"
+   ignoreext "\n"
+   
+   "#end\n" ;
+#############################################################
+
+
+#############################################################
+#
+# auxiliary dialog, to setup options
+#
+more_flags0 :dialog "Options..." -> flags_top flags_buttons;
+flags_buttons -> @close="OK";
+flags_top :horizontal :framed  -> options;# extras;
+# extras "Extras" -> @;
+ options "Options"
+  -> index multidoc singledoc singlefile 
+     tell folds internal internalonly 
+     nosource nodesc sections tabsize toc;
+     
+  index "Also create a master index file" -> "--index\n"! | @;
+  multidoc "Generate one document per source file, and copy the directory hierarchys" ->
+  "--multidoc\n"! | @;
+  singledoc  "Define the documentation directory or documentation file." -> "--singledoc\n" |!@;
+  singlefile "Generate a single document from a single file."  -> "--singlefile\n" |!@;
+  tell "ROBODoc tells you what steps it is taking." -> "--tell\n" |!@;
+  folds "Use fold marks to split a big document into smaller ones." -> "--folds\n" |!@;
+  internal "Also include headers marked internal." -> "--internal\n" |!@;
+  internalonly "Only include headers marked internal." -> "--internalonly\n" |!@;
+  nosource "Do not include the SOURCE items."  -> "--nosource\n" |!@;
+  nodesc "Do not scan any subdirectories." -> "--nodesc\n" |!@;
+  sections "Create sections based on the module hierarchy." -> "--sections\n" |!@;
+  tabsize "Lets you specify the tabsize." -> "--tabsize\n" |!@;
+  toc "Add a table of contents." -> "--toc\n" |!@;
+#############################################################
+
+#############################################################
+#
+# auxiliary dialog, to setup output types (html, latex, rtf, docbook)
+#
+more_output0 :dialog "Output Types..." -> output_top output_buttons;
+output_buttons -> @close="OK";
+output_top :horizontal :framed  -> out_options;# extras;
+# extras "Extras" -> @;
+ out_options "Output Types"
+  -> html ascii rtf latex docbook;
+  html "HTML" -> "--html\n"! | @;
+  ascii "ASCII" -> "--ascii\n"! | @;
+  latex "LaTeX" -> "--latex\n" | !@;
+  rtf "Rich Text format" -> "--rtf\n" | !@;
+  docbook "DocBook" -> "--dbxml\n" | !@;
+#############################################################
+
+#############################################################
+#
+# auxiliary dialog, to setup items
+#
+more_items0 :dialog "Include Items..." -> item_top item_buttons ;
+item_buttons -> @close="OK";
+item_top :horizontal :framed  -> item_options;# extras;
+# extras "Extras" -> @;
+item_options :horizontal "Items"
+  -> itemleft itemright;
+
+ itemleft -> NAME SYNOPSIS INPUTS   
+  USAGE SOURCE COPYRIGHT FUNCTION AUTHOR RESULT EXAMPLE NOTES DIAGNOSTICS;
+ 
+ itemright ->  WARNINGS ERRORS BUGS SEEALSO METHODS ATTRIBUTES TAGS COMMAND DERIVEDFROM 
+  DERIVEDBY USES USEDBY INPUTS OUTPUTS HISTORY;
+  
+  NAME "NAME, Item name + short description" -> "    NAME\n"! | @;
+  SYNOPSIS "SYNOPSIS, how to use it" -> "    SYNOPSIS\n" | !@;  
+  USAGE "USAGE, how to use it" -> "    USAGE\n" | !@;
+  SOURCE "SOURCE, source code inclusion" -> "    SOURCE\n" | !@;
+  COPYRIGHT "COPYRIGHT, who own the copyright" -> "    COPYRIGHT\n" | !@;
+  FUNCTION "FUNCTION, what does it" -> "    FUNCTION\n" | !@;
+  AUTHOR  "AUTHOR, who wrote it" -> "    AUTHOR\n" | !@;
+  RESULT "RESULT, what do we get returned" -> "    RESULT\n" | !@;
+  EXAMPLE "EXAMPLE, a clear example of the items use" -> "    EXAMPLE\n" | !@;
+  NOTES "NOTES, any annotations" -> "    NOTES\n" | !@;
+  DIAGNOSTICS "DIAGNOSTICS, diagnostical output" -> "    DIAGNOSTICS\n" | !@;
+  WARNINGS "WARNINGS, warning messages" -> "    WARNINGS\n" | !@;
+  ERRORS "ERRORS, error messages" -> "    ERRORS\n" | !@;
+  BUGS "BUGS, known bugs" -> "    BUGS\n" | !@;
+  SEEALSO "SEE ALSO, references" -> "    SEE ALSO\n" | !@;
+  METHODS "METHODS, oop attributes" -> "    METHODS\n" | !@;
+  ATTRIBUTES "ATTRIBUTES, oop attributes" -> "    ATTRIBUTES\n" | !@;
+  TAGS "TAGS, tagitem description" -> "    TAGS\n" | !@;
+  COMMAND "COMMAND, command description" -> "    COMMAND\n" | !@; 
+  DERIVEDFROM "DERIVED FROM, oop super class" -> "    DERIVED FROM\n" | !@; 
+  DERIVEDBY "DERIVED BY, oop sub class" -> "    DERIVED BY\n" | !@; 
+  USES "USES, what modules are used by this one" -> "    USES\n" | !@;
+  USEDBY "USED BY,which modules do use this" -> "    USED BY\n" | !@;
+  INPUTS "INPUTS, what can we feed into it" -> "    INPUTS\n" | !@;
+  OUTPUTS "OUTPUTS, what output will be made" -> "    OUTPUTS\n" | !@;
+  HISTORY "HISTORY, who done what changes when" -> "    HISTORY\n" | !@;  
+#############################################################
+
+#############################################################
+#
+# auxiliary dialog, to setup ignore items
+#
+more_iitems0 :dialog "Ignore Items..." -> iitem_top iitem_buttons;
+iitem_buttons -> @close="OK";
+iitem_top :horizontal :framed  -> iitem_options;# extras;
+# extras "Extras" -> @;
+ iitem_options :horizontal "Ignore Items"
+  -> iitemleft iitemright;
+  
+ iitemleft -> iNAME iSYNOPSIS iINPUTS   
+  iUSAGE iSOURCE iCOPYRIGHT iFUNCTION iAUTHOR iRESULT iEXAMPLE iNOTES iDIAGNOSTICS;
+ 
+ iitemright ->  iWARNINGS iERRORS iBUGS iSEEALSO iMETHODS iATTRIBUTES iTAGS iCOMMAND iDERIVEDFROM 
+  iDERIVEDBY iUSES iUSEDBY iOUTPUTS iHISTORY iBUGS;
+  
+  iNAME "NAME, Item name + short description" -> "    NAME\n" | !@;
+  iSYNOPSIS "SYNOPSIS, how to use it" -> "    SYNOPSIS\n" | !@;  
+  iUSAGE "USAGE, how to use it" -> "    USAGE\n" | !@;
+  iSOURCE "SOURCE, source code inclusion" -> "    SOURCE\n" | !@;
+  iCOPYRIGHT "COPYRIGHT, who own the copyright" -> "    COPYRIGHT\n" | !@;
+  iFUNCTION "FUNCTION, what does it" -> "    FUNCTION\n" | !@;
+  iAUTHOR  "AUTHOR, who wrote it" -> "    AUTHOR\n" | !@;
+  iRESULT "RESULT, what do we get returned" -> "    RESULT\n" | !@;
+  iEXAMPLE "EXAMPLE, a clear example of the items use" -> "    EXAMPLE\n" | !@;
+  iNOTES "NOTES, any annotations" -> "    NOTES\n" | !@;
+  iDIAGNOSTICS "DIAGNOSTICS, diagnostical output" -> "    DIAGNOSTICS\n" | !@;
+  iWARNINGS "WARNINGS, warning messages" -> "    WARNINGS\n" | !@;
+  iERRORS "ERRORS, error messages" -> "    ERRORS\n" | !@;
+  iBUGS "BUGS, known bugs" -> "    BUGS\n" | !@;
+  iSEEALSO "SEE ALSO, references" -> "    SEE ALSO\n" | !@;
+  iMETHODS "METHODS, oop attributes" -> "    METHODS\n" | !@;
+  iATTRIBUTES "ATTRIBUTES, oop attributes" -> "    ATTRIBUTES\n" | !@;
+  iTAGS "TAGS, tagitem description" -> "    TAGS\n" | !@;
+  iCOMMAND "COMMAND, command description" -> "    COMMAND\n" | !@; 
+  iDERIVEDFROM "DERIVED FROM, oop super class" -> "    DERIVED FROM\n" | !@; 
+  iDERIVEDBY "DERIVED BY, oop sub class" -> "    DERIVED BY\n" | !@; 
+  iUSES "USES, what modules are used by this one" -> "    USES\n" | !@;
+  iUSEDBY "USED BY,which modules do use this" -> "    USED BY\n" | !@;
+  iINPUTS "INPUTS, what can we feed into it" -> "    INPUTS\n" | !@;
+  iOUTPUTS "OUTPUTS, what output will be made" -> "    OUTPUTS\n" | !@;
+  iHISTORY "HISTORY, who done what changes when" -> "    HISTORY\n" | !@;    
+#############################################################
+
+#############################################################
+#
+# auxiliary dialog, to setup excluded file by extension
+#
+more_iexts0 :dialog "Exclude Extensions..." -> iextm_top iextm_buttons;
+iextm_buttons -> @close="OK";
+iextm_top :horizontal :framed  -> iextm_options;# extras;
+# extras "Extras" -> @;
+ iextm_options "Exclude files by extension"
+  -> BAK TILDE;
+  BAK "*.bak" -> "    *.bak\n" | @;
+  TILDE "~" -> "    ~\n" | @;
+#############################################################
+
