@@ -23,6 +23,8 @@ rm -f mkinstalldirs
 rm -f missing makefile
 rm -f configure config.status
 
+#export CC=i586-mingw32msvc-gcc
+
 # Obsolete
 #aclocal
 #automake -a
@@ -34,6 +36,7 @@ rm -f configure config.status
 autoreconf -f -i
 
 # run configure to guess configuration
+
 # CFLAGS="-g -Wall -DDMALLOC -DMALLOC_FUNC_CHECK" LDFLAGS="-ldmalloc" ./configure
 # CFLAGS="-g -Wall -O0 -std=gnu99 -pedantic -Wshadow -Wbad-function-cast -Wconversion -Wredundant-decls" ./configure
 CFLAGS="-g -Wall -O0 -std=gnu99 -pedantic -Wshadow -Wbad-function-cast -Wredundant-decls" ./configure
