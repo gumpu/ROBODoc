@@ -617,7 +617,7 @@ The end marker:
 </programlisting>
 
     <para>When you generate documentation with the option
-    <option>--section</option>, ROBODoc uses the hierarchical
+    <option>--sections</option>, ROBODoc uses the hierarchical
     information when generating the table of contents and document
     section information. For instance in HTML sections are started
     with &lt;H1&gt;,  &lt;H2&gt;,  &lt;H3&gt; depending on the level

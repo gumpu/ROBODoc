@@ -12,8 +12,6 @@
 <!ENTITY tips            SYSTEM "tips.xml">
 ] >
 
-<!-- $Id: manual.xml,v 1.67 2010/05/12 19:41:00 gumpu Exp $ -->
-
 <article lang="en">
 
 <articleinfo>
@@ -33,9 +31,9 @@
         </author>
     </authorgroup>
     <edition>Users Guide $Revision: 1.67 $</edition>
-    <pubdate>May 2010</pubdate>
+    <pubdate>Feb 2011</pubdate>
     <copyright>
-        <year>1994-2010</year>
+        <year>1994-2011</year>
         <holder>
           Frans Slothouber, Petteri Kettunen,
           Jacco van Weert, Gergely Budai
