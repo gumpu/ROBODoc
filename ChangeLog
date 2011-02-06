@@ -1,5 +1,10 @@
 # vi: spell ff=unix ft=none
 
+Feb 2011 - V4.99.41
+  Frans Slothouber
+  o Switch to github
+  o segfault fix
+
 May 2010 - V4.99.40
   o Applied a fix by Luis Alejandro Muzzachiodi to fix a problem
     in troff_generator.c that prevented compilation under cygwin.
