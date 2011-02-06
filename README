@@ -1,6 +1,4 @@
-$Id: README,v 1.51 2010/05/02 20:16:14 gumpu Exp $
-
-ROBODoc Version 4.99.40 May 2008.
+ROBODoc Version 4.99.41 Feb 2011.
 
 ROBODoc is program documentation tool. The idea is to include for
 every function or procedure a standard header containing all
@@ -45,7 +43,6 @@ o Stefan Kost <kost -a-t- imn.htwk-leipzig.de>
 
 Questions, found a bug or a typo; send an email to [rfsber -a-t- xs4all.nl]
 
-(c) 1994-2008  Frans Slothouber, Petteri Kettunen, and Jacco van Weert 
-
+(c) 1994-2011  Frans Slothouber, Petteri Kettunen, and Jacco van Weert 
 
 
