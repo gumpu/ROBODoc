@@ -381,7 +381,7 @@ int RB_CompareHeaders(
         if ( course_of_action.do_sectionnameonly )
         {
             /*  Do not include parent name in sorting if they are not displayed */
-            return RB_Str_Case_Cmp( header_1->function_name,
+            return RB_Str_Name_Case_Cmp( header_1->function_name,
                                     header_2->function_name );
         }
         else

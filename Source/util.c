@@ -3,7 +3,7 @@
  */
 
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
+Copyright (C) 1994-2011 Frans Slothouber, Jacco van Weert, Petteri Kettunen,
 Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
 Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
 
@@ -29,7 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *   Set of general purpose utility functions that are used
  *   in more than one module.
  *****
- * $Id: util.c,v 1.63 2008/06/17 11:49:28 gumpu Exp $
  */
 
 #include <stdio.h>
@@ -51,6 +50,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "headers.h"
 #include "path.h"
 #include "util.h"
+#include "roboconfig.h"
 
 #ifdef DMALLOC
 #include <dmalloc.h>
@@ -494,6 +494,48 @@ void RB_Warning(
 
 /*******/
 
+/****f* Utilities/RB_Str_Name_Case_Cmp
+ * FUNCTION
+ *   Compare two strings, regardless of the case of the characters.
+ *   Skip any of the prefixes listed in the skip prefix: section
+ *   of the robodoc.rc file.
+ * SYNOPSIS
+ */
+int RB_Str_Name_Case_Cmp(
+    char *s,
+    char *t )
+/* RESULT
+ *    0  s == t
+ *   -1  s < t
+ *    1  s > t
+ ******/
+{
+    if ( configuration.skip_prefix.number ) {
+        int prefix_number;
+        for ( prefix_number = 0;
+              prefix_number < configuration.skip_prefix.number;
+              ++prefix_number ) {
+            int l = strlen( configuration.skip_prefix.names[ prefix_number ] );
+            if ( strncmp( s, configuration.skip_prefix.names[ prefix_number ], l 
+                        ) == 0 ) {
+                s += l;
+                break;
+            }
+        }
+        for ( prefix_number = 0;
+              prefix_number < configuration.skip_prefix.number;
+              ++prefix_number ) {
+            int l = strlen( configuration.skip_prefix.names[ prefix_number ] );
+            if ( strncmp( t, configuration.skip_prefix.names[ prefix_number ], l 
+                        ) == 0 ) {
+                t += l;
+                break;
+            }
+        }
+    }
+    return RB_Str_Case_Cmp( s, t );
+}
+
 
 /****f* Utilities/RB_Str_Case_Cmp
  * FUNCTION
@@ -620,7 +662,7 @@ void RB_FputcLatin1ToUtf8(
  * SYNOPSIS
  *   void RB_CopyFile( char* sourceFileName, char* destinationFileName )
  * RESULT
- *   Program Exit if one of the specified files did not open.
+ *   Program Exits if one of the specified files did not open.
  * SOURCE
  */
 
