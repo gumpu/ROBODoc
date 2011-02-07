@@ -1,11 +1,13 @@
 #ifndef ROBODOC_CONFIG_H
 #define ROBODOC_CONFIG_H
-/* vi: spell ff=unix */
+/* vi: spell ff=unix 
+ */
 
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
-Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
+Copyright (C) 1994-2010  Frans Slothouber, Jacco van Weert, Petteri
+Kettunen, Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan
+Kost, David Druffner, Sasha Vasko, Kai Hofmann, Thierry Pierron,
+Friedrich Haase, and Gergely Budai.
 
 This file is part of ROBODoc
 
@@ -54,6 +56,7 @@ typedef enum
     SK_PREFORMATTED_ITEMS,
     SK_FORMAT_ITEMS,
     SK_ITEM_ORDER,
+    SK_SKIP_PREFIX,
     SK_UNKNOWN
 } T_Block_Kind;
 
@@ -164,6 +167,7 @@ struct RB_Configuration
     struct Parameters   source_line_comments;
     struct Parameters   header_ignore_chars;
     struct Parameters   header_separate_chars;
+    struct Parameters   skip_prefix;
 };
 
 /*******/

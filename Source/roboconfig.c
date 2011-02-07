@@ -2,9 +2,10 @@
  */
 
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
-Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
+Copyright (C) 1994-2011  Frans Slothouber, Jacco van Weert, Petteri
+Kettunen, Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan
+Kost, David Druffner, Sasha Vasko, Kai Hofmann, Thierry Pierron,
+Friedrich Haase, and Gergely Budai.
 
 This file is part of ROBODoc
 
@@ -683,6 +684,7 @@ char               *ReadConfiguration(
     Alloc_Parameters( &( configuration.source_line_comments ), 10 );
     Alloc_Parameters( &( configuration.header_ignore_chars ), 10 );
     Alloc_Parameters( &( configuration.header_separate_chars ), 10 );
+    Alloc_Parameters( &( configuration.skip_prefix ), 10 );
 
     if ( f )
     {
@@ -1097,6 +1099,10 @@ static T_Block_Kind BlockKind(
     {
         section_kind = SK_ITEM_ORDER;
     }
+    else if ( strcmp( line, "skip prefix:" ) == 0 )
+    {
+        section_kind = SK_SKIP_PREFIX;
+    }
     else
     {
         RB_Panic( "unknown block kind \"%s\"\n", line );
@@ -1457,6 +1463,10 @@ static void SecondScan(
                 case SK_ITEM_ORDER:
                     GetParameter( myConfLine,
                                   &( configuration.item_order ) );
+                    break;
+                case SK_SKIP_PREFIX:
+                    GetParameter( myConfLine,
+                                  &( configuration.skip_prefix ) );
                     break;
                 case SK_UNKNOWN:
                     break;
