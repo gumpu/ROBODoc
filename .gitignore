@@ -8,11 +8,15 @@ configure
 install-sh
 missing
 *.o
+./makefile
 Docs/makefile
 depcomp
-makefile
+Source/makefile
 Source/config.h
 Source/config.h.in
 Source/robodoc
 Source/robohdrs
-
+*.bz2
+*.gz
+*.zip
+Source/tags
