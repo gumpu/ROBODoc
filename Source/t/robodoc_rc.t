@@ -12,6 +12,83 @@ use Test::More 'no_plan';
 use XML::Simple;
 use Data::Dumper;
 
+
+
+#****x* ROBODoc Configuration File/Skip Prefix
+# FUNCTION
+#   Test whether skip prefixes can be specified and work
+#
+# SOURCE
+#
+
+{ 
+    my $source = <<'EOF';
+
+/ ****f* Test/SkipThis_Zoo
+/ NAME
+/   SkipThis_Zoo --
+/ FUNCTION
+/   test
+/ ****
+
+/ ****f* Test/SkipThis_NootMies
+/ NAME
+/   SkipThis_NootMies --
+/ FUNCTION
+/   test
+/ ****
+
+/ ****f* Test/Raaaaa
+/ NAME
+/   SkipThis_Zoo --
+/ FUNCTION
+/   test
+/ ****
+
+/ ****f* Test/Saaaaa
+/ NAME
+/   SkipThis_Zoo --
+/ FUNCTION
+/   test
+/ ****
+
+
+
+EOF
+
+    my $rc_file = <<'EOF';
+header markers:
+  / ****
+remark markers:
+  /
+end markers:
+  / ****
+headertypes:
+  f functions 1
+  F Foos      2
+skip prefix:
+  SkipThis
+  SkipThat
+EOF
+
+    add_source( "test.c", $source );
+    add_source( "robodoc.rc", $rc_file );
+    my ($out, $err) = runrobo( qw(--src Src --doc Doc --multidoc --toc
+        --test --rc Src/robodoc.rc ) );
+    is( $out, '', 'no output' );
+    is( $err, '', 'no error' );
+    my $documentation = XMLin( 'Doc/test_c.xml' );
+    my $header = $documentation->{'header'};
+    # Now look for the headers.
+    isnt ( $header->{'Foo/foo'}, undef, 'There is a header named Foo/foo' );
+    isnt ( $header->{'Test/test'}, undef, 'There is a header named Test/foo' );
+#    clean();
+    exit;
+}
+
+#******
+#
+
 #****x* ROBODoc Configuration File/Custom Header Markers
 # FUNCTION
 #   Test whether custum header markers can be specified and
