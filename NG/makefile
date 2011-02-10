@@ -1,9 +1,11 @@
+CFLAGS = -ansi -pedantic -O2 -Wall -I /home/frans/usr/local/include 
+LFLAGS = -L /home/frans/usr/local/lib -llua -ldl -lm
 
 robodoc : robodoc.o
-	gcc -L /home/frans/usr/local/lib robodoc.o -llua -lm
+	gcc lpeg-0.10.1/lpeg.o robodoc.o -o robodoc $(LFLAGS)
 
 robodoc.o : robodoc.c
-	gcc -O2 -Wall -I /home/frans/usr/local/include -c robodoc.c -o robodoc.o
+	gcc $(CFLAGS) -c robodoc.c -o robodoc.o
 
 clean :
 	-rm robodoc.o robodoc
