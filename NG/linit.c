@@ -10,7 +10,7 @@
 ** libraries, call luaL_openlibs in your program. If you need a
 ** different set of libraries, copy this file to your project and edit
 ** it to suit your needs.
-*/                                                              
+*/
 
 
 #define linit_c
@@ -39,7 +39,7 @@ static const luaL_Reg loadedlibs[] = {
   {LUA_BITLIBNAME, luaopen_bit32},
   {LUA_MATHLIBNAME, luaopen_math},
   {LUA_DBLIBNAME, luaopen_debug},
-  {LUA_LPEGNAME,  luaopen_lpeg},
+  {LUA_LPEGNAME, luaopen_lpeg},
   {NULL, NULL}
 };
 
@@ -52,19 +52,22 @@ static const luaL_Reg preloadedlibs[] = {
 };
 
 
-LUALIB_API void luaL_openlibs (lua_State *L) {
+LUALIB_API void
+luaL_openlibs (lua_State *L)
+{
   const luaL_Reg *lib;
   /* call open functions from 'loadedlibs' and set results to global table */
-  for (lib = loadedlibs; lib->func; lib++) {
-    luaL_requiref(L, lib->name, lib->func, 1);
-    lua_pop(L, 1);  /* remove lib */
-  }
+  for (lib = loadedlibs; lib->func; lib++)
+    {
+      luaL_requiref (L, lib->name, lib->func, 1);
+      lua_pop (L, 1);           /* remove lib */
+    }
   /* add open functions from 'preloadedlibs' into 'package.preload' table */
-  luaL_findtable(L, LUA_REGISTRYINDEX, "_PRELOAD");
-  for (lib = preloadedlibs; lib->func; lib++) {
-    lua_pushcfunction(L, lib->func);
-    lua_setfield(L, -2, lib->name);
-  }
-  lua_pop(L, 1);  /* remove _PRELOAD table */
+  luaL_findtable (L, LUA_REGISTRYINDEX, "_PRELOAD");
+  for (lib = preloadedlibs; lib->func; lib++)
+    {
+      lua_pushcfunction (L, lib->func);
+      lua_setfield (L, -2, lib->name);
+    }
+  lua_pop (L, 1);               /* remove _PRELOAD table */
 }
-

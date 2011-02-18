@@ -1,4 +1,4 @@
-CFLAGS = -ansi -pedantic -O2 -Wall -I lua -I lpeg
+CFLAGS = -g -ansi -pedantic -O0 -Wall -I lua -I lpeg
 LFLAGS = -ldl -lm
 
 LUA_OBJECTS = lua/lapi.o lua/lauxlib.o lua/lbaselib.o lua/lbitlib.o \
@@ -21,4 +21,9 @@ robodoc.o : robodoc.c
 
 clean :
 	-rm robodoc.o robodoc linit.o
+
+.indent : robodoc.c linit.c
+	indent robodoc.c
+	indent linit.c
+	touch .indent
 
