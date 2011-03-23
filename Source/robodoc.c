@@ -1,23 +1,5 @@
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
-Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
-
-This file is part of ROBODoc
-
-ROBODoc is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+ * This file is part of ROBODoc, See COPYING for the license.
 */
 
 /****h* Docuwala/ROBODoc
@@ -221,7 +203,7 @@ char                use[] =
 /*           1         2         3         4         5         6         7         8
     12345678901234567890123456789012345678901234567890123456789012345678901234567890 */
     "ROBODoc Version " VERSION "    autodocs formatter ($Revision: 1.115 $)\n"
-    "(c) 1994-2010 Frans Slothouber, Petteri Kettunen, \n"
+    "(c) 1994-2011 Frans Slothouber, Petteri Kettunen, \n"
     "              Gergely Budai and Jacco van Weert\n"
     "ROBODoc comes with ABSOLUTELY NO WARRANTY.\n"
     "This is free software, and you are welcome to redistribute it\n"
@@ -322,11 +304,7 @@ char                use_authors[] =
 
 char                copying[] =
     "\n"
-    " Distributed under the GNU GENERAL PUBLIC LICENSE\n"
-    "   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n"
-    " See the source archive for a copy of the complete licence\n"
-    " If you do not have it you can get it from URL\n"
-    " http://www.gnu.org/copyleft/gpl.html\n";
+    " This version is distributed under the MIT LICENSE\n";
 
 
 static void dump_version(

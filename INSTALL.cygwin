@@ -1,4 +1,0 @@
-
-cd Source
-make -f makefile.cygwin-mingw 
-

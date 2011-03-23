@@ -39,7 +39,6 @@
 #
 #****
 #
-# $Id: makefile.plain,v 1.68 2010/05/02 20:16:14 gumpu Exp $
 #
 
 SHELL = /bin/sh
