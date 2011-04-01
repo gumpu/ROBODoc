@@ -15,4 +15,8 @@ Source/config.h
 Source/config.h.in
 Source/robodoc
 Source/robohdrs
+*.bz2
+*.gz
+*.zip
+*.exe
 

@@ -9,8 +9,8 @@ use strict;
 use IO::Dir;
 use IO::File;
 
-my $month    = "Feb";
-my $major    = 4;
+my $month    = "Mar";
+my $major    = "4A";
 my $minor    = 99;
 my $revision = 41;
 my $release  = 1;
@@ -22,7 +22,7 @@ sub readme {
     foreach my $line (@{$lines}) {
         if ($line =~ m/^ROBODoc\sVersion/) {
             print $line;
-            $line =~ s/\d+\.\d+\.\d+\s\S+\s2/$major.$minor.$revision $month 2/;
+            $line =~ s/\S+\.\d+\.\d+\s\S+\s2/$major.$minor.$revision $month 2/;
             print $line;
             print $file $line;
             ++$done;
@@ -80,7 +80,7 @@ sub robodoc_1 {
     foreach my $line (@{$lines}) {
         if ($line =~ m/TH\sROBODoc/) {
             print $line;
-            $line =~ s/ROBODoc\s\d+\.\d+\.\d+/ROBODoc $major.$minor.$revision/;
+            $line =~ s/ROBODoc\s\S+\.\d+\.\d+/ROBODoc $major.$minor.$revision/;
             $line =~ s/"\S+\s2/"$month 2/;
             print $line;
             print $file $line;
@@ -100,7 +100,7 @@ sub manual {
     foreach my $line (@{$lines}) {
         if ($line =~ m/title>ROBODoc\s\d/) {
             print $line;
-            $line =~ s/title>ROBODoc\s\d+\.\d+\.\d+/title>ROBODoc $major.$minor.$revision/;
+            $line =~ s/title>ROBODoc\s\S+\.\d+\.\d+/title>ROBODoc $major.$minor.$revision/;
             print $line;
             print $file $line;
             ++$done;
@@ -119,7 +119,7 @@ sub rpm_mk {
     foreach my $line (@{$lines}) {
         if ($line =~ /^PROJECT\_VERSION/) {
             print $line;
-            $line =~ s/\d+\.\d+\.\d+/$major.$minor.$revision/;
+            $line =~ s/\S+\.\d+\.\d+/$major.$minor.$revision/;
             print $line;
             print $file $line;
             ++$done;
@@ -143,7 +143,7 @@ sub makefile_plain {
     foreach my $line (@{$lines}) {
         if ($line =~ /^VERS/) {
             print $line;
-            $line =~ s/\d+\.\d+\.\d+/$major.$minor.$revision/;
+            $line =~ s/\S+\.\d+\.\d+/$major.$minor.$revision/;
             print $line;
             print $file $line;
             ++$done;
@@ -168,12 +168,12 @@ sub readme_cygwin {
         if ($line =~ /^----------\ robodoc-/) {
             print $file $line;
         # replace all other
-        } elsif ($line =~ /robodoc-\d+\.\d+\.\d+-\d+/) {
+        } elsif ($line =~ /robodoc-\S+\.\d+\.\d+-\d+/) {
             print $line;
             $line =~ s/\d+\.\d+\.\d+-\d+/$major.$minor.$revision-$release/;
             print $line;
             print $file $line;
-        } elsif ($line =~ /robodoc-\d+\.\d+\.\d+/) {
+        } elsif ($line =~ /robodoc-\S+\.\d+\.\d+/) {
             print $line;
             $line =~ s/\d+\.\d+\.\d+/$major.$minor.$revision/;
             print $line;
@@ -207,23 +207,4 @@ foreach my $filename ( keys %updaters ) {
     rename "$filename.bup", $filename;
 }
 
-__DATA__
-Copyright (C) 1994-2010  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
-Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
-
-This file is part of ROBODoc
-
-ROBODoc is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
 

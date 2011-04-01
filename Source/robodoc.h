@@ -10,7 +10,7 @@
 #endif
 
 #ifndef VERSION
-#define VERSION "4.99.41"
+#define VERSION "4A.99.41"
 #endif
 
 #define COMMENT_ROBODOC \
