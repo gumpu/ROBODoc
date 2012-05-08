@@ -28,7 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifndef VERSION
-#define VERSION "4.99.41"
+#define VERSION "5.0.0"
 #endif
 
 #define COMMENT_ROBODOC \

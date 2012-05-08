@@ -9,11 +9,11 @@ use strict;
 use IO::Dir;
 use IO::File;
 
-my $month    = "Feb";
-my $major    = 4;
-my $minor    = 99;
-my $revision = 41;
-my $release  = 1;
+my $month    = "May";
+my $major    = 5;
+my $minor    = 0;
+my $revision = 0;
+my $release  = 0;
 
 sub readme {
     my $file  = shift;
