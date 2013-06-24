@@ -15,4 +15,5 @@ Source/config.h
 Source/config.h.in
 Source/robodoc
 Source/robohdrs
-
+Docs/robodoc.1
+Docs/robohdr.1

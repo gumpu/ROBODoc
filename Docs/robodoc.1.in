@@ -11,7 +11,7 @@
 .if n .sp 1
 .if t .sp .5
 ..
-.TH ROBODoc "1" "May 2010" "@PACKAGE_STRING@"
+.TH ROBODoc "1" "Jul 2013" "@PACKAGE_STRING@"
 
 .SH NAME
 ROBODoc \- Extract documentation from source code.

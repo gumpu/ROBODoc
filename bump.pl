@@ -1,6 +1,5 @@
 #!/usr/bin/perl -w
 
-# $Id: bump.pl,v 1.48 2010/05/02 20:16:14 gumpu Exp $
 #
 # TODO: Fix auto update of years too!
 #
@@ -9,10 +8,10 @@ use strict;
 use IO::Dir;
 use IO::File;
 
-my $month    = "Feb";
+my $month    = "Jul";
 my $major    = 4;
 my $minor    = 99;
-my $revision = 41;
+my $revision = 42;
 my $release  = 1;
 
 sub readme {

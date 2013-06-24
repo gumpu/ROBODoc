@@ -15,7 +15,7 @@
 <article lang="en">
 
 <articleinfo>
-    <title>ROBODoc 4.99.41 User Manual</title>
+    <title>ROBODoc 4.99.42 User Manual</title>
     <authorgroup>
         <author>
             <firstname>Frans</firstname>
@@ -31,9 +31,9 @@
         </author>
     </authorgroup>
     <edition>Users Guide $Revision: 1.67 $</edition>
-    <pubdate>Feb 2011</pubdate>
+    <pubdate>Jul 2013</pubdate>
     <copyright>
-        <year>1994-2011</year>
+        <year>1994-2013</year>
         <holder>
           Frans Slothouber, Petteri Kettunen,
           Jacco van Weert, Gergely Budai

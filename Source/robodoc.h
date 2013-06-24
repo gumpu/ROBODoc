@@ -2,7 +2,7 @@
 #define ROBODOC_ROBODOC_H
 
 /*
-Copyright (C) 1994-2011  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
+Copyright (C) 1994-2013  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
 Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
 Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
 
@@ -28,13 +28,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifndef VERSION
-#define VERSION "4.99.41"
+#define VERSION "4.99.42"
 #endif
 
 #define COMMENT_ROBODOC \
     "Generated with ROBODoc Version " VERSION " (" __DATE__ ")\n"
 #define COMMENT_COPYRIGHT\
-    "ROBODoc (c) 1994-2011 by Frans Slothouber and many others.\n"
+    "ROBODoc (c) 1994-2013 by Frans Slothouber and many others.\n"
 
 /* Semaphore bits for actions */
 typedef struct actions_s
