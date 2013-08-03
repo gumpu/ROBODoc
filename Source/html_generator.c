@@ -722,7 +722,7 @@ void RB_HTML_Generate_TOC_2(
          * hierarchy of the headers.
          */
         fprintf( dest_doc, "<ul>\n" );
-        for ( i = 0; i < count; ++i )
+        for ( i = count -1 ; i >= 0; i-- )
         {
             header = headers[i];
             if ( owner == NULL )
