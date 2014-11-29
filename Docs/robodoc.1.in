@@ -11,7 +11,7 @@
 .if n .sp 1
 .if t .sp .5
 ..
-.TH ROBODoc "1" "Jul 2013" "@PACKAGE_STRING@"
+.TH ROBODoc "1" "Sep 2014" "@PACKAGE_STRING@"
 
 .SH NAME
 ROBODoc \- Extract documentation from source code.
@@ -73,6 +73,12 @@ Store all documentation in a single file.
 
 .IP --singlefile
 Generate a single document from a single file
+
+.IP --cmode
+Handy defaults for C
+
+.IP --cobol
+Add hyphens to identifiers, breaks cmode indexing.
 
 .EE
 The complete list of options can be found in the HTML documentation.

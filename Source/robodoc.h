@@ -34,7 +34,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define COMMENT_ROBODOC \
     "Generated with ROBODoc Version " VERSION " (" __DATE__ ")\n"
 #define COMMENT_COPYRIGHT\
-    "ROBODoc (c) 1994-2013 by Frans Slothouber and many others.\n"
+    "ROBODoc (c) 1994-2014 by Frans Slothouber and many others.\n"
 
 /* Semaphore bits for actions */
 typedef struct actions_s
@@ -78,6 +78,9 @@ typedef struct actions_s
     char                 do_block_comments;
     char                 do_keywords;
     char                 do_non_alpha;
+
+    /* Hyphens in identifiers */
+    char                 do_hyphens;
 
 } actions_t;
 

@@ -3,9 +3,10 @@
 
 
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
+Copyright (C) 1994-2014  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
 Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
+Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai,
+Brian Tiffin.
 
 This file is part of ROBODoc
 
@@ -2049,6 +2050,33 @@ static void Generate_Item(
             /* Get back to working dir */
             RB_Change_Back_To_CWD(  );
         }
+        /* BWT 20140910 include file with copy piping tool */
+        else if ( !Works_Like_SourceItem( item_type ) &&
+                  ( item_line->kind == ITEM_LINE_INCLUDE ) )
+        {
+            Format_Line( f, item_line->format );
+
+                FILE               *in = NULL, *dot_pipe = NULL;
+                char                str[TEMP_BUF_SIZE];
+
+                /* Change to docdir */
+                RB_Change_To_Docdir( docname );
+
+                /* Open the file */
+                snprintf( str, sizeof( str ), "%s%s",
+                          header->owner->filename->path->name, line );
+                in = RB_Open_File( str, "r" );
+
+                /* Include file in output */
+                while ( fgets( str, sizeof( str ), in ) != NULL )
+                    fputs( str, f);
+
+                /* Close file handlers */
+                RB_Close_File( in );
+
+                /* Get back to working dir */
+                RB_Change_Back_To_CWD(  );
+        }
         /* Source lines */
         else if ( Works_Like_SourceItem( item_type ) )
         {
@@ -2483,7 +2511,7 @@ static void Generate_Item_Line(
                      */
                     state = SEARCH_LINK;
                 }
-                else if ( utf8_isalnum( c ) || ( c == '_' ) )
+                else if ( utf8_isalnum( c ) || ( c == '_' ) || (( course_of_action.do_hyphens && c == '-' )) )
                 {
                     state = SEARCH_LINK_START_WORD;
                 }
@@ -2509,7 +2537,7 @@ static void Generate_Item_Line(
                      */
                     state = SKIP_SPACE;
                 }
-                else if ( utf8_ispunct( c ) && ( c != '_' ) )
+                else if ( utf8_ispunct( c ) && ( c != '_' ) && ( (course_of_action.do_hyphens && c != '-')) )
                 {
                     /* We found a puntuation character, this end
                      * the string of alpha numeric character, but
@@ -2529,7 +2557,7 @@ static void Generate_Item_Line(
              * of alpha numeric characters.
              */
             {
-                if ( utf8_isalnum( c ) || ( c == '_' ) )
+                if ( utf8_isalnum( c ) || ( c == '_' ) || ( (course_of_action.do_hyphens && c == '-')) )
                 {
                     /* We are not at the second character of
                      * a string of alpha numeric characters,
@@ -2539,7 +2567,7 @@ static void Generate_Item_Line(
                      */
                     state = SKIP_ALPHANUM;
                 }
-                else if ( utf8_ispunct( c ) && ( c != '_' ) )
+                else if ( utf8_ispunct( c ) && ( c != '_' ) && ( (course_of_action.do_hyphens && c != '-')) )
                 {
                     state = SEARCH_LINK;
                 }
@@ -2559,7 +2587,7 @@ static void Generate_Item_Line(
                  * searching if we encounter a space because this
                  * marks end of the word,
                  */
-                if ( utf8_isalnum( c ) || ( c == '_' ) )
+                if ( utf8_isalnum( c ) || ( c == '_' ) || ( (course_of_action.do_hyphens && c == '-')) )
                 {
                     /* We are at the start of a word.
                      */

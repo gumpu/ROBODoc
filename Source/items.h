@@ -76,7 +76,8 @@ enum ItemLineKind
     ITEM_LINE_EXEC,             /* Exec item */
     ITEM_LINE_DOT_START,        /* Similar to TOOL_START but use DOT tool */
     ITEM_LINE_DOT_END,          /* End line of a DOT item */
-    ITEM_LINE_DOT_FILE          /* DOT file to include */
+    ITEM_LINE_DOT_FILE,         /* DOT file to include */
+    ITEM_LINE_INCLUDE           /* file to include */
 };
 
 /*****/

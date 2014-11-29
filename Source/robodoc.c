@@ -237,6 +237,7 @@ char                use_options1[] =
     "Options:\n"
     "   --charset NAME   Add character encoding information (html only).\n"
     "   --cmode          Use ANSI C grammar in source items (html only).\n"
+    "   --cobol          Allow hyphen in identifiers. Breaks cmode indexing.\n"
     "   --config         Print configuration info and exit.\n"
     "   --css            Specify the stylesheet to use.\n"
     "   --ext EXTENSION  Set extension for generated files.\n"
@@ -1235,6 +1236,20 @@ actions_t Find_Actions(
             actions.do_block_comments = TRUE;
             actions.do_keywords = TRUE;
             actions.do_non_alpha = TRUE;
+
+            Install_C_Syntax(  );
+        }
+        else if ( !RB_Str_Case_Cmp( configuration.options.names[parameter_nr],
+                                    "--cobol" ) )
+        {
+            actions.do_quotes = TRUE;
+            actions.do_squotes = TRUE;
+            actions.do_line_comments = TRUE;
+            actions.do_block_comments = TRUE;
+            actions.do_keywords = TRUE;
+            actions.do_non_alpha = TRUE;
+
+            actions.do_hyphens = TRUE;
 
             Install_C_Syntax(  );
         }

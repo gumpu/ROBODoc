@@ -1,5 +1,15 @@
 # vi: spell ff=unix ft=none
 
+Sep 13 2014 V.99.41Cobol-b
+  Brian Tiffin
+  o Added --cobol option, sets action.do_hyphens to include dash, unborks --cmode.
+
+Sep 2014 - V4.99.41Cobol
+  Brian Tiffin
+  o Added dash to the link/identifier analyzer
+    This is a --cmode breaking feature.
+  o Added |copy pipe tool
+
 Feb 2011 - V4.99.41
   Frans Slothouber
   o Switch to github

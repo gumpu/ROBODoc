@@ -1,7 +1,8 @@
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
+Copyright (C) 1994-2014  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
 Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
+Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai,
+Brian Tiffin.
 
 This file is part of ROBODoc
 
@@ -202,6 +203,12 @@ static char        *Is_Tool(
         else if ( !strncmp( "exec ", s, 5 ) && !*tool_active )
         {
             *itemkind = ITEM_LINE_EXEC;
+            return ( s + 5 );
+        }
+        /* Check for include items */
+        else if ( !strncmp( "copy ", s, 5 ) && !*tool_active )
+        {
+            *itemkind = ITEM_LINE_INCLUDE;
             return ( s + 5 );
         }
     }

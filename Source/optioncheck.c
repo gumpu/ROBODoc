@@ -157,6 +157,7 @@ static char        *ok_options[] = {
     "--nogeneratedwith",
     "--no_subdirectories",
     "--cmode",
+    "--cobol",
     "--charset",
     "--ext",
     "--help",
