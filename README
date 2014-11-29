@@ -1,4 +1,4 @@
-COBODoc Version 4.99.42Cobol Sep 2014.
+ROBODoc Version 4.99.42Cobol Sep 2014.
 
 ROBODoc was modified to be more friendly to COBOL sources, by adding
 dash to identifiers through a --cobol switch.  This will break some
