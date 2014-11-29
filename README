@@ -5,7 +5,7 @@ dash to identifiers through a --cobol switch.  This will break some
 uses of ROBODoc, tripping on code expressions that use the minus
 operator.  This only occurs when --cobol is explicitly requested.
 
-Also added a |copy piping tool, to include text, as-is.
+Also added a |copy piping tool, to include a text file, as-is.
 
 ROBODoc Version 4.99.42 Jul 2013.
 
