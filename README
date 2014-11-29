@@ -1,8 +1,9 @@
 COBODoc Version 4.99.42Cobol Sep 2014.
 
 ROBODoc was modified to be more friendly to COBOL sources, by adding
-dash to identifiers.  This will break most other uses of ROBODoc,
-tripping code expressions that use the minus operator.
+dash to identifiers through a --cobol switch.  This will break some
+uses of ROBODoc, tripping on code expressions that use the minus
+operator.  This only occurs when --cobol is explicitly requested.
 
 Also added a |copy piping tool, to include text, as-is.
 
