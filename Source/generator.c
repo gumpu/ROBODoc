@@ -2511,7 +2511,7 @@ static void Generate_Item_Line(
                      */
                     state = SEARCH_LINK;
                 }
-                else if ( utf8_isalnum( c ) || ( c == '_' ) || (( course_of_action.do_hyphens && c == '-' )) )
+                else if ( utf8_isalnum( c ) || ( c == '_' ) || ( course_of_action.do_hyphens && c == '-' ) )
                 {
                     state = SEARCH_LINK_START_WORD;
                 }
@@ -2537,7 +2537,7 @@ static void Generate_Item_Line(
                      */
                     state = SKIP_SPACE;
                 }
-                else if ( utf8_ispunct( c ) && ( c != '_' ) && ( (course_of_action.do_hyphens && c != '-')) )
+                else if ( utf8_ispunct( c ) && ( c != '_' ) && ( !course_of_action.do_hyphens || ( course_of_action.do_hyphens && c != '-' ) ) )
                 {
                     /* We found a puntuation character, this end
                      * the string of alpha numeric character, but
@@ -2557,7 +2557,7 @@ static void Generate_Item_Line(
              * of alpha numeric characters.
              */
             {
-                if ( utf8_isalnum( c ) || ( c == '_' ) || ( (course_of_action.do_hyphens && c == '-')) )
+                if ( utf8_isalnum( c ) || ( c == '_' ) || ( course_of_action.do_hyphens && c == '-' ) )
                 {
                     /* We are not at the second character of
                      * a string of alpha numeric characters,
@@ -2567,7 +2567,7 @@ static void Generate_Item_Line(
                      */
                     state = SKIP_ALPHANUM;
                 }
-                else if ( utf8_ispunct( c ) && ( c != '_' ) && ( (course_of_action.do_hyphens && c != '-')) )
+                else if ( utf8_ispunct( c ) && ( c != '_' ) && ( !course_of_action.do_hyphens || ( course_of_action.do_hyphens && c != '-' ) ) )
                 {
                     state = SEARCH_LINK;
                 }
@@ -2587,7 +2587,7 @@ static void Generate_Item_Line(
                  * searching if we encounter a space because this
                  * marks end of the word,
                  */
-                if ( utf8_isalnum( c ) || ( c == '_' ) || ( (course_of_action.do_hyphens && c == '-')) )
+                if ( utf8_isalnum( c ) || ( c == '_' ) || ( course_of_action.do_hyphens && c == '-' ) )
                 {
                     /* We are at the start of a word.
                      */
