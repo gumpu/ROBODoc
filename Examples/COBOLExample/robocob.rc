@@ -16,6 +16,7 @@ items:
     Output:
     Side effects:
     Bugs:
+    Notes:
     Example:
     SOURCE
     Unittest:
@@ -38,6 +39,7 @@ item order:
     Side effects:
     History:
     Bugs:
+    Notes:
     Example:
     SOURCE
     Unittest:
@@ -52,14 +54,14 @@ preformatted items:
 format items:
     Purpose:
 options:
-    --documenttitle "cobweb-gtk"
-#   --src ./
-#   --doc ./doc
+    --documenttitle "ROBODoc COBOL"
+    --src ./
+    --doc ./robodoc
     --nodesc
     --html
     --syntaxcolors
 #   --singledoc
-#   --multidoc
+    --multidoc
     --index
     --sectionnameonly
     --nosort
@@ -84,15 +86,12 @@ ignore files:
     *~
     "a test_*"
 accept files:
-    cobweb-gtk.cob
-    cobweb-gui.cob
-    voidcall.c
-#    *.cob
-#    *.COB
-#    *.cbl
-#    *.CBL
-#    *.cpy
-#    *.CPY
+    *.cob
+    *.COB
+    *.cbl
+    *.CBL
+    *.cpy
+    *.CPY
 header markers:
     *>****
     /****
