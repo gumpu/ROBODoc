@@ -1,4 +1,12 @@
-# vi: spell ff=unix ft=none
+
+
+Sep 2014 V4.99.42Cobol 
+   ROBODoc was modified to be more friendly to COBOL sources, by adding
+   dash to identifiers through a --cobol switch.  This will break some
+   uses of ROBODoc, tripping on code expressions that use the minus
+   operator.  This only occurs when --cobol is explicitly requested.
+
+   Also added a |copy piping tool, to include a text file, as-is.
 
 Sep 13 2014 V.99.41Cobol-b
   Brian Tiffin
@@ -751,4 +759,4 @@ Mar-95  - Jacco van Weert      -  v1.0a:  Final version
 
 December 1994 - Jacco van Weert -- creation date.
 
-
+# vi: spell spl=en
