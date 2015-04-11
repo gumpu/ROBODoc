@@ -1,7 +1,5 @@
 #!/bin/bash
-# vi: ff=unix 
-# $Id: do.sh,v 1.22 2008/06/17 11:49:26 gumpu Exp $
-
+#
 # If a ./do.sh under cygwin gives
 #  : command not found
 #  : command not found

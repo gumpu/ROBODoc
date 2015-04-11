@@ -8,10 +8,10 @@ use strict;
 use IO::Dir;
 use IO::File;
 
-my $month    = "Jul";
+my $month    = "April";
 my $major    = 4;
 my $minor    = 99;
-my $revision = 42;
+my $revision = 43;
 my $release  = 1;
 
 sub readme {
@@ -207,7 +207,7 @@ foreach my $filename ( keys %updaters ) {
 }
 
 __DATA__
-Copyright (C) 1994-2010  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
+Copyright (C) 1994-2015  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
 Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
 Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
 
