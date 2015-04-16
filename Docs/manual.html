@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>ROBODoc 4.99.41 User Manual</title><link rel="stylesheet" href="manual.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div xml:lang="en" class="article" title="ROBODoc 4.99.41 User Manual" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="id363971"></a>ROBODoc 4.99.41 User Manual</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Frans</span> <span class="surname">Slothouber</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Petteri</span> <span class="surname">Kettunen</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Gergely</span> <span class="surname">Budai</span></h3></div></div></div><div><p class="copyright">Copyright © 1994-2011 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>ROBODoc 4.99.42 User Manual</title><link rel="stylesheet" type="text/css" href="manual.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /></head><body><div xml:lang="en" class="article" lang="en"><div class="titlepage"><div><div><h2 class="title"><a id="idm140261836010576"></a>ROBODoc 4.99.42 User Manual</h2></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Frans</span> <span class="surname">Slothouber</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Petteri</span> <span class="surname">Kettunen</span></h3></div><div class="author"><h3 class="author"><span class="firstname">Gergely</span> <span class="surname">Budai</span></h3></div></div></div><div><p class="copyright">Copyright © 1994-2013 
           Frans Slothouber, Petteri Kettunen,
           Jacco van Weert, Gergely Budai
-        </p></div><div><p class="pubdate">Feb 2011</p></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id364236">1. Preface</a></span></dt><dt><span class="section"><a href="#installing">2. Installing ROBODoc</a></span></dt><dt><span class="section"><a href="#preparing">3. Preparing your source code for ROBODoc</a></span></dt><dd><dl><dt><span class="section"><a href="#id370816">3.1. Headers</a></span></dt><dt><span class="section"><a href="#header_types">3.2. Header Types</a></span></dt><dt><span class="section"><a href="#id371603">3.3. Items</a></span></dt><dt><span class="section"><a href="#sections">3.4. Sections</a></span></dt><dt><span class="section"><a href="#formatting">3.5. Smart Text Formatting</a></span></dt></dl></dd><dt><span class="section"><a href="#id373369">4. Extracting Documentation with ROBODoc</a></span></dt><dd><dl><dt><span class="section"><a href="#id373056">4.1. Single document or many smaller documents</a></span></dt><dt><span class="section"><a href="#id373381">4.2. multidoc</a></span></dt><dt><span class="section"><a href="#id373419">4.3. singledoc</a></span></dt><dt><span class="section"><a href="#id373461">4.4. singlefile</a></span></dt><dt><span class="section"><a href="#id373488">4.5. Output formats</a></span></dt></dl></dd><dt><span class="section"><a href="#id373277">5. Examples of How to Create Documentation</a></span></dt><dd><dl><dt><span class="section"><a href="#id373285">5.1. HTML Example</a></span></dt><dt><span class="section"><a href="#id373812">5.2. RTF Example</a></span></dt><dt><span class="section"><a href="#id373879">5.3. LaTeX Example</a></span></dt><dt><span class="section"><a href="#id373967">5.4. XML DocBook Example</a></span></dt></dl></dd><dt><span class="section"><a href="#options">6. Options</a></span></dt><dt><span class="section"><a href="#customizing">7. Customizing ROBODoc</a></span></dt><dd><dl><dt><span class="section"><a href="#id377005">7.1. items block</a></span></dt><dt><span class="section"><a href="#id377021">7.2. ignore items block</a></span></dt><dt><span class="section"><a href="#id377032">7.3. item order block</a></span></dt><dt><span class="section"><a href="#sourceitems">7.4. source items block</a></span></dt><dt><span class="section"><a href="#id377061">7.5. preformatted items block</a></span></dt><dt><span class="section"><a href="#id377092">7.6. format items block</a></span></dt><dt><span class="section"><a href="#id377121">7.7. options block</a></span></dt><dt><span class="section"><a href="#headertypes_block">7.8. headertypes block</a></span></dt><dt><span class="section"><a href="#id377192">7.9. ignore files block</a></span></dt><dt><span class="section"><a href="#id377253">7.10. accept files block</a></span></dt><dt><span class="section"><a href="#id377268">7.11. header markers block</a></span></dt><dt><span class="section"><a href="#id377279">7.12. remark markers block</a></span></dt><dt><span class="section"><a href="#id377290">7.13. end markers block</a></span></dt><dt><span class="section"><a href="#separate_characters_block">7.14. header separate characters block</a></span></dt><dt><span class="section"><a href="#header_ignore_characters_block">7.15. header ignore characters block</a></span></dt><dt><span class="section"><a href="#remark_begin_end">7.16. 
-remark begin markers and remark end markers block</a></span></dt><dt><span class="section"><a href="#linecomments">7.17. source line comments block</a></span></dt><dt><span class="section"><a href="#keywords">7.18. keywords block</a></span></dt><dt><span class="section"><a href="#id377752">7.19. Configuration file location</a></span></dt></dl></dd><dt><span class="section"><a href="#id378669">8. Tips and Tricks</a></span></dt><dd><dl><dt><span class="section"><a href="#id378675">8.1. The SOURCE Item</a></span></dt><dt><span class="section"><a href="#id378696">8.2. Minimizing Duplicate Information</a></span></dt><dt><span class="section"><a href="#id378777">8.3. Advanced formatting with raw HTML and LaTeX code</a></span></dt><dt><span class="section"><a href="#id378827">8.4. Linking to external documents (href, file, mailto, images)</a></span></dt><dt><span class="section"><a href="#id378918">8.5. Linking from an external document</a></span></dt><dt><span class="section"><a href="#tools">8.6. Using external tools</a></span></dt><dt><span class="section"><a href="#id379172">8.7. ROBODoc-ing an existing project</a></span></dt><dt><span class="section"><a href="#id379225">8.8. Using ROBODoc under Windows</a></span></dt></dl></dd><dt><span class="section"><a href="#defaultheaders">9. Languages Supported by Default</a></span></dt><dd><dl><dt><span class="section"><a href="#id380016">9.1. C</a></span></dt><dt><span class="section"><a href="#id380036">9.2. Modula-2</a></span></dt><dt><span class="section"><a href="#id380083">9.3. Pascal</a></span></dt><dt><span class="section"><a href="#id380131">9.4. C++</a></span></dt><dt><span class="section"><a href="#id380179">9.5. Tcl</a></span></dt><dt><span class="section"><a href="#id380226">9.6. Perl</a></span></dt><dt><span class="section"><a href="#id380274">9.7. LaTeX/TeX</a></span></dt><dt><span class="section"><a href="#id380321">9.8. Postscript</a></span></dt><dt><span class="section"><a href="#id380369">9.9. Occam</a></span></dt><dt><span class="section"><a href="#id380416">9.10. Fortran 90</a></span></dt></dl></dd><dt><span class="section"><a href="#id381013">10. Suggestions and Bugs</a></span></dt></dl></div><div class="section" title="1. Preface"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id364236"></a>1. Preface</h2></div></div></div><p>ROBODoc is an API documentation tool for C, C++, Java, Assembler,
+        </p></div><div><p class="pubdate">Jul 2013</p></div></div><hr /></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="#idm140261835900080">1. Preface</a></span></dt><dt><span class="section"><a href="#installing">2. Installing ROBODoc</a></span></dt><dt><span class="section"><a href="#preparing">3. Preparing your source code for ROBODoc</a></span></dt><dd><dl><dt><span class="section"><a href="#idm140261835979296">3.1. Headers</a></span></dt><dt><span class="section"><a href="#header_types">3.2. Header Types</a></span></dt><dt><span class="section"><a href="#idm140261835046848">3.3. Items</a></span></dt><dt><span class="section"><a href="#sections">3.4. Sections</a></span></dt><dt><span class="section"><a href="#formatting">3.5. Smart Text Formatting</a></span></dt></dl></dd><dt><span class="section"><a href="#idm140261834830608">4. Extracting Documentation with ROBODoc</a></span></dt><dd><dl><dt><span class="section"><a href="#idm140261834875824">4.1. Single document or many smaller documents</a></span></dt><dt><span class="section"><a href="#idm140261834829232">4.2. multidoc</a></span></dt><dt><span class="section"><a href="#idm140261834824592">4.3. singledoc</a></span></dt><dt><span class="section"><a href="#idm140261834819616">4.4. singlefile</a></span></dt><dt><span class="section"><a href="#idm140261834816304">4.5. Output formats</a></span></dt></dl></dd><dt><span class="section"><a href="#idm140261834833328">5. Examples of How to Create Documentation</a></span></dt><dd><dl><dt><span class="section"><a href="#idm140261834832288">5.1. HTML Example</a></span></dt><dt><span class="section"><a href="#idm140261834777504">5.2. RTF Example</a></span></dt><dt><span class="section"><a href="#idm140261834769440">5.3. LaTeX Example</a></span></dt><dt><span class="section"><a href="#idm140261834758816">5.4. XML DocBook Example</a></span></dt></dl></dd><dt><span class="section"><a href="#options">6. Options</a></span></dt><dt><span class="section"><a href="#customizing">7. Customizing ROBODoc</a></span></dt><dd><dl><dt><span class="section"><a href="#idm140261834394528">7.1. items block</a></span></dt><dt><span class="section"><a href="#idm140261834392544">7.2. ignore items block</a></span></dt><dt><span class="section"><a href="#idm140261834391216">7.3. item order block</a></span></dt><dt><span class="section"><a href="#sourceitems">7.4. source items block</a></span></dt><dt><span class="section"><a href="#idm140261834387872">7.5. preformatted items block</a></span></dt><dt><span class="section"><a href="#idm140261834384064">7.6. format items block</a></span></dt><dt><span class="section"><a href="#idm140261834380592">7.7. options block</a></span></dt><dt><span class="section"><a href="#headertypes_block">7.8. headertypes block</a></span></dt><dt><span class="section"><a href="#idm140261834372208">7.9. ignore files block</a></span></dt><dt><span class="section"><a href="#idm140261834364864">7.10. accept files block</a></span></dt><dt><span class="section"><a href="#idm140261834363072">7.11. header markers block</a></span></dt><dt><span class="section"><a href="#idm140261834361776">7.12. remark markers block</a></span></dt><dt><span class="section"><a href="#idm140261834360480">7.13. end markers block</a></span></dt><dt><span class="section"><a href="#separate_characters_block">7.14. header separate characters block</a></span></dt><dt><span class="section"><a href="#header_ignore_characters_block">7.15. header ignore characters block</a></span></dt><dt><span class="section"><a href="#remark_begin_end">7.16. 
+remark begin markers and remark end markers block</a></span></dt><dt><span class="section"><a href="#linecomments">7.17. source line comments block</a></span></dt><dt><span class="section"><a href="#keywords">7.18. keywords block</a></span></dt><dt><span class="section"><a href="#idm140261834305008">7.19. Configuration file location</a></span></dt></dl></dd><dt><span class="section"><a href="#idm140261834194784">8. Tips and Tricks</a></span></dt><dd><dl><dt><span class="section"><a href="#idm140261834194112">8.1. The SOURCE Item</a></span></dt><dt><span class="section"><a href="#idm140261834191568">8.2. Minimizing Duplicate Information</a></span></dt><dt><span class="section"><a href="#idm140261834181904">8.3. Advanced formatting with raw HTML and LaTeX code</a></span></dt><dt><span class="section"><a href="#idm140261834175920">8.4. Linking to external documents (href, file, mailto, images)</a></span></dt><dt><span class="section"><a href="#idm140261834165040">8.5. Linking from an external document</a></span></dt><dt><span class="section"><a href="#tools">8.6. Using external tools</a></span></dt><dt><span class="section"><a href="#idm140261834134496">8.7. ROBODoc-ing an existing project</a></span></dt><dt><span class="section"><a href="#idm140261834128112">8.8. Using ROBODoc under Windows</a></span></dt></dl></dd><dt><span class="section"><a href="#defaultheaders">9. Languages Supported by Default</a></span></dt><dd><dl><dt><span class="section"><a href="#idm140261834033120">9.1. C</a></span></dt><dt><span class="section"><a href="#idm140261834030848">9.2. Modula-2</a></span></dt><dt><span class="section"><a href="#idm140261834025152">9.3. Pascal</a></span></dt><dt><span class="section"><a href="#idm140261834019392">9.4. C++</a></span></dt><dt><span class="section"><a href="#idm140261834013712">9.5. Tcl</a></span></dt><dt><span class="section"><a href="#idm140261834008048">9.6. Perl</a></span></dt><dt><span class="section"><a href="#idm140261834002352">9.7. LaTeX/TeX</a></span></dt><dt><span class="section"><a href="#idm140261833996640">9.8. Postscript</a></span></dt><dt><span class="section"><a href="#idm140261833990928">9.9. Occam</a></span></dt><dt><span class="section"><a href="#idm140261833985216">9.10. Fortran 90</a></span></dt></dl></dd><dt><span class="section"><a href="#idm140261833913600">10. Suggestions and Bugs</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm140261835900080"></a>1. Preface</h2></div></div></div><p>ROBODoc is an API documentation tool for C, C++, Java, Assembler,
         Basic, Fortran, LaTeX, Postscript, Tcl/Tk, LISP, Forth, Perl, Shell
         Scripts, Makefiles, Occam, COBOL, DCL, Visual Basic, HTML, DB/C, XML,
         and many other languages.  It can be made to work with any language that
@@ -30,7 +29,7 @@ remark begin markers and remark end markers block</a></span></dt><dt><span class
         other tools that have detailed knowledge of the syntax of a
         particular language.  They can use that knowledge to figure out
         some of the information automatically.  This usually also means
-        that they work only with one or two languages.  </p></div><div class="section" title="2. Installing ROBODoc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing"></a>2. Installing ROBODoc</h2></div></div></div><p>The easiest way to install ROBODoc is to use one of the
+        that they work only with one or two languages.  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing"></a>2. Installing ROBODoc</h2></div></div></div><p>The easiest way to install ROBODoc is to use one of the
     packages.  There are package for RedHat, Debian, OSX, and a precompiled
     executable for Windows.</p><p>You can also compile --- from the sources.  On a system
     with <span class="command"><strong>autoconfig</strong></span> it is as simple as:</p><pre class="programlisting">
@@ -47,12 +46,12 @@ make -f makefile.mingw-cygwin
        This should create a directory
        called <code class="filename">Doc</code>.  In there you should now
        find a file called <code class="filename">masterindex.html</code>.
-</p></div><div class="section" title="3. Preparing your source code for ROBODoc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="preparing"></a>3. Preparing your source code for ROBODoc</h2></div></div></div><p> ROBODoc allows you to mix the program documentation with
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="preparing"></a>3. Preparing your source code for ROBODoc</h2></div></div></div><p> ROBODoc allows you to mix the program documentation with
     the source code.  It does require though that this documentation
     has a particular layout so ROBODoc can recognize it.  There are
-    three key concepts: headers, items, and sections.  </p><div class="section" title="3.1. Headers"><div class="titlepage"><div><div><h3 class="title"><a id="id370816"></a>3.1. Headers</h3></div></div></div><p>Headers are the building blocks of the documentation. Lets
+    three key concepts: headers, items, and sections.  </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261835979296"></a>3.1. Headers</h3></div></div></div><p>Headers are the building blocks of the documentation. Lets
     look at an example. The following header was taken from the
-    documentation of the predecessor of ROBODoc, AutoDoc.</p><div class="example"><a id="robodocheader"></a><p class="title"><b>Example 1. A ROBODoc header in C.</b></p><div class="example-contents"><pre class="programlisting">
+    documentation of the predecessor of ROBODoc, AutoDoc.</p><div class="example"><a id="robodocheader"></a><p class="title"><strong>Example 1. A ROBODoc header in C.</strong></p><div class="example-contents"><pre class="programlisting">
  /****f* financial.library/StealMoney
   *  NAME
   *    StealMoney -- Steal money from the Federal Reserve Bank. (V77)
@@ -98,7 +97,7 @@ make -f makefile.mingw-cygwin
     in the example is:</p><pre class="programlisting">
   ****f* financial.library/StealMoney
 </pre><p>It marks the beginning of a header.  It also tells ROBODoc
-</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>the name of the element that is being documented, StealMoney,</p></li><li class="listitem"><p>the module it is part of, financial.library,</p></li><li class="listitem"><p>the kind of element, <code class="literal">f</code>, which stands for function.</p></li></ul></div><p>
+</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>the name of the element that is being documented, StealMoney,</p></li><li class="listitem"><p>the module it is part of, financial.library,</p></li><li class="listitem"><p>the kind of element, <code class="literal">f</code>, which stands for function.</p></li></ul></div><p>
     ROBODoc always expects that a <code class="literal">/</code> separates the module name and an element name.
     So <code class="literal">ModFoo/funcBar</code>
     is a valid name, but <code class="literal">funcBar</code> is not.
@@ -139,7 +138,7 @@ The end marker:
     </p><p>
     Each line of an item starts with a remark marker.  In this case
     <code class="literal">*</code>.
-    </p><p>That what ROBODoc needs to recognize a header is therefore:</p><div class="example"><a id="id371374"></a><p class="title"><b>Example 2. The markers needed by ROBODoc to recognize a header.</b></p><div class="example-contents"><pre class="programlisting">
+    </p><p>That what ROBODoc needs to recognize a header is therefore:</p><div class="example"><a id="idm140261835074256"></a><p class="title"><strong>Example 2. The markers needed by ROBODoc to recognize a header.</strong></p><div class="example-contents"><pre class="programlisting">
  /****f* financial.library/StealMoney
   *  NAME
   *
@@ -180,7 +179,7 @@ The end marker:
 </pre></div></div><br class="example-break" /><p>
     The above example is in C.  ROBODoc supports many more
     languages though.  See <a class="xref" href="#defaultheaders" title="9. Languages Supported by Default">Languages Supported by Default</a>.
-    </p></div><div class="section" title="3.2. Header Types"><div class="titlepage"><div><div><h3 class="title"><a id="header_types"></a>3.2. Header Types</h3></div></div></div><p> ROBODoc defines a number of header types.  You don't need
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="header_types"></a>3.2. Header Types</h3></div></div></div><p> ROBODoc defines a number of header types.  You don't need
     to use them but they can be useful for sorting information.  The
     header type tells ROBODoc what kind of object you are documenting.
     This information allows ROBODoc to create more useful index
@@ -188,7 +187,7 @@ The end marker:
     expects to find them after the fourth <code class="literal">*</code> in the
     begin marker.  So <code class="literal">#****f</code> is a valid marker,
     but <code class="literal">#**f**</code> is not.</p><p>If a single character is given, the type is defined as
-    listed in the following table</p><div class="table"><a id="id371438"></a><p class="title"><b>Table 1. Default header types</b></p><div class="table-contents"><table summary="Default header types" border="1"><colgroup><col align="left" /><col align="left" /></colgroup><tbody><tr><td align="left">c</td><td align="left">Header for a class </td></tr><tr><td align="left">d</td><td align="left">Header for a constant (from define)</td></tr><tr><td align="left">f</td><td align="left">Header for a function</td></tr><tr><td align="left">h</td><td align="left"><a id="header_type_h"></a>Header for a module in a project</td></tr><tr><td align="left">m</td><td align="left">Header for a method</td></tr><tr><td align="left">s</td><td align="left">Header for a structure</td></tr><tr><td align="left">t</td><td align="left">Header for a types</td></tr><tr><td align="left">u</td><td align="left">Header for a unit test</td></tr><tr><td align="left">v</td><td align="left">Header for a variable</td></tr><tr><td align="left">*</td><td align="left">Generic header for everything else</td></tr></tbody></table></div></div><br class="table-break" /><p>If two characters are given, the first character should be
+    listed in the following table</p><div class="table"><a id="idm140261835066592"></a><p class="title"><strong>Table 1. Default header types</strong></p><div class="table-contents"><table summary="Default header types" border="1"><colgroup><col align="left" class="c1" /><col align="left" class="c2" /></colgroup><tbody><tr><td align="left">c</td><td align="left">Header for a class </td></tr><tr><td align="left">d</td><td align="left">Header for a constant (from define)</td></tr><tr><td align="left">f</td><td align="left">Header for a function</td></tr><tr><td align="left">h</td><td align="left"><a id="header_type_h"></a>Header for a module in a project</td></tr><tr><td align="left">m</td><td align="left">Header for a method</td></tr><tr><td align="left">s</td><td align="left">Header for a structure</td></tr><tr><td align="left">t</td><td align="left">Header for a types</td></tr><tr><td align="left">u</td><td align="left">Header for a unit test</td></tr><tr><td align="left">v</td><td align="left">Header for a variable</td></tr><tr><td align="left">*</td><td align="left">Generic header for everything else</td></tr></tbody></table></div></div><br class="table-break" /><p>If two characters are given, the first character should be
     <code class="literal">i</code> and the second can be any of the other
     characters from the table above.  This creates an internal header
     of the type specified by the second character.  Internal headers
@@ -208,7 +207,7 @@ The end marker:
     See <a class="xref" href="#headertypes_block" title="7.8. headertypes block">headertypes block</a>.
     This way you can document anything you like, for instance makefile
     entries, system tests, or exceptions.
-    </p></div><div class="section" title="3.3. Items"><div class="titlepage"><div><div><h3 class="title"><a id="id371603"></a>3.3. Items</h3></div></div></div><p> By default ROBODoc recognizes the following items: </p><div class="variablelist"><dl><dt><span class="term">
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261835046848"></a>3.3. Items</h3></div></div></div><p> By default ROBODoc recognizes the following items: </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">
                 NAME
             </span></dt><dd><p>Item name plus a short description.
                 </p></dd><dt><span class="term">
@@ -319,7 +318,7 @@ The end marker:
             </span></dt><dd><p>Command description. </p></dd><dt><span class="term">
                 SOURCE
             </span></dt><dd><p>Source code inclusion. </p></dd></dl></div><p>You can define your own items using the ROBODoc
-    configuration file, <code class="filename">robodoc.rc</code>.  See <a class="xref" href="#customizing" title="7. Customizing ROBODoc">Customizing ROBODoc</a>.  </p></div><div class="section" title="3.4. Sections"><div class="titlepage"><div><div><h3 class="title"><a id="sections"></a>3.4. Sections</h3></div></div></div><p>The structure of source code for a project is usually
+    configuration file, <code class="filename">robodoc.rc</code>.  See <a class="xref" href="#customizing" title="7. Customizing ROBODoc">Customizing ROBODoc</a>.  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sections"></a>3.4. Sections</h3></div></div></div><p>The structure of source code for a project is usually
     hierarchical.  A project might consists of several applications,
     an application of several modules, a module of several functions
     or even sub modules.  ROBODoc allows you to show this hierarchy in
@@ -365,7 +364,7 @@ The end marker:
 1.1 Compiler/Parser
 1.1.1 Parser/ReadToken
 2. D-Language/Linker
-</pre></div><div class="section" title="3.5. Smart Text Formatting"><div class="titlepage"><div><div><h3 class="title"><a id="formatting"></a>3.5. Smart Text Formatting</h3></div></div></div><p>By default ROBODoc creates preformatted text in the output
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="formatting"></a>3.5. Smart Text Formatting</h3></div></div></div><p>By default ROBODoc creates preformatted text in the output
 documentation for all the text it finds in an item.  This means
 that the formatting of the output looks the same as the formatting of
 the text of an item.  Line-breaks and indentation stay the same.
@@ -377,7 +376,7 @@ manual this is called Smart Formatting.
 </p><p>You switch this on with the option <code class="option">--nopre</code>.
 ROBODoc now tries to find three kind of elements: paragraphs,
 lists, and preformatted text.</p><p>Paragraphs are separated by empty lines.  So the following item
-has two paragraphs.</p><div class="example"><a id="id372104"></a><p class="title"><b>Example 3. Two paragraphs.</b></p><div class="example-contents"><pre class="programlisting">
+has two paragraphs.</p><div class="example"><a id="idm140261834986656"></a><p class="title"><strong>Example 3. Two paragraphs.</strong></p><div class="example-contents"><pre class="programlisting">
   FUNCTION
     This function does something.
 
@@ -385,14 +384,14 @@ has two paragraphs.</p><div class="example"><a id="id372104"></a><p class="title
     and a bit more.
 </pre></div></div><br class="example-break" /><p> A List starts with a line that ends with a ':' which is then
 followed by one or more list items. List items should start with '*',
-'-', or 'o'.   So the following item contains a valid list: </p><div class="example"><a id="id372122"></a><p class="title"><b>Example 4. A list.</b></p><div class="example-contents"><pre class="programlisting">
+'-', or 'o'.   So the following item contains a valid list: </p><div class="example"><a id="idm140261834984560"></a><p class="title"><strong>Example 4. A list.</strong></p><div class="example-contents"><pre class="programlisting">
   FUNCTION
      This function does:
      * a lot of foo
      * some snafuing
      * and a bit of foobarring.
 </pre></div></div><br class="example-break" /><p> A list item can span more than one line if the second and following
-lines are indented.  So this is also a valid list:</p><div class="example"><a id="id372139"></a><p class="title"><b>Example 5. A list where one of the items spans more than one line.</b></p><div class="example-contents"><pre class="programlisting">
+lines are indented.  So this is also a valid list:</p><div class="example"><a id="idm140261834982528"></a><p class="title"><strong>Example 5. A list where one of the items spans more than one line.</strong></p><div class="example-contents"><pre class="programlisting">
   FUNCTION
      This function does:
      * a lot of foo and preprocessing of the
@@ -401,7 +400,7 @@ lines are indented.  So this is also a valid list:</p><div class="example"><a id
      * some snafuing
      * and a bit of foobarring.
 </pre></div></div><br class="example-break" /><p>If list items directly follow the name of a robodoc item they
-also form a valid list.  So this is a valid list:</p><div class="example"><a id="id372156"></a><p class="title"><b>Example 6. an implicit list</b></p><div class="example-contents"><pre class="programlisting">
+also form a valid list.  So this is a valid list:</p><div class="example"><a id="idm140261834980416"></a><p class="title"><strong>Example 6. an implicit list</strong></p><div class="example-contents"><pre class="programlisting">
   INPUTS
     * inputname -- the name of the input file
     * outputname -- the name of the output file
@@ -409,7 +408,7 @@ also form a valid list.  So this is a valid list:</p><div class="example"><a id=
 </pre></div></div><br class="example-break" /><p> Preformatted text is indicated by indenting it more that the
 surrounding text.  The first non-empty line in an item determines the
 base indenting.  Any lines with an indentation larger than this are
-preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class="title"><b>Example 7. Preformatted text</b></p><div class="example-contents"><pre class="literallayout">
+preformatted.  An example:</p><div class="example"><a id="idm140261834978224"></a><p class="title"><strong>Example 7. Preformatted text</strong></p><div class="example-contents"><pre class="literallayout">
    FUNCTION
      The following lines are preformatted
         +--------+
@@ -417,7 +416,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
         |        |
         +--------+
      End of the preformatted text.
-</pre></div></div><br class="example-break" /><p>The following is a complete example.</p><div class="example"><a id="fullsmart"></a><p class="title"><b>Example 8. All three elements of smart formatting.</b></p><div class="example-contents"><pre class="literallayout">
+</pre></div></div><br class="example-break" /><p>The following is a complete example.</p><div class="example"><a id="fullsmart"></a><p class="title"><strong>Example 8. All three elements of smart formatting.</strong></p><div class="example-contents"><pre class="literallayout">
     This is some example text.
     And some more.
 
@@ -432,7 +431,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
         |        |
         +--------+
     The box will stay.
-</pre></div></div><br class="example-break" /><p>will be turn into</p><div class="example"><a id="fulloutput"></a><p class="title"><b>Example 9. The corresponding HTML output.</b></p><div class="example-contents"><pre class="literallayout">
+</pre></div></div><br class="example-break" /><p>will be turn into</p><div class="example"><a id="fulloutput"></a><p class="title"><strong>Example 9. The corresponding HTML output.</strong></p><div class="example-contents"><pre class="literallayout">
     &lt;p&gt;This is some example text.
     And some more.&lt;/p&gt;
 
@@ -451,9 +450,9 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
         +--------+
     &lt;/pre&gt;
     &lt;p&gt; The box will stay.&lt;/p&gt;
-</pre></div></div><br class="example-break" /></div></div><div class="section" title="4. Extracting Documentation with ROBODoc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id373369"></a>4. Extracting Documentation with ROBODoc</h2></div></div></div><p>Now that you have prepared your source code for use with
+</pre></div></div><br class="example-break" /></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm140261834830608"></a>4. Extracting Documentation with ROBODoc</h2></div></div></div><p>Now that you have prepared your source code for use with
     ROBODoc you are ready to extract the documentation.  There are
-    several choices to be made.</p><div class="section" title="4.1. Single document or many smaller documents"><div class="titlepage"><div><div><h3 class="title"><a id="id373056"></a>4.1. Single document or many smaller documents</h3></div></div></div><p>First of all, ROBODoc can be used in three modes.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>multidoc -- in this mode ROBODoc scans
+    several choices to be made.</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834875824"></a>4.1. Single document or many smaller documents</h3></div></div></div><p>First of all, ROBODoc can be used in three modes.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>multidoc -- in this mode ROBODoc scans
     all the source files in your source directory and creates a
     separate document file for each of these in a document directory.
     The document directory is created automatically. Its structure is
@@ -461,7 +460,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
     files in your source directory and creates a single documentation
     file that contains all the documentation extracted from your
     source files.  </p></li><li class="listitem"><p>singlefile -- in this mode ROBODoc scans a single source
-    file and creates a single documentation file.</p></li></ul></div></div><div class="section" title="4.2. multidoc"><div class="titlepage"><div><div><h3 class="title"><a id="id373381"></a>4.2. multidoc</h3></div></div></div><p>The multidoc mode is useful to create browsable documents.
+    file and creates a single documentation file.</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834829232"></a>4.2. multidoc</h3></div></div></div><p>The multidoc mode is useful to create browsable documents.
     For instance many small HTML files that can be viewed with a
     web-browser.  This mode requires the following arguments:</p><p>
     <span class="command"><strong>robodoc
@@ -472,7 +471,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
     </strong></span>
 </p><p>An additional option that is useful with this mode is
     <code class="option">--index</code>, this creates a series of index files,
-    one for each header type.</p></div><div class="section" title="4.3. singledoc"><div class="titlepage"><div><div><h3 class="title"><a id="id373419"></a>4.3. singledoc</h3></div></div></div><p> The singledoc mode is useful to create bulk documentation
+    one for each header type.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834824592"></a>4.3. singledoc</h3></div></div></div><p> The singledoc mode is useful to create bulk documentation
     that can be incorporated in other documents, or that can be
     delivered to a client as a single document.  For instance a file
     created in RTF format can be included into a larger design
@@ -487,7 +486,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
 </p><p>An additional option that is useful with this mode is
     <code class="option">--sections</code>, this causes the headers to follow a
     section layout based on the module element hierarchy defined in the
-    header name.</p></div><div class="section" title="4.4. singlefile"><div class="titlepage"><div><div><h3 class="title"><a id="id373461"></a>4.4. singlefile</h3></div></div></div><p>The singlefile mode is not very useful.  It is mainly used
+    header name.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834819616"></a>4.4. singlefile</h3></div></div></div><p>The singlefile mode is not very useful.  It is mainly used
     for debugging purposes.  This mode requires the following
     arguments:</p><p>
     <span class="command"><strong>robodoc
@@ -496,18 +495,18 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
     --singlefile
     other options
 </strong></span>
-</p></div><div class="section" title="4.5. Output formats"><div class="titlepage"><div><div><h3 class="title"><a id="id373488"></a>4.5. Output formats</h3></div></div></div><p>Your next choice is the output format. ROBODoc can create
-    documentation in several formats:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>HTML, option <code class="option">--html</code></p></li><li class="listitem"><p>RTF, option <code class="option">--rtf</code></p></li><li class="listitem"><p>LaTeX, option <code class="option">--latex</code></p></li><li class="listitem"><p>XML DocBook, option <code class="option">--dbxml</code></p></li></ul></div><p>What format to use depends on your wishes. If you want a
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834816304"></a>4.5. Output formats</h3></div></div></div><p>Your next choice is the output format. ROBODoc can create
+    documentation in several formats:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>HTML, option <code class="option">--html</code></p></li><li class="listitem"><p>RTF, option <code class="option">--rtf</code></p></li><li class="listitem"><p>LaTeX, option <code class="option">--latex</code></p></li><li class="listitem"><p>XML DocBook, option <code class="option">--dbxml</code></p></li></ul></div><p>What format to use depends on your wishes. If you want a
     single printable document, use LaTeX or XML DocBook.  If you want
     a document that can be included into a larger (Word) document use
     RTF.  If you want something that is browsable use HTML, or use XML
-    DocBook and then convert it to HTML.</p></div></div><div class="section" title="5. Examples of How to Create Documentation"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id373277"></a>5. Examples of How to Create Documentation</h2></div></div></div><div class="section" title="5.1. HTML Example"><div class="titlepage"><div><div><h3 class="title"><a id="id373285"></a>5.1. HTML Example</h3></div></div></div><p> For this you need a web browser, say FireFox or Mozilla.  You can try
+    DocBook and then convert it to HTML.</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm140261834833328"></a>5. Examples of How to Create Documentation</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834832288"></a>5.1. HTML Example</h3></div></div></div><p> For this you need a web browser, say FireFox or Mozilla.  You can try
   this in the robodoc root directory.  It creates a document called
   <code class="filename">HDocs/masterindex.html</code> plus a lot of smaller
   documents from all the source files in the directory
   <code class="filename">Source</code>.</p><pre class="programlisting">
 <span class="command"><strong>robodoc</strong></span> <code class="option">--src</code> ./Source <code class="option">--doc</code> ./HDocs <code class="option">--multidoc</code> <code class="option">--index</code> <code class="option">--html</code>
-</pre></div><div class="section" title="5.2. RTF Example"><div class="titlepage"><div><div><h3 class="title"><a id="id373812"></a>5.2. RTF Example</h3></div></div></div><p>For this you need an rtf reader, for instance
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834777504"></a>5.2. RTF Example</h3></div></div></div><p>For this you need an rtf reader, for instance
     <span class="command"><strong>Word</strong></span>.  You can try this in the robodoc root
     directory.</p><pre class="programlisting">
 <span class="command"><strong>robodoc</strong></span> <code class="option">--src</code> ./Source <code class="option">--doc</code> api <code class="option">--singledoc</code> <code class="option">--rtf</code> <code class="option">--sections</code>
@@ -521,7 +520,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
     bigger document with the right formatting options.  This is best
     done with a cut-and-paste operation.  Use the cut-past-paste
     special menu, and paste it as RTF formatted text into your Word
-    document.</p></div><div class="section" title="5.3. LaTeX Example"><div class="titlepage"><div><div><h3 class="title"><a id="id373879"></a>5.3. LaTeX Example</h3></div></div></div><p> For this you need <span class="command"><strong>latex</strong></span> and
+    document.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834769440"></a>5.3. LaTeX Example</h3></div></div></div><p> For this you need <span class="command"><strong>latex</strong></span> and
   <span class="command"><strong>makeindex</strong></span>. You can try this in the robodoc root
   directory.  It creates a single document called
   <code class="filename">api.dvi</code> from all the source files in the
@@ -532,7 +531,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
 <span class="command"><strong>makeindex</strong></span> api.idx
 <span class="command"><strong>latex</strong></span> api.tex
 <span class="command"><strong>xdvi</strong></span> api.dvi
-</pre></div><div class="section" title="5.4. XML DocBook Example"><div class="titlepage"><div><div><h3 class="title"><a id="id373967"></a>5.4. XML DocBook Example</h3></div></div></div><p>
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834758816"></a>5.4. XML DocBook Example</h3></div></div></div><p>
     DocBook is a xml format to create technical documentation, see.
     <a class="ulink" href="http://www.docbook.org/" target="_top"><em class="citetitle">DocBook.org</em></a>.
     DocBook is quite nice. This manual for instance is written in DocBook and
@@ -542,7 +541,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
     for instance: html, pdf, html-help.
     For this you need a tool that can process a DocBook file. There
     are several of these tools.
-</p><div class="section" title="5.4.1. DocBook with html output"><div class="titlepage"><div><div><h4 class="title"><a id="id373990"></a>5.4.1. DocBook with html output</h4></div></div></div><p>The easiest to use is <span class="command"><strong>xsltproc</strong></span>. It works under
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="idm140261834756080"></a>5.4.1. DocBook with html output</h4></div></div></div><p>The easiest to use is <span class="command"><strong>xsltproc</strong></span>. It works under
     Windows and Unix.  A typical workflow under Windows is:
 </p><pre class="programlisting">
 <span class="command"><strong>robodoc</strong></span> <code class="option">--src</code> ./Source <code class="option">--doc</code> api <code class="option">--singledoc</code> <code class="option">--dbxml</code> <code class="option">--sections</code>
@@ -566,7 +565,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
 </p><p>
     More information about xsl can be found at
     <a class="ulink" href="http://www.sagehill.net/docbookxsl/" target="_top"><em class="citetitle">http://www.sagehill.net/docbookxsl/</em></a>.
-</p></div><div class="section" title="5.4.2. DocBook with html help output"><div class="titlepage"><div><div><h4 class="title"><a id="id374106"></a>5.4.2. DocBook with html help output</h4></div></div></div><p>The same program can be used to
+</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="idm140261834742160"></a>5.4.2. DocBook with html help output</h4></div></div></div><p>The same program can be used to
     <a class="ulink" href="http://docbook.sourceforge.net/release/xsl/current/doc/htmlhelp.html" target="_top">
         <em class="citetitle">create a html help</em>
     </a> file. For this you need
@@ -587,8 +586,8 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
     &lt;xsl:param name="section.autolabel" select="1"/&gt;
 &lt;/xsl:stylesheet&gt;
 
-</pre></div></div></div><div class="section" title="6. Options"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="options"></a>6. Options</h2></div></div></div><p>The behavior of ROBODoc can be further fine-tune with a large number of
-        options.</p><div class="variablelist"><dl><dt><span class="term">-c</span></dt><dd><p>Show the copyright message.</p></dd><dt><a id="cmode"></a><span class="term"><a id="cmode.term"></a>--cmode</span></dt><dd><p>Use ANSI C grammar in SOURCE items and use this
+</pre></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="options"></a>6. Options</h2></div></div></div><p>The behavior of ROBODoc can be further fine-tune with a large number of
+        options.</p><div class="variablelist"><dl class="variablelist"><dt><span class="term">-c</span></dt><dd><p>Show the copyright message.</p></dd><dt><a id="cmode"></a><span class="term"><a id="cmode.term"></a>--cmode</span></dt><dd><p>Use ANSI C grammar in SOURCE items and use this
                     for syntax highlighting (<code class="literal">HTML</code> only).</p></dd><dt><span class="term">--css</span></dt><dd><p> Use the content of the specified file to create the
                     <code class="filename">robodoc.css</code>.  The content of the file is
                     copied into <code class="filename">robodoc.css</code>.  </p></dd><dt><span class="term">--dbxml</span></dt><dd><p>Generate documentation in XML DocBook format.</p></dd><dt><span class="term">--debug</span></dt><dd><p>Works like --tell, bug gives a lot more information.</p></dd><dt><span class="term">--doc</span></dt><dd><p>Define the path to the documentation directory or
@@ -688,7 +687,7 @@ preformatted.  An example:</p><div class="example"><a id="id372175"></a><p class
                 <code class="literal">SOURCE</code> items (<code class="literal">HTML</code> only).</p><p>Usage:
                   <code class="option">--syntaxcolors_enable
                   quotes,squotes,line_comments,block_comments,keywords,non_alpha</code>
-                </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><code class="option">quotes</code>
+                </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><code class="option">quotes</code>
                     -- Enable highlighting of <code class="literal">"string literals"
                   </code></li><li class="listitem"><code class="option">squotes</code>
                     -- Enable highlighting of <code class="literal">'string literals'
@@ -741,7 +740,7 @@ remark begin markers and remark end markers block</a>)
                 option, ROBODoc will insert a line break after every two header names. Set it to
                 zero to disable the line breaks.</p><p>
                   Example: <code class="option">--header_breaks 3</code>
-                </p></dd><dt><span class="term">--source_line_numbers</span></dt><dd><p>Display original source line numbers for SOURCE items.</p></dd></dl></div></div><div class="section" title="7. Customizing ROBODoc"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="customizing"></a>7. Customizing ROBODoc</h2></div></div></div><p> ROBODoc can be configured with a configuration file called
+                </p></dd><dt><span class="term">--source_line_numbers</span></dt><dd><p>Display original source line numbers for SOURCE items.</p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="customizing"></a>7. Customizing ROBODoc</h2></div></div></div><p> ROBODoc can be configured with a configuration file called
     <code class="filename">robodoc.rc</code>.  With it you can define item
     names, frequently used options, and translations for English
     terms. One should note that if a configuration file is specified,
@@ -831,7 +830,7 @@ keywords:
     <code class="literal">:</code>.
     In each block you define a number of values.  Each value must
     start with at least one space.
-</p><div class="section" title="7.1. items block"><div class="titlepage"><div><div><h3 class="title"><a id="id377005"></a>7.1. items block</h3></div></div></div><p>In this block you can define the names of items that
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834394528"></a>7.1. items block</h3></div></div></div><p>In this block you can define the names of items that
         ROBODoc should recognize.  Item names can consist of more than
         one word but should be written in all uppercase characters.
         Define one item name per line.  You do not need to put quotes
@@ -839,19 +838,19 @@ keywords:
     </p><p>If you do not define an items block ROBODoc uses its
         default list of item names.  If you define an items block
         ROBODoc uses only those item names, any of the default items names
-        (except SOURCE) are no longer recognized.</p></div><div class="section" title="7.2. ignore items block"><div class="titlepage"><div><div><h3 class="title"><a id="id377021"></a>7.2. ignore items block</h3></div></div></div><p>In this block you can define the names of items that
+        (except SOURCE) are no longer recognized.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834392544"></a>7.2. ignore items block</h3></div></div></div><p>In this block you can define the names of items that
         ROBODoc should ignore when generating documentation.
         This can be useful if you want to create documentation
         for a client, but for instance do not want to include
-        the history items and bugs items.</p></div><div class="section" title="7.3. item order block"><div class="titlepage"><div><div><h3 class="title"><a id="id377032"></a>7.3. item order block</h3></div></div></div><p>In this block you can define the order in which items
+        the history items and bugs items.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834391216"></a>7.3. item order block</h3></div></div></div><p>In this block you can define the order in which items
         are to appear in the generated documentation.
         The items listed here will appear in the given order in the
         generated documentation.  Any remaining items appear
         after these items in the order they were found in the header.
         This allows you to make the documentation look more uniform.
-        </p></div><div class="section" title="7.4. source items block"><div class="titlepage"><div><div><h3 class="title"><a id="sourceitems"></a>7.4. source items block</h3></div></div></div><p>In this block you can define the names of items that
+        </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sourceitems"></a>7.4. source items block</h3></div></div></div><p>In this block you can define the names of items that
         ROBODoc handles in the same way as the SOURCE item.
-    </p></div><div class="section" title="7.5. preformatted items block"><div class="titlepage"><div><div><h3 class="title"><a id="id377061"></a>7.5. preformatted items block</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834387872"></a>7.5. preformatted items block</h3></div></div></div><p>
     In this block you can define the names of items that should be always
     preformatted. This is useful if you have the
     <code class="option"><a class="xref" href="#nopre">--nopre</a></code> option
@@ -859,17 +858,17 @@ keywords:
     automatically preformatted. See
     <a class="xref" href="#formatting" title="3.5. Smart Text Formatting">Smart Text Formatting</a> for more
     information.
-  </p></div><div class="section" title="7.6. format items block"><div class="titlepage"><div><div><h3 class="title"><a id="id377092"></a>7.6. format items block</h3></div></div></div><p>
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834384064"></a>7.6. format items block</h3></div></div></div><p>
     In this block you can define the names of items that should be formatted by
     the <a class="xref" href="#formatting" title="3.5. Smart Text Formatting">Smart Text Formatting</a> feature
     (like function descriptions) even if the
     <code class="option"><a class="xref" href="#nopre">--nopre</a></code>
     option has not been specified.
-  </p></div><div class="section" title="7.7. options block"><div class="titlepage"><div><div><h3 class="title"><a id="id377121"></a>7.7. options block</h3></div></div></div><p>In this block you can define frequently used options.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834380592"></a>7.7. options block</h3></div></div></div><p>In this block you can define frequently used options.
         The options you specify here are added to any options you
         specify on the command line.</p><p>
       See <a class="xref" href="#options" title="6. Options">Options</a>.
-    </p></div><div class="section" title="7.8. headertypes block"><div class="titlepage"><div><div><h3 class="title"><a id="headertypes_block"></a>7.8. headertypes block</h3></div></div></div><p>In this block you can define your own header types.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="headertypes_block"></a>7.8. headertypes block</h3></div></div></div><p>In this block you can define your own header types.
         These are added to the existing header types.  Each new
         header type requires three parameters: the character used to
         indicate a header of this type, the title for this type as
@@ -886,7 +885,7 @@ keywords:
         "<a class="xref" href="#header_type_h">Header for a module in a project</a>",
         which has the sorting priority 1.
         See <a class="xref" href="#header_types" title="3.2. Header Types">Header Types</a>.
-    </p></div><div class="section" title="7.9. ignore files block"><div class="titlepage"><div><div><h3 class="title"><a id="id377192"></a>7.9. ignore files block</h3></div></div></div><p>In this block you can define the names of files or
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834372208"></a>7.9. ignore files block</h3></div></div></div><p>In this block you can define the names of files or
         directories that ROBODoc should ignore while scanning
         the directory tree for source files.  You can use the
         wildcard symbols <code class="literal">*</code> and
@@ -899,34 +898,34 @@ keywords:
         with <code class="filename">.bak</code> or <code class="filename">~</code> or
         that start with <code class="filename">a test_</code> </p><p>Normally you specify the names of directories here
         and do the filtering of file names with a accept files block.
-    </p></div><div class="section" title="7.10. accept files block"><div class="titlepage"><div><div><h3 class="title"><a id="id377253"></a>7.10. accept files block</h3></div></div></div><p>In this block you can define the names of files that
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834364864"></a>7.10. accept files block</h3></div></div></div><p>In this block you can define the names of files that
         robodoc should accept. This test is carried out after the
         'ignore files' filtering is performed.  Any files that do
         not match the patterns in this block are ignored by ROBODoc.
     </p><p>
         If there is no accept files block all files are accepted.
-    </p></div><div class="section" title="7.11. header markers block"><div class="titlepage"><div><div><h3 class="title"><a id="id377268"></a>7.11. header markers block</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834363072"></a>7.11. header markers block</h3></div></div></div><p>
         In this block you define what ROBODoc will recognize
         as start of a header.  If you use this block ROBODoc only
         recognizes these markers, any of the inbuilt markers will
         be ignored.
-    </p></div><div class="section" title="7.12. remark markers block"><div class="titlepage"><div><div><h3 class="title"><a id="id377279"></a>7.12. remark markers block</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834361776"></a>7.12. remark markers block</h3></div></div></div><p>
         In this block you define what ROBODoc will recognize
         as start of remark.  If you use this block ROBODoc only
         recognizes these markers, any of the inbuilt markers will
         be ignored.
-    </p></div><div class="section" title="7.13. end markers block"><div class="titlepage"><div><div><h3 class="title"><a id="id377290"></a>7.13. end markers block</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834360480"></a>7.13. end markers block</h3></div></div></div><p>
         In this block you define what ROBODoc will recognize
         as end of a header.  If you use this block ROBODoc only
         recognizes these markers, any of the inbuilt markers will
         be ignored.
-    </p></div><div class="section" title="7.14. header separate characters block"><div class="titlepage"><div><div><h3 class="title"><a id="separate_characters_block"></a>7.14. header separate characters block</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="separate_characters_block"></a>7.14. header separate characters block</h3></div></div></div><p>
     In this block you can specify the separation character(s) for multiple
     header names. The default character is "<code class="literal">,</code>" (comma) if
     this block is missing. See
     <a class="xref" href="#preparing" title="3. Preparing your source code for ROBODoc">Preparing your source code for ROBODoc</a>
     for more information.
-  </p></div><div class="section" title="7.15. header ignore characters block"><div class="titlepage"><div><div><h3 class="title"><a id="header_ignore_characters_block"></a>7.15. header ignore characters block</h3></div></div></div><p>
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="header_ignore_characters_block"></a>7.15. header ignore characters block</h3></div></div></div><p>
     In this block you can specify character(s) where the evaluation of a header
     should stop. The default character is "<code class="literal">[</code>" if this block
     is missing. This is useful to supply additional information to the header
@@ -936,7 +935,7 @@ keywords:
 </p><pre class="programlisting">
   ****f* financial.library/StealMoney [2.0]
 </pre><p>
-  </p></div><div class="section" title="7.16.  remark begin markers and remark end markers block"><div class="titlepage"><div><div><h3 class="title"><a id="remark_begin_end"></a>7.16. 
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="remark_begin_end"></a>7.16. 
 remark begin markers and remark end markers block</h3></div></div></div><p>
         Some languages allow remarks to span more than one line. They
         start a remark with a begin marker and end it with another
@@ -1014,7 +1013,7 @@ remark end markers:
     </code>
     option) is specified (Similar to
     <a class="xref" href="#linecomments" title="7.17. source line comments block">source line comments block</a>).
-</p></div><div class="section" title="7.17. source line comments block"><div class="titlepage"><div><div><h3 class="title"><a id="linecomments"></a>7.17. source line comments block</h3></div></div></div><p>
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="linecomments"></a>7.17. source line comments block</h3></div></div></div><p>
         Here you can specify markers which start whole line comments.
         (Comments that span until the end of line like "<code class="literal">//</code>",
         "<code class="literal">REM</code>", "<code class="literal">;</code>", etc...)
@@ -1037,7 +1036,7 @@ remark end markers:
     </p><p>
         The default highlighting color can be changed in the <code class="literal">CSS</code>
         file (<code class="literal">span.comment</code>).
-    </p></div><div class="section" title="7.18. keywords block"><div class="titlepage"><div><div><h3 class="title"><a id="keywords"></a>7.18. keywords block</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="keywords"></a>7.18. keywords block</h3></div></div></div><p>
         Here you can specify the keywords in your <code class="literal">SOURCE</code> items.
         These keywords will be highlighted in the generated <code class="literal">HTML</code>
         output if the
@@ -1060,7 +1059,7 @@ remark end markers:
     </p><p>
         The default highlighting color can be changed in the <code class="literal">CSS</code>
         file (<code class="literal">span.keyword</code>).
-    </p></div><div class="section" title="7.19. Configuration file location"><div class="titlepage"><div><div><h3 class="title"><a id="id377752"></a>7.19. Configuration file location</h3></div></div></div><p>ROBODoc searches the your current directory for the
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834305008"></a>7.19. Configuration file location</h3></div></div></div><p>ROBODoc searches the your current directory for the
     <code class="filename">robodoc.rc</code> file. If it can't find
     it there it will search in <code class="literal">$HOME/</code>, then
     <code class="filename">$HOMEDRIVE$HOMEPATH/</code>, and finally in
@@ -1071,7 +1070,7 @@ remark end markers:
 robodoc --rc  htmlsingle.rc
 robodoc --rc  rtfsingle.rc
 robodoc --rc  htmlmulti.rc
-</pre></div></div><div class="section" title="8. Tips and Tricks"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id378669"></a>8. Tips and Tricks</h2></div></div></div><div class="section" title="8.1. The SOURCE Item"><div class="titlepage"><div><div><h3 class="title"><a id="id378675"></a>8.1. The SOURCE Item</h3></div></div></div><p> With a little extra work you can include part of your
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm140261834194784"></a>8. Tips and Tricks</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834194112"></a>8.1. The SOURCE Item</h3></div></div></div><p> With a little extra work you can include part of your
     source code into your documentation too.  The following example
     shows how this is done:</p><pre class="programlisting">
 /****f* Robodoc/RB_Panic [2.0d]
@@ -1110,7 +1109,7 @@ robodoc --rc  htmlmulti.rc
     document without the SOURCE items use the option
     <code class="option">--nosource</code>.</p><p>You can also make normal items work like the source item,
     see <a class="xref" href="#sourceitems" title="7.4. source items block">source items block</a>.
-</p></div><div class="section" title="8.2. Minimizing Duplicate Information"><div class="titlepage"><div><div><h3 class="title"><a id="id378696"></a>8.2. Minimizing Duplicate Information</h3></div></div></div><p>It is always good to avoid having the same information in several different locations.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834191568"></a>8.2. Minimizing Duplicate Information</h3></div></div></div><p>It is always good to avoid having the same information in several different locations.
     It is easy to create headers that have a lot information duplication.  Take for instance
     the following header.
 </p><pre class="programlisting">
@@ -1195,7 +1194,7 @@ remark begin markers:
     /*
 remark end markers:
     */
-</pre></div><div class="section" title="8.3. Advanced formatting with raw HTML and LaTeX code"><div class="titlepage"><div><div><h3 class="title"><a id="id378777"></a>8.3. Advanced formatting with raw HTML and LaTeX code</h3></div></div></div><p> By default an item's body shows up in your documentation in
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834181904"></a>8.3. Advanced formatting with raw HTML and LaTeX code</h3></div></div></div><p> By default an item's body shows up in your documentation in
     the same way as it is formatted in your source code.  All special
     characters for the output mode are escaped.  For instance an &lt;
     is translated to a &amp;lt; in HTML mode.  Sometimes however you
@@ -1237,8 +1236,8 @@ remark end markers:
  *   End of the example.
  ******
  */
-</pre></div><div class="section" title="8.4. Linking to external documents (href, file, mailto, images)"><div class="titlepage"><div><div><h3 class="title"><a id="id378827"></a>8.4. Linking to external documents (href, file, mailto, images)</h3></div></div></div><p> In HTML mode ROBODoc recognizes the following links to
-    external documents.  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="literal">href:body</code> -- This is replaced with
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834175920"></a>8.4. Linking to external documents (href, file, mailto, images)</h3></div></div></div><p> In HTML mode ROBODoc recognizes the following links to
+    external documents.  </p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><code class="literal">href:body</code> -- This is replaced with
       <code class="literal">&lt;a href="body"&gt;body&lt;/A&gt;</code>
     </p></li><li class="listitem"><p><code class="literal">file:/body</code> -- This is replaced with
     <code class="literal">&lt;a href="file:/body"&gt;file:/body&lt;/A&gt;</code>
@@ -1248,7 +1247,7 @@ remark end markers:
     <code class="literal">&lt;a href="http://body"&gt;http://body&lt;/A&gt;</code>
     </p></li><li class="listitem"><p><code class="literal">image:body</code> -- This is replaced with
     <code class="literal">&lt;image src="body"&gt;</code>
-    </p></li></ul></div></div><div class="section" title="8.5. Linking from an external document"><div class="titlepage"><div><div><h3 class="title"><a id="id378918"></a>8.5. Linking from an external document</h3></div></div></div><p>To link from an external document to one of the HTML
+    </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834165040"></a>8.5. Linking from an external document</h3></div></div></div><p>To link from an external document to one of the HTML
     documents generated by ROBODoc you need a label.  ROBODoc creates
     two labels for each header. The first one starts with
     <code class="literal">robo</code> followed by a number.  You can not use
@@ -1261,7 +1260,7 @@ remark end markers:
     <code class="literal">/</code> was replaced by <code class="literal">2f</code> and
     <code class="literal">_</code> was replaced by <code class="literal">5f</code>.  As
     long as you do not change the header name, this label stays the
-    same each time you run ROBODoc.</p></div><div class="section" title="8.6. Using external tools"><div class="titlepage"><div><div><h3 class="title"><a id="tools"></a>8.6. Using external tools</h3></div></div></div><p>
+    same each time you run ROBODoc.</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="tools"></a>8.6. Using external tools</h3></div></div></div><p>
     You can also execute external tools from <code class="literal">ROBODoc</code> and even
     pass data to them.
     The output of these tools can be included in your documentation for instance.
@@ -1349,7 +1348,7 @@ remark end markers:
     (Don't forget to convert all the generated <code class="literal">PS</code> images to
     <code class="literal">PDF</code> images with the <span class="command"><strong>epstopdf</strong></span> utility,
     if you are generating <code class="literal">PDF</code> output.)
-    </p></div><div class="section" title="8.7. ROBODoc-ing an existing project"><div class="titlepage"><div><div><h3 class="title"><a id="id379172"></a>8.7. ROBODoc-ing an existing project</h3></div></div></div><p>
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834134496"></a>8.7. ROBODoc-ing an existing project</h3></div></div></div><p>
   The ROBODoc package includes also a standalone binary named
   <code class="literal">robohdrs</code>.
   This helper program can take clean source file and insert
@@ -1372,7 +1371,7 @@ robohdrs -s -p testproj -i "MODIFICATION HISTORY" -i IDEAS testproj.c
 </p><p>
   Note that <code class="literal">robohdrs</code> is supported on UNIX-like platforms only.
   It requires <code class="literal">fork()</code> and  Exuberant Ctags 5.3.1 or newer.
-  </p></div><div class="section" title="8.8. Using ROBODoc under Windows"><div class="titlepage"><div><div><h3 class="title"><a id="id379225"></a>8.8. Using ROBODoc under Windows</h3></div></div></div><p>When you use ROBODoc under windows, don't forget that it is
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834128112"></a>8.8. Using ROBODoc under Windows</h3></div></div></div><p>When you use ROBODoc under windows, don't forget that it is
     a command line tool.  ROBODoc relies on the console window to
     inform you about problems and errors.</p><p>An easy mistake to make is to create a shortcut to
     <code class="literal">robodoc.exe</code> and then click on the icon to
@@ -1392,7 +1391,7 @@ pause
     go to properties-&gt;layout and set the buffer size to something
     like 2500. That way, the next time you run it, you can scroll back
     and view all error messages.
-    </p></div></div><div class="section" title="9. Languages Supported by Default"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="defaultheaders"></a>9. Languages Supported by Default</h2></div></div></div><p>
+    </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="defaultheaders"></a>9. Languages Supported by Default</h2></div></div></div><p>
         ROBODoc support a whole range of languages by default.
         These languages are listed in the following sections.
         For each language two example headers are shown.
@@ -1421,14 +1420,14 @@ pause
         number of languages.
         This because if you specify your own markers, ROBODoc
         ignores any of the in-built markers.
-    </p><div class="section" title="9.1. C"><div class="titlepage"><div><div><h3 class="title"><a id="id380016"></a>9.1. C</h3></div></div></div><div class="example"><a id="id380022"></a><p class="title"><b>Example 10. A simple header without any source items in C.</b></p><div class="example-contents"><pre class="programlisting">
+    </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834033120"></a>9.1. C</h3></div></div></div><div class="example"><a id="idm140261834032480"></a><p class="title"><strong>Example 10. A simple header without any source items in C.</strong></p><div class="example-contents"><pre class="programlisting">
 /****f* ModuleName/Foo
 * FUNCTION
 *   Foo computes the foo factor
 *   using a fudge factor.
 ****
 */
-</pre></div></div><br class="example-break" /><div class="example"><a id="id379715"></a><p class="title"><b>Example 11. A header with source items in C.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834076992"></a><p class="title"><strong>Example 11. A header with source items in C.</strong></p><div class="example-contents"><pre class="programlisting">
 /****f* ModuleName/Foo
 * FUNCTION
 *   Foo computes the foo factor
@@ -1445,7 +1444,7 @@ int Foo( int fudge )
  more source code..
 
 /*****/
-</pre></div></div><br class="example-break" /><div class="example"><a id="id379729"></a><p class="title"><b>Example 12. The robodoc.rc file required for C if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834075344"></a><p class="title"><strong>Example 12. The robodoc.rc file required for C if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   /****
 remark markers:
@@ -1457,14 +1456,14 @@ remark begin markers:
   /*
 remark end markers:
   */
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.2. Modula-2"><div class="titlepage"><div><div><h3 class="title"><a id="id380036"></a>9.2. Modula-2</h3></div></div></div><div class="example"><a id="id380042"></a><p class="title"><b>Example 13. A simple header without any source items in Modula-2.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834030848"></a>9.2. Modula-2</h3></div></div></div><div class="example"><a id="idm140261834030208"></a><p class="title"><strong>Example 13. A simple header without any source items in Modula-2.</strong></p><div class="example-contents"><pre class="programlisting">
 (****f* ModuleName/Foo
 * FUNCTION
 *   Foo computes the foo factor
 *   using a fudge factor.
 ****
 *)
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380055"></a><p class="title"><b>Example 14. A header with source items in Modula-2.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834028640"></a><p class="title"><strong>Example 14. A header with source items in Modula-2.</strong></p><div class="example-contents"><pre class="programlisting">
 (****f* ModuleName/Foo
 * FUNCTION
 *   Foo computes the foo factor
@@ -1481,7 +1480,7 @@ int Foo( int fudge )
  more source code..
 
 (*****)
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380068"></a><p class="title"><b>Example 15. The robodoc.rc file required for Modula-2 if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834026944"></a><p class="title"><strong>Example 15. The robodoc.rc file required for Modula-2 if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   (****
 remark markers:
@@ -1493,14 +1492,14 @@ remark begin markers:
   (*
 remark end markers:
   *)
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.3. Pascal"><div class="titlepage"><div><div><h3 class="title"><a id="id380083"></a>9.3. Pascal</h3></div></div></div><div class="example"><a id="id380089"></a><p class="title"><b>Example 16. A simple header without any source items in Pascal.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834025152"></a>9.3. Pascal</h3></div></div></div><div class="example"><a id="idm140261834024480"></a><p class="title"><strong>Example 16. A simple header without any source items in Pascal.</strong></p><div class="example-contents"><pre class="programlisting">
 {****f* ModuleName/Foo
 * FUNCTION
 *   Foo computes the foo factor
 *   using a fudge factor.
 ****
 *}
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380102"></a><p class="title"><b>Example 17. A header with source items in Pascal.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834022880"></a><p class="title"><strong>Example 17. A header with source items in Pascal.</strong></p><div class="example-contents"><pre class="programlisting">
 {****f* ModuleName/Foo
 * FUNCTION
 *   Foo computes the foo factor
@@ -1517,7 +1516,7 @@ int Foo( int fudge )
  more source code..
 
 {*****}
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380116"></a><p class="title"><b>Example 18. The robodoc.rc file required for Pascal if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834021184"></a><p class="title"><strong>Example 18. The robodoc.rc file required for Pascal if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   {****
 remark markers:
@@ -1529,13 +1528,13 @@ remark begin markers:
   {*
 remark end markers:
   *}
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.4. C++"><div class="titlepage"><div><div><h3 class="title"><a id="id380131"></a>9.4. C++</h3></div></div></div><div class="example"><a id="id380137"></a><p class="title"><b>Example 19. A simple header without any source items in C++.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834019392"></a>9.4. C++</h3></div></div></div><div class="example"><a id="idm140261834018752"></a><p class="title"><strong>Example 19. A simple header without any source items in C++.</strong></p><div class="example-contents"><pre class="programlisting">
 //****f* ModuleName/Foo
 // FUNCTION
 //   Foo computes the foo factor
 //   using a fudge factor.
 //****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380150"></a><p class="title"><b>Example 20. A header with source items in C++.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834017136"></a><p class="title"><strong>Example 20. A header with source items in C++.</strong></p><div class="example-contents"><pre class="programlisting">
 //****f* ModuleName/Foo
 // FUNCTION
 //   Foo computes the foo factor
@@ -1549,47 +1548,20 @@ int Foo( int fudge )
  more source code..
 
 //****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380165"></a><p class="title"><b>Example 21. The robodoc.rc file required for C++ if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834015440"></a><p class="title"><strong>Example 21. The robodoc.rc file required for C++ if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   //****
 remark markers:
   //
 end markers:
   //****
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.5. Tcl"><div class="titlepage"><div><div><h3 class="title"><a id="id380179"></a>9.5. Tcl</h3></div></div></div><div class="example"><a id="id380184"></a><p class="title"><b>Example 22. A simple header without any source items in Tcl.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834013712"></a>9.5. Tcl</h3></div></div></div><div class="example"><a id="idm140261834013072"></a><p class="title"><strong>Example 22. A simple header without any source items in Tcl.</strong></p><div class="example-contents"><pre class="programlisting">
 #****f* ModuleName/Foo
 # FUNCTION
 #   Foo computes the foo factor
 #   using a fudge factor.
 #****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380198"></a><p class="title"><b>Example 23. A header with source items in Tcl.</b></p><div class="example-contents"><pre class="programlisting">
-#****f* ModuleName/Foo
-# FUNCTION
-#   Foo computes the foo factor
-#   using a fudge factor.
-# SYNOPSIS
-int Foo( int fudge )
-# INPUTS
-#   fudge -- the fudge factor
-# SOURCE
-
- more source code..
-
-#****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380212"></a><p class="title"><b>Example 24. The robodoc.rc file required for Tcl if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
-header markers:
-  #****
-remark markers:
-  #
-end markers:
-  #****
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.6. Perl"><div class="titlepage"><div><div><h3 class="title"><a id="id380226"></a>9.6. Perl</h3></div></div></div><div class="example"><a id="id380232"></a><p class="title"><b>Example 25. A simple header without any source items in Perl.</b></p><div class="example-contents"><pre class="programlisting">
-#****f* ModuleName/Foo
-# FUNCTION
-#   Foo computes the foo factor
-#   using a fudge factor.
-#****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380245"></a><p class="title"><b>Example 26. A header with source items in Perl.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834011472"></a><p class="title"><strong>Example 23. A header with source items in Tcl.</strong></p><div class="example-contents"><pre class="programlisting">
 #****f* ModuleName/Foo
 # FUNCTION
 #   Foo computes the foo factor
@@ -1603,20 +1575,47 @@ int Foo( int fudge )
  more source code..
 
 #****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380259"></a><p class="title"><b>Example 27. The robodoc.rc file required for Perl if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834009776"></a><p class="title"><strong>Example 24. The robodoc.rc file required for Tcl if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   #****
 remark markers:
   #
 end markers:
   #****
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.7. LaTeX/TeX"><div class="titlepage"><div><div><h3 class="title"><a id="id380274"></a>9.7. LaTeX/TeX</h3></div></div></div><div class="example"><a id="id380279"></a><p class="title"><b>Example 28. A simple header without any source items in LaTeX/TeX.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834008048"></a>9.6. Perl</h3></div></div></div><div class="example"><a id="idm140261834007376"></a><p class="title"><strong>Example 25. A simple header without any source items in Perl.</strong></p><div class="example-contents"><pre class="programlisting">
+#****f* ModuleName/Foo
+# FUNCTION
+#   Foo computes the foo factor
+#   using a fudge factor.
+#****
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834005776"></a><p class="title"><strong>Example 26. A header with source items in Perl.</strong></p><div class="example-contents"><pre class="programlisting">
+#****f* ModuleName/Foo
+# FUNCTION
+#   Foo computes the foo factor
+#   using a fudge factor.
+# SYNOPSIS
+int Foo( int fudge )
+# INPUTS
+#   fudge -- the fudge factor
+# SOURCE
+
+ more source code..
+
+#****
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834004080"></a><p class="title"><strong>Example 27. The robodoc.rc file required for Perl if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
+header markers:
+  #****
+remark markers:
+  #
+end markers:
+  #****
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261834002352"></a>9.7. LaTeX/TeX</h3></div></div></div><div class="example"><a id="idm140261834001680"></a><p class="title"><strong>Example 28. A simple header without any source items in LaTeX/TeX.</strong></p><div class="example-contents"><pre class="programlisting">
 %****f* ModuleName/Foo
 % FUNCTION
 %   Foo computes the foo factor
 %   using a fudge factor.
 %****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380293"></a><p class="title"><b>Example 29. A header with source items in LaTeX/TeX.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261834000080"></a><p class="title"><strong>Example 29. A header with source items in LaTeX/TeX.</strong></p><div class="example-contents"><pre class="programlisting">
 %****f* ModuleName/Foo
 % FUNCTION
 %   Foo computes the foo factor
@@ -1630,20 +1629,20 @@ int Foo( int fudge )
  more source code..
 
 %****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380307"></a><p class="title"><b>Example 30. The robodoc.rc file required for LaTeX/TeX if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833998368"></a><p class="title"><strong>Example 30. The robodoc.rc file required for LaTeX/TeX if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   %****
 remark markers:
   %
 end markers:
   %****
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.8. Postscript"><div class="titlepage"><div><div><h3 class="title"><a id="id380321"></a>9.8. Postscript</h3></div></div></div><div class="example"><a id="id380327"></a><p class="title"><b>Example 31. A simple header without any source items in Postscript.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261833996640"></a>9.8. Postscript</h3></div></div></div><div class="example"><a id="idm140261833995968"></a><p class="title"><strong>Example 31. A simple header without any source items in Postscript.</strong></p><div class="example-contents"><pre class="programlisting">
 %****f* ModuleName/Foo
 % FUNCTION
 %   Foo computes the foo factor
 %   using a fudge factor.
 %****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380340"></a><p class="title"><b>Example 32. A header with source items in Postscript.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833994368"></a><p class="title"><strong>Example 32. A header with source items in Postscript.</strong></p><div class="example-contents"><pre class="programlisting">
 %****f* ModuleName/Foo
 % FUNCTION
 %   Foo computes the foo factor
@@ -1657,47 +1656,20 @@ int Foo( int fudge )
  more source code..
 
 %****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380354"></a><p class="title"><b>Example 33. The robodoc.rc file required for Postscript if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833992656"></a><p class="title"><strong>Example 33. The robodoc.rc file required for Postscript if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   %****
 remark markers:
   %
 end markers:
   %****
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.9. Occam"><div class="titlepage"><div><div><h3 class="title"><a id="id380369"></a>9.9. Occam</h3></div></div></div><div class="example"><a id="id380374"></a><p class="title"><b>Example 34. A simple header without any source items in Occam.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261833990928"></a>9.9. Occam</h3></div></div></div><div class="example"><a id="idm140261833990256"></a><p class="title"><strong>Example 34. A simple header without any source items in Occam.</strong></p><div class="example-contents"><pre class="programlisting">
 __****f* ModuleName/Foo
 __ FUNCTION
 __   Foo computes the foo factor
 __   using a fudge factor.
 __****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380388"></a><p class="title"><b>Example 35. A header with source items in Occam.</b></p><div class="example-contents"><pre class="programlisting">
-__****f* ModuleName/Foo
-__ FUNCTION
-__   Foo computes the foo factor
-__   using a fudge factor.
-__ SYNOPSIS
-int Foo( int fudge )
-__ INPUTS
-__   fudge -- the fudge factor
-__ SOURCE
-
- more source code..
-
-__****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380402"></a><p class="title"><b>Example 36. The robodoc.rc file required for Occam if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
-header markers:
-  __****
-remark markers:
-  __
-end markers:
-  __****
-</pre></div></div><br class="example-break" /></div><div class="section" title="9.10. Fortran 90"><div class="titlepage"><div><div><h3 class="title"><a id="id380416"></a>9.10. Fortran 90</h3></div></div></div><div class="example"><a id="id380422"></a><p class="title"><b>Example 37. A simple header without any source items in Fortran 90.</b></p><div class="example-contents"><pre class="programlisting">
-__****f* ModuleName/Foo
-__ FUNCTION
-__   Foo computes the foo factor
-__   using a fudge factor.
-__****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380436"></a><p class="title"><b>Example 38. A header with source items in Fortran 90.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833988640"></a><p class="title"><strong>Example 35. A header with source items in Occam.</strong></p><div class="example-contents"><pre class="programlisting">
 __****f* ModuleName/Foo
 __ FUNCTION
 __   Foo computes the foo factor
@@ -1711,14 +1683,41 @@ __ SOURCE
  more source code..
 
 __****
-</pre></div></div><br class="example-break" /><div class="example"><a id="id380450"></a><p class="title"><b>Example 39. The robodoc.rc file required for Fortran 90 if it were not supported by default.</b></p><div class="example-contents"><pre class="programlisting">
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833986944"></a><p class="title"><strong>Example 36. The robodoc.rc file required for Occam if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
 header markers:
   __****
 remark markers:
   __
 end markers:
   __****
-</pre></div></div><br class="example-break" /></div></div><div class="section" title="10. Suggestions and Bugs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="id381013"></a>10. Suggestions and Bugs</h2></div></div></div><p>If you find any bugs, catch them, put them in a jar, and send them
+</pre></div></div><br class="example-break" /></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idm140261833985216"></a>9.10. Fortran 90</h3></div></div></div><div class="example"><a id="idm140261833984544"></a><p class="title"><strong>Example 37. A simple header without any source items in Fortran 90.</strong></p><div class="example-contents"><pre class="programlisting">
+__****f* ModuleName/Foo
+__ FUNCTION
+__   Foo computes the foo factor
+__   using a fudge factor.
+__****
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833982928"></a><p class="title"><strong>Example 38. A header with source items in Fortran 90.</strong></p><div class="example-contents"><pre class="programlisting">
+__****f* ModuleName/Foo
+__ FUNCTION
+__   Foo computes the foo factor
+__   using a fudge factor.
+__ SYNOPSIS
+int Foo( int fudge )
+__ INPUTS
+__   fudge -- the fudge factor
+__ SOURCE
+
+ more source code..
+
+__****
+</pre></div></div><br class="example-break" /><div class="example"><a id="idm140261833981216"></a><p class="title"><strong>Example 39. The robodoc.rc file required for Fortran 90 if it were not supported by default.</strong></p><div class="example-contents"><pre class="programlisting">
+header markers:
+  __****
+remark markers:
+  __
+end markers:
+  __****
+</pre></div></div><br class="example-break" /></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="idm140261833913600"></a>10. Suggestions and Bugs</h2></div></div></div><p>If you find any bugs, catch them, put them in a jar, and send them
         to: Frans Slothouber at frans.slothouber {at} gmail.com.
         Suggestions are also welcome at this address.
         Flames can be directed to the sun.</p></div></div></body></html>
