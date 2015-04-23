@@ -16,8 +16,9 @@ cp $tarball $builddir/
 cd $builddir
 tar -zxf robodoc*.gz
 cd robodoc-$version
-./configure
+./configure --prefix=$HOME
 make
+make install
 build_version=`./Source/robodoc --version`
 
 echo "Build was successful."
