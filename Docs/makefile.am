@@ -5,7 +5,7 @@ man_MANS = robodoc.1 robohdrs.1
 if FINK
 man1_MANS = robodoc.1 robohdrs.1
 else
-man1_MANS = robodoc.1 robohdrs.1
+
 endif
 
 #if FINK

@@ -10,7 +10,6 @@ missing
 *.o
 Docs/makefile
 depcomp
-makefile
 Source/config.h
 Source/config.h.in
 Source/robodoc
