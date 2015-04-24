@@ -3,8 +3,9 @@ dnl Process this file with autoconf to produce a configure script.
 dnl TODO FS   Document this.
 dnl TODO FS   Figure out how this really works.
 
-AC_INIT(robodoc, 4.99.43)
-AC_CONFIG_SRCDIR(Source/robodoc.h)
+AC_INIT([robodoc], [4.99.43])
+AC_CONFIG_SRCDIR([Source/robodoc.h])
+AM_INIT_AUTOMAKE
 
 dnl XXX Work around some autoconf bugs.
 if test "x$prefix" = "xNONE"; then
@@ -16,7 +17,6 @@ dnl so make a define for it.
 AC_DEFINE_UNQUOTED([ROBO_PREFIX], "$ROBO_INSTALL_PREFIX", [default location for robodoc.rc])
 
 AM_CONFIG_HEADER(Source/config.h)
-AM_INIT_AUTOMAKE(robodoc, 4.99.43)
 
 AC_PROG_MAKE_SET
 

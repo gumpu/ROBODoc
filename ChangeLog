@@ -1,4 +1,6 @@
-
+Apr 2015 V4.99.43
+   Frans Slothouber
+   o Bug fix for a failing   make install
 
 Sep 2014 V4.99.42Cobol 
    ROBODoc was modified to be more friendly to COBOL sources, by adding

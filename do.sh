@@ -21,12 +21,7 @@ rm -f mkinstalldirs
 rm -f missing makefile
 rm -f configure config.status
 
-# Obsolete
-#aclocal
-#automake -a
-#autoconf
-
-# autoreconf does a better job, and calls all needed autotools
+# autoreconf calls all needed autotools
 # -f consider all autotool files obsolete
 # -i copy missing auxiliary files
 autoreconf -f -i
