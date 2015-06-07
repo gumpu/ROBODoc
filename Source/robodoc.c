@@ -1,7 +1,8 @@
 /*
-Copyright (C) 1994-2007  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
-Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai.
+Copyright (C) Frans Slothouber, Jacco van Weert, Petteri Kettunen,
+Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David
+Druffner, Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase,
+and Gergely Budai.
 
 This file is part of ROBODoc
 
@@ -387,8 +388,6 @@ int main(
     struct RB_Directory *srctree = NULL;
     char               *optstr = NULL;
     char               *used_rc_file = NULL;
-    long                debug = 0;
-
 /*
    TODO, make setlocale work.
     char * loc;
@@ -462,7 +461,7 @@ int main(
     document = RB_Get_RB_Document(  );
     document->doctype = output_mode;
     document->actions = Find_Actions(  );
-    debug = document->debugmode = Find_DebugMode(  );
+    document->debugmode = Find_DebugMode(  );
     document->charset = Find_Parameterized_Option( "--charset" );
     document->extension = Find_Parameterized_Option( "--ext" );
     document->css = Find_Parameterized_Option( "--css" );
@@ -678,7 +677,7 @@ int main(
 
 #ifdef __APPLE__
     /* Mac OS X specific: print memory leaks */
-    if ( debug & SAY_DEBUG )
+    if ( debugmode & SAY_DEBUG )
     {
         char                cmd[32];
 

@@ -621,8 +621,6 @@ static void Preformat_All(
  */
 {
     int                 i;
-    int                 preformatted = FALSE;
-    char               *line = NULL;
 
     if ( arg_item->no_lines > 0 )
     {
@@ -635,13 +633,11 @@ static void Preformat_All(
             /* Empty */
         }
 
-        line = arg_item->lines[i]->line;
         if ( ( arg_item->lines[i]->kind == ITEM_LINE_RAW ) ||
              ( arg_item->lines[i]->kind == ITEM_LINE_PLAIN ) )
         {
             arg_item->lines[i]->format |=
                 RBILA_BEGIN_PRE | ( source ? RBILA_BEGIN_SOURCE : 0 );
-            preformatted = TRUE;
 
             for ( ++i; i < arg_item->no_lines; i++ )
             {

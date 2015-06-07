@@ -3,10 +3,10 @@
 
 
 /*
-Copyright (C) 1994-2014  Frans Slothouber, Jacco van Weert, Petteri Kettunen,
-Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner,
-Sasha Vasko, Kai Hofmann, Thierry Pierron, Friedrich Haase, and Gergely Budai,
-Brian Tiffin.
+Copyright (C) 1994-2014  Frans Slothouber, Jacco van Weert, Petteri
+Kettunen, Bernd Koesling, Thomas Aglassinger, Anthon Pang, Stefan
+Kost, David Druffner, Sasha Vasko, Kai Hofmann, Thierry Pierron,
+Friedrich Haase, and Gergely Budai, Brian Tiffin.
 
 This file is part of ROBODoc
 
@@ -2056,7 +2056,7 @@ static void Generate_Item(
         {
             Format_Line( f, item_line->format );
 
-                FILE               *in = NULL, *dot_pipe = NULL;
+                FILE               *in = NULL;
                 char                str[TEMP_BUF_SIZE];
 
                 /* Change to docdir */

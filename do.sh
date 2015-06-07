@@ -21,21 +21,20 @@ rm -f mkinstalldirs
 rm -f missing makefile
 rm -f configure config.status
 
+# CFLAGS="-g -Wall -DDMALLOC -DMALLOC_FUNC_CHECK" LDFLAGS="-ldmalloc" ./configure
+# CFLAGS="-g -Wall -O0 -std=gnu99 -pedantic -Wshadow -Wbad-function-cast -Wconversion -Wredundant-decls" ./configure
 # autoreconf calls all needed autotools
 # -f consider all autotool files obsolete
 # -i copy missing auxiliary files
 autoreconf -f -i
 
-# run configure to guess configuration
-# CFLAGS="-g -Wall -DDMALLOC -DMALLOC_FUNC_CHECK" LDFLAGS="-ldmalloc" ./configure
-# CFLAGS="-g -Wall -O0 -std=gnu99 -pedantic -Wshadow -Wbad-function-cast -Wconversion -Wredundant-decls" ./configure
-CFLAGS="-g -Wall -O0 -std=gnu99 -pedantic -Wshadow -Wbad-function-cast -Wredundant-decls" ./configure
-#CFLAGS="-g -Wall" ./configure
-#./configure
-
 # distcheck creates all distribution packages and does some sanity checks on it
+#
+# Adding -Werror makes the test for snprintf fail!  Bug in autoconfig?
+# CFLAGS="-g -Wall -Werror -O0 -Wshadow -Wredundant-decls" ./configure
+#
+CFLAGS="-g -Wall -O0 -Wshadow -Wredundant-decls" ./configure
 make distcheck
-
 # Make clean and recompile
 make clean
 make

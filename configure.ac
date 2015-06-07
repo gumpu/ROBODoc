@@ -56,7 +56,7 @@ dnl Checks for library functions.
 AC_FUNC_STRFTIME
 AC_FUNC_VPRINTF
 AC_FUNC_FORK
-AC_CHECK_FUNCS(strstr snprintf symlink)
+AC_CHECK_FUNCS(snprintf strstr symlink)
 
 # configuration info
 AC_DEFINE_UNQUOTED([ROBO_CFLAGS], "$CFLAGS", [compiler flags])

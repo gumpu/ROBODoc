@@ -52,5 +52,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 /* Source to come soon */
-
 #endif
+
+void todo(void) {}
+
