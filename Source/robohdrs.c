@@ -27,10 +27,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *    robohdrs
 *  DESCRIPTION
 *    Standalone program to insert ROBODoc headers to source code files.
-*    This program processes one source file at the time. Existing 
-*    ROBODoc headers, if any, are not checked for. Beware since this 
-*    may result in double headers. Current working directory should 
-*    be the same as where the source file is located.
+*    This program processes one source file at the time. Current working 
+*    directory should be the same as where the source file is located.
 *  USES
 *    Exuberant Ctags 5.3.1 or newer required
 *  USAGE
@@ -184,6 +182,29 @@ ctags_t;
 static ctags_t      myctags;
 
 /********** myctags */
+
+/****v* ROBOhdrs/checkctags
+*  NAME
+*    myctags
+*  SYNOPSIS
+*    static ctags_t checkctags;
+*  SOURCE
+*/
+static ctags_t      checkctags;
+
+/********** checkctags */
+
+/****v* ROBOhdrs/checkctagsptr
+*  NAME
+*    checkctagsptr
+*  SYNOPSIS
+*    static ctags_t *checkctagsptr;
+*  SOURCE
+*/
+static ctags_t     *checkctagsptr;
+
+/********** ctags */
+
 /****v* ROBOhdrs/ctags
 *  NAME
 *    ctags
@@ -477,7 +498,18 @@ static void
 initMe( void )
 {
     ctags = &myctags;
+    checkctagsptr = &checkctags;
     memset( ctags, 0, sizeof( ctags_t ) );
+    memset( checkctagsptr, 0, sizeof( ctags_t ) );
+
+    if ( !checkctagsptr->ctag )
+    {
+        /* empty list */
+        checkctagsptr->ctag = ( ctag_t * ) malloc( sizeof( ctag_t ) );
+        assert( checkctagsptr->ctag );
+        memset( checkctagsptr->ctag, 0, sizeof( ctag_t ) );
+    }
+
     projName[0] = '\0';
     ctagsBin[0] = '\0';
     vcTag[0] = '\0';
@@ -632,8 +664,31 @@ roboFileHeader( FILE * fp, char *proj, char *fname )
              ( end_remark_markers[srcEnd] ? end_remark_markers[srcEnd] :
                "" ) );
 }
-
 /********** roboFileHeader */
+
+/****f* ROBOhdrs/roboFileHeaderCheck
+*  NAME
+*    roboFileHeaderCheck
+*  FUNCTION
+*    Check if source file header has been write.
+*  SYNOPSIS
+*    static void roboFileHeaderCheck( char *proj, char *fname )
+*  SOURCE
+*/
+static int
+roboFileHeaderCheck( char *proj, char *fname, char *line )
+{
+    char               *s;
+    char               buf[ MAXLINE ];
+
+    s = remark_markers[srcRem];
+    sprintf( buf, "%sh* %s/%s\n", header_markers[srcSta],
+             ( proj[0] ? proj : fname ), fname );
+
+    return strcmp(buf, line);
+}
+
+/********** roboFileHeaderCheck */
 
 /****f* ROBOhdrs/roboHeader
 *  NAME
@@ -705,6 +760,75 @@ roboHeader( FILE * fp, char *fname, char *name, char *type, char *decl )
 
 /********** roboHeader */
 
+/****f* ROBOhdrs/roboHeaderCheck
+*  NAME
+*    roboHeaderCheck
+*  SYNOPSIS
+*    static void roboHeaderCheck( char * line, ctags_t *ctags )
+*  SOURCE
+*/
+static int
+roboHeaderCheck( char * line, ctag_t *ctags )
+{
+    char fname[MAXNAME];
+    char type[MAXNAME];
+    char typechar;
+    char *name;
+
+    int ret = 0;
+
+    /* type is 2 char long due to the optional prefix "i" */
+    ret = sscanf(line, "/***%2s* %s\n", type, fname);
+
+    if(ret >= 2)
+    {
+      name = strstr(fname, "/");
+      if( name != NULL )
+      {
+        *name = '\0';
+        name++;
+
+        /* if no "i" option */
+        if( type[0] == '*' )
+        {
+          type[0] = type[1];
+          type[1] = '\0';
+          typechar = type[0];
+        }
+        else
+          typechar = type[1];
+
+        switch(typechar)
+        {
+          case 'f':
+            strcpy(type, "function");
+            break;
+
+          case 'v':
+            strcpy(type, "variable");
+            break;
+
+          case 's':
+            strcpy(type, "struct");
+            break;
+
+          case 'm':
+            strcpy(type, "macro");
+            break;
+        }
+
+        strncpy( ctags->type, type, MAXNAME );
+        strncpy( ctags->fname, fname, MAXNAME );
+        strncpy( ctags->name, name, MAXNAME );
+      }
+
+      return 0;
+    }
+    return 1;
+}
+
+/********** roboHeaderCheck */
+
 /****f* ROBOhdrs/insertSrcEnd
 *  NAME
 *    insertSrcEnd
@@ -735,6 +859,7 @@ insertHeaders( ctags_t * e, char *project, char *dstpath, char *srcpath )
 {
     FILE               *ifp, *ofp;
     ctag_t             *ctag = e->ctag;
+    ctag_t             *ctagcheck = checkctagsptr->ctag;
     int                 lnum = 0, funcline = 0;
     char                buf[MAXLINE], *funcname = 0;
 
@@ -746,14 +871,19 @@ insertHeaders( ctags_t * e, char *project, char *dstpath, char *srcpath )
     assert( ofp = fopen( dstpath, "w" ) );
     assert( ifp = fopen( srcpath, "r" ) );
 
-    /* include file header only if project name is defined */
-    if ( project )
-    {
-        roboFileHeader( ofp, project, dstpath );
-    }
 
     while ( fgets( buf, MAXLINE, ifp ) != NULL )
     {
+        /* include file header only if project name is defined */
+        /* include file header only if project header hasn't been write yet */
+        if ( project && (lnum == 0) )
+        {
+          if(roboFileHeaderCheck( project, dstpath, buf))
+              roboFileHeader( ofp, project, dstpath );
+        }
+
+        roboHeaderCheck( buf, ctagcheck );
+
         lnum++;
         while ( ctag->prev )
         {
@@ -771,8 +901,13 @@ insertHeaders( ctags_t * e, char *project, char *dstpath, char *srcpath )
             {
                 if ( typeOk( ctag->type ) )
                 {
-                    roboHeader( ofp, ctag->fname, ctag->name, ctag->type,
-                                ctag->decl );
+                    if( strncmp(ctagcheck->fname, ctag->fname, MAXNAME) || 
+                        strncmp(ctagcheck->name, ctag->name, MAXNAME )  || 
+                        strncmp(ctagcheck->type, ctag->type, MAXNAME ) )
+                    {
+                        roboHeader( ofp, ctag->fname, ctag->name, ctag->type,
+                                    ctag->decl );
+                    }
                     funcline = lnum;
                     funcname = ctag->name;
                 }
