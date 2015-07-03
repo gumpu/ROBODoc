@@ -146,6 +146,19 @@ static short        srcEnd = SRC_E_C;
 
 /********** srcSta */
 
+/****v* ROBOhdrs/stdin_cp
+*  NAME
+*    srcSta
+*  SEE ALSO
+*    src_constants
+*  SOURCE
+*/
+
+static int        stdin_cp;
+static int        stdout_cp;
+
+/********** srcSta */
+
 typedef struct _ctag_t
 {
     void               *prev;
@@ -497,6 +510,9 @@ typeOk( char *t )
 static void
 initMe( void )
 {
+    stdin_cp = dup(0);
+    stdout_cp = dup(1);
+
     ctags = &myctags;
     checkctagsptr = &checkctags;
     memset( ctags, 0, sizeof( ctags_t ) );
@@ -629,12 +645,54 @@ parseCtagsX( FILE * fp )
             tagsParsed++;
         }
     }                           /* end while() */
+
     fclose( fp );
+
+    dup2(stdin_cp, 0);
+    dup2(stdout_cp, 1);
 
     return tagsParsed;
 }
 
 /********** parseCtagsX */
+
+/****f* ROBOhdrs/doNanoExec
+*  NAME
+*    doNanoExec
+*  SYNOPSIS
+*    static void doNanoExec( char * buffer)
+*  SOURCE
+*/
+static void
+doNanoExec( char *buffer )
+{
+    int                 vipe_fd[2], echo_fd[2], vipe_pid, echo_pid;
+    FILE               *incoming = NULL;
+    char               *vipe_cmd = "vipe";
+    char               *echo_cmd = "echo";
+
+    *buffer = '\0';
+
+    FILE *pipe_fp;
+
+    if(( pipe_fp = popen("export EDITOR=nano;echo prova | vipe", "r") ) == NULL)
+    {
+        perror("popen");
+        exit(1);
+    }
+
+    char                buf[MAXLINE + 1];
+
+    while ( fgets( buf, MAXLINE, pipe_fp ) != NULL )
+    {
+      sprintf( buffer, "%s%s    %s", buffer,remark_markers[srcRem], buf );
+      //strcat( buffer, buf);
+    }                           
+
+    pclose( pipe_fp );
+}
+
+/********** doCtagsExec */
 
 /****f* ROBOhdrs/roboFileHeader
 *  NAME
@@ -660,6 +718,12 @@ roboFileHeader( FILE * fp, char *proj, char *fname )
         fprintf( fp, "%s    %s\n", s, vcTag );
     }
     fprintf( fp, "%s  DESCRIPTION\n", s );
+
+    char input[1024];
+    doNanoExec( input );
+
+    fprintf( fp, "%s", input );
+
     fprintf( fp, "%s*******%s\n", s,
              ( end_remark_markers[srcEnd] ? end_remark_markers[srcEnd] :
                "" ) );
