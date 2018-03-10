@@ -178,6 +178,7 @@ static char        *ok_options[] = {
     "--tabstops",
     "--syntaxcolors",
     "--syntaxcolors_enable",
+    "--keywords_case_insensitive",
     "--dotname",
     "--masterindex",
     "--sourceindex",

@@ -70,6 +70,7 @@ struct keywords_hash_s
 {
     struct keywords_hash_s *next;
     char               *keyword;
+    char               *keyword_lower;
 };
 
 /*****/
@@ -179,6 +180,12 @@ void                Install_C_Syntax(
 char               *Find_Keyword(
     char *keyword,
     int len );
+char               *Find_Keyword_Case_Sensitive(
+    char *keyword,
+    int len );
+char               *Find_Keyword_Case_Insensitive(
+    char *keyword,
+    int len );
 char               *Find_Parameter_Exact(
     struct Parameters *params,
     char *paramname );
@@ -188,6 +195,8 @@ char               *Find_Parameter_Partial(
 char               *Find_Parameter_Char(
     struct Parameters *params,
     char param );
+void add_keywords_to_hash_table(
+    void );
 
 extern struct RB_Configuration configuration;
 

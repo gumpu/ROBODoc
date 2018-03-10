@@ -186,6 +186,10 @@ int                 snprintf(
     ... );
 #endif
 
+void strtolower(
+    char *str
+    );
+
 /****f* Utilities/RB_Mem_Check
  * FUNCTION
  *   Check for memory allocation failures.

@@ -478,10 +478,16 @@ int RB_HTML_Generate_Extra(
                       utf8_isalnum( cur_char[i] ) || ( cur_char[i] == '_' ) || ( course_of_action.do_hyphens && cur_char[i] == '-' );
                       i++ );
                 /*  Check if it is a keyword */
-                if ( ( keyword = Find_Keyword( cur_char, i ) ) )
-                {
+                if ( course_of_action.do_keywords_case_insensitive ){
+                    keyword = Find_Keyword_Case_Insensitive( cur_char, i );
+                }
+                else{
+                    keyword = Find_Keyword_Case_Sensitive( cur_char, i );
+                }
+                if ( keyword ){
                     RB_HTML_Color_String( dest_doc, 2, KEYWORD_CLASS,
                                           keyword );
+                    //free(keyword);
                     /*  Exit function */
                     return i - 1;
                 }
