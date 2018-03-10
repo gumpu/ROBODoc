@@ -70,7 +70,6 @@ struct keywords_hash_s
 {
     struct keywords_hash_s *next;
     char               *keyword;
-    char               *keyword_lower;
 };
 
 /*****/

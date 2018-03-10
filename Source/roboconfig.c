@@ -547,7 +547,7 @@ char               *Find_Keyword_Case_Insensitive(
             if ( !strncasecmp( keyword_lower, curr->keyword, len ) )
             {
                 /* Found it! */
-                keyword_found[sizeof(curr->keyword)] = '\0';
+                keyword_found[strlen(curr->keyword)] = '\0';
                 keyword_found_flag = 1;
                 break;
             }
