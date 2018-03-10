@@ -35,7 +35,8 @@
 #--------------------------------------
 
 CC = gcc
-#DEBUG = 1
+CYGWIN =1
+DEBUG = 1
 
 #****v* makefile.mingw-cygwin/CFLAGS
 # FUNCTION
