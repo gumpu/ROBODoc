@@ -487,7 +487,7 @@ int RB_HTML_Generate_Extra(
                 if ( keyword ){
                     RB_HTML_Color_String( dest_doc, 2, KEYWORD_CLASS,
                                           keyword );
-                    //free(keyword);
+                    free(keyword);
                     /*  Exit function */
                     return i - 1;
                 }

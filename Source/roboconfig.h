@@ -176,9 +176,6 @@ void                Free_Configuration(
     void );
 void                Install_C_Syntax(
     void );
-char               *Find_Keyword(
-    char *keyword,
-    int len );
 char               *Find_Keyword_Case_Sensitive(
     char *keyword,
     int len );

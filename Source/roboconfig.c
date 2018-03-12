@@ -436,31 +436,7 @@ void add_to_keywords_hash_table(
     /* Insert entry into hash table */
     *curr = tmp;
 }
-
 /*****/
-
-/****f* Configuration/Find_Keyword
- * FUNCTION
- *   Find a keyword in the hash table
- * SYNOPSIS
- */
-char               *Find_Keyword(
-    char *keyword,
-    int len
-    )
-/*
- * INPUTS
- *   - keyword -- The keyword string
- *   - len     -- The length of the keyword string
- * RETURN VALUE
- *   - pointer to the found keyword string in hash table or
- *   - NULL if the keyword is not found
- * SOURCE
- */
-{
-    //wrap it
-    return Find_Keyword_Case_Sensitive(keyword, len);
-}
 
 /****f* Configuration/Find_Keyword_Case_Sensitive
  * FUNCTION
@@ -481,26 +457,40 @@ char               *Find_Keyword_Case_Sensitive(
  * SOURCE
  */
 {
-    unsigned long           hash;
-    struct keywords_hash_s *curr;
+    unsigned long            hash;
+    struct keywords_hash_s  *curr;
+    char                    *keyword_found;
+    int                      keyword_found_flag;
 
-    /* Calculate hash value */
-    hash = Hash_Keyword( keyword, len );
+    keyword_found_flag = 0;
+    keyword_found = RB_malloc(len+1);
+    if (keyword_found){
+        strncpy(keyword_found, keyword, len);
+        keyword_found[len] = '\0';
+    
+        /* Calculate hash value */
+        hash = Hash_Keyword( keyword, len );
 
-    /* Seek through hash table row */
-    for ( curr = keywords_hash[hash]; curr; curr = curr->next )
-    {
-        /* Check for keyword in row element */
-        if ( !strncmp( keyword, curr->keyword, len ) )
+        /* Seek through hash table row */
+        for ( curr = keywords_hash[hash]; curr; curr = curr->next )
         {
-            /* Found it! */
-            return curr->keyword;
+            /* Check for keyword in row element */
+            if ( !strncmp( keyword, curr->keyword, len ) )
+            {
+                /* Found it! */
+                keyword_found[strlen(curr->keyword)] = '\0';
+                keyword_found_flag = 1;
+                break;
+            }
+        }
+        if (!keyword_found_flag && keyword_found){
+            free(keyword_found);
+            keyword_found = NULL;
         }
     }
-
-    /* Keyword not found */
-    return NULL;
+    return keyword_found;
 }
+/*****/
 
 /****f* Configuration/Find_Keyword_Case_Insensitive
  * FUNCTION
@@ -525,7 +515,7 @@ char               *Find_Keyword_Case_Insensitive(
     struct keywords_hash_s  *curr;
     char                    *keyword_lower;
     char                    *keyword_found;
-    int                     keyword_found_flag;
+    int                      keyword_found_flag;
 
     keyword_found_flag = 0;
     keyword_lower = RB_malloc(len+1);
