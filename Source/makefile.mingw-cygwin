@@ -36,6 +36,7 @@
 
 CC = gcc
 #DEBUG = 1
+#CYGWIN =1
 
 #****v* makefile.mingw-cygwin/CFLAGS
 # FUNCTION
@@ -60,7 +61,7 @@ CC = gcc
 ifdef CYGWIN
 CYGFLAGS = -DHAVE_FORK -DHAVE_SYMLINK
 else
-CYGFLAGS = -mno-cygwin
+#CYGFLAGS = -mno-cygwin
 endif
 
 # Use DEBUG = 1 to include debugging symbols and to turn off optimisations
