@@ -53,7 +53,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *    2003-08-08/petterik: #define `d' header (bug rep. from Anand Dhanakshirur)
 *    2003-08-04/petterik: -t option (suggestion from Anand Dhanakshirur)
 *    2003-02-21/petterik: -l option, script option tested
-*    2018-12-18/cashy:    MAXLINE size increased from 10240 to 102400
 *******
 */
 
@@ -115,7 +114,7 @@ int main( int argc, char** argv )
 *    MAXLINE
 *  SOURCE
 */
-#define MAXLINE 102400
+#define MAXLINE 10240
 /********** MAXLINE */
 /****v* ROBOhdrs/MAXNAME
 *  NAME
