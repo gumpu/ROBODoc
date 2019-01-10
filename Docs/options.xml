@@ -24,6 +24,12 @@
                     copied into <filename>robodoc.css</filename>.  </para>
         </listitem></varlistentry>
 
+        <varlistentry><term>--js</term><listitem>
+                <para> Use the content of the specified file to create the
+                    <filename>robodoc.js</filename>.  The content of the file is
+                    copied into <filename>robodoc.js</filename>.  </para>
+        </listitem></varlistentry>
+
         <varlistentry><term>--dbxml</term><listitem>
                 <para>Generate documentation in XML DocBook format.</para>
         </listitem></varlistentry>

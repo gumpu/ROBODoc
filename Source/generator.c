@@ -1378,6 +1378,7 @@ void RB_Generate_MultiDoc(
     if ( output_mode == HTML )
     {
         RB_Create_CSS( document );
+        RB_Create_JS( document );
     }
 
 
@@ -1489,6 +1490,7 @@ void RB_Generate_SingleDoc(
     if ( output_mode == HTML )
     {
         RB_Create_CSS( document );
+        RB_Create_JS( document );
     }
 
     document_file = RB_Open_SingleDocumentation( document );

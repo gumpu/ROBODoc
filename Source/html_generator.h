@@ -114,6 +114,11 @@ void                RB_Create_CSS(
 void                RB_InsertCSS(
     FILE *dest_doc,
     char *filename );
+void                RB_Create_JS(
+    struct RB_Document *document );
+void                RB_InsertJS(
+    FILE *dest_doc,
+    char *filename );
 void                RB_HTML_Generate_Nav_Bar(
     struct RB_Document *document,
     FILE *current_doc,

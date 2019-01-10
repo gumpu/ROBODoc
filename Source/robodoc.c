@@ -241,6 +241,7 @@ char                use_options1[] =
     "   --cobol          Allow hyphen in identifiers. Breaks cmode indexing.\n"
     "   --config         Print configuration info and exit.\n"
     "   --css            Specify the stylesheet to use.\n"
+    "   --js             Specify the javascript library to use.\n"
     "   --ext EXTENSION  Set extension for generated files.\n"
     "   --footless       Do not create the foot of a document.\n"
     "   --headless       Do not create the head of a document.\n"
@@ -470,6 +471,7 @@ int main(
     document->charset = Find_Parameterized_Option( "--charset" );
     document->extension = Find_Parameterized_Option( "--ext" );
     document->css = Find_Parameterized_Option( "--css" );
+    document->js = Find_Parameterized_Option( "--js" );
     document->compress = Find_Parameterized_Option( "--compress" );
     document->section = Find_Parameterized_Option( "--mansection" );
     document_title = Find_Parameterized_Option( "--documenttitle" );
@@ -498,6 +500,11 @@ int main(
     if ( document->css )
     {
         document->css = Path_Convert_Win32_to_Unix( document->css );
+    }
+
+    if ( document->js )
+    {
+        document->js = Path_Convert_Win32_to_Unix( document->js );
     }
 
     if ( ( document->actions.do_index ) && output_mode == TROFF )

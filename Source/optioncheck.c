@@ -162,6 +162,7 @@ static char        *ok_options[] = {
     "--ext",
     "--help",
     "--css",
+    "--js",
     "--version",
     "-c",
     "--lock",

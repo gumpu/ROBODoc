@@ -61,6 +61,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *   * extension -- the extension used for the documentation
  *                files.
  *   * css      -- the cascading style sheet to be used.
+ *   * js       -- the javascript to be used.
  *   * cur_part -- unused   TODO remove.
  * SOURCE
  */
@@ -82,6 +83,7 @@ struct RB_Document
     struct RB_Path     *docroot;        /* TODO Better make this a char* */
     char               *charset;        /* HTML, XML? */
     char               *css;
+    char               *js;
     char               *extension;
     char               *compress;
     char               *section;
