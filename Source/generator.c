@@ -77,7 +77,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *   were the function pointers are initialized at program start based
  *   on the output mode.
  *******
- * $Id: generator.c,v 1.114 2008/07/29 07:50:56 gumpu Exp $
+ * $Id: generator.c,v 1.115 2020/12/30 07:50:56 cashy Exp $
  */
 
 #include <stdio.h>
@@ -1386,6 +1386,7 @@ void RB_Generate_MultiDoc(
     {
 
         char               *srcname = Get_Fullname( i_part->filename );
+        char               *relname = RB_Get_Filename ( i_part->filename );
         char               *docname = RB_Get_FullDocname( i_part->filename );
 
         /* Nothing found in this part, do not generate it */
@@ -1397,7 +1398,7 @@ void RB_Generate_MultiDoc(
         {
             document_file = RB_Open_Documentation( i_part );
             RB_Generate_Doc_Start( document,
-                                   document_file, srcname, srcname, 1,
+                                   document_file, srcname, relname, 1,
                                    docname, document->charset );
 
             Generate_Begin_Navigation( document_file );
