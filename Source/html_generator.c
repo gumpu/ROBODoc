@@ -64,6 +64,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 static char        *css_name = NULL;
+static char        *js_name = NULL;
 static int          in_linecomment = 0; /* are we in a line comment? */
 
 static void         RB_HTML_Generate_String(
@@ -159,8 +160,16 @@ static void RB_HTML_Generate_Source_Tree_Entry(
     {
         if ( cur_path->parent == parent_path )
         {
+            char               *r = 0;
+
             fprintf( dest_doc, "<li>\n" );
-            RB_HTML_Generate_String( dest_doc, cur_path->name );
+            //RB_Say( "document->srcroot->name %s\n", SAY_DEBUG, document->srcroot->name);
+            //RB_Say( "cur_filename->name %s\n", SAY_DEBUG, cur_path->name);
+
+            r = RB_HTML_RelativeAddress( document->srcroot->name,
+                                         cur_path->name);
+            //RB_Say( "r %s\n", SAY_DEBUG, r );
+            RB_HTML_Generate_String( dest_doc, r );
             RB_HTML_Generate_Source_Tree_Entry( dest_doc, dest_name, cur_path,
                                                 srctree, document );
             fprintf( dest_doc, "</li>\n" );
@@ -478,10 +487,16 @@ int RB_HTML_Generate_Extra(
                       utf8_isalnum( cur_char[i] ) || ( cur_char[i] == '_' ) || ( course_of_action.do_hyphens && cur_char[i] == '-' );
                       i++ );
                 /*  Check if it is a keyword */
-                if ( ( keyword = Find_Keyword( cur_char, i ) ) )
-                {
+                if ( course_of_action.do_keywords_case_insensitive ){
+                    keyword = Find_Keyword_Case_Insensitive( cur_char, i );
+                }
+                else{
+                    keyword = Find_Keyword_Case_Sensitive( cur_char, i );
+                }
+                if ( keyword ){
                     RB_HTML_Color_String( dest_doc, 2, KEYWORD_CLASS,
                                           keyword );
+                    free(keyword);
                     /*  Exit function */
                     return i - 1;
                 }
@@ -974,6 +989,7 @@ void RB_HTML_Generate_Doc_Start(
                  "<meta http-equiv=\"Content-type\" content=\"text/html; charset=%s\" />\n",
                  charset ? charset : DEFAULT_CHARSET );
         RB_InsertCSS( dest_doc, dest_name );
+        RB_InsertJS( dest_doc, dest_name );
         fprintf( dest_doc, "<title>%s</title>\n", name );
 
         /* append SGML-comment with document- and copyright-info. This code
@@ -2325,6 +2341,107 @@ void RB_InsertCSS(
     }
 }
 
+/****f* HTML_Generator/RB_Create_JS
+ * FUNCTION
+ *   Create the .js file.  Unless the user specified it's own js
+ *   file robodoc creates a default one.
+ *
+ *   For multidoc mode the name of the .js file is
+ *      robodoc.js
+ *   For singledoc mode the name of the .js file is equal
+ *   to the name of the documentation file.
+ * SYNOPSIS
+ */
+void RB_Create_JS(
+    struct RB_Document *document )
+/*
+ * INPUTS
+ *   o document -- the document for which to create the file.
+ * SOURCE
+ */
+{
+    size_t              l = 0;
+    FILE               *js_file;
+
+    /* compute the complete path to the js file */
+    if ( ( document->actions.do_singledoc ) ||
+         ( document->actions.do_singlefile ) )
+    {
+        char               *extension = ".js";
+
+        l += strlen( document->singledoc_name );
+        l += strlen( extension );
+        ++l;
+        js_name = malloc( l );
+        strcpy( js_name, document->singledoc_name );
+        strcat( js_name, extension );
+    }
+    else
+    {
+        struct RB_Path     *docroot = document->docroot;
+        char               *docrootname = docroot->name;
+        char               *filename = "robodoc.js";
+
+        l = strlen( filename );
+        l += strlen( docrootname );
+        ++l;
+        js_name = malloc( l );
+        strcpy( js_name, docrootname );
+        strcat( js_name, filename );
+    }
+
+    RB_Say( "Creating JS file %s\n", SAY_DEBUG, js_name );
+    if ( document->js )
+    {
+        /* The user specified its own js file,
+         * so we use the content of that.
+         */
+        RB_CopyFile( document->js, js_name );
+    }
+    else
+    {
+        js_file = fopen( js_name, "w" );
+        if ( js_file )
+        {
+                    /** BEGIN BEGIN BEGIN Don't remove */
+            fprintf( js_file,
+                     "/****h* ROBODoc/ROBODoc Javascript support\n"
+                     " * FUNCTION\n"
+                     " *   This is the default Javascript library for documentation\n"
+                     " *   generated with ROBODoc.\n"
+                     " *   You can edit this file to your own liking and then use\n"
+                     " *   it with the option\n"
+                     " *      --js <filename>\n"
+                     " ******\n"
+                     " * $Id: html_generator.c,v 1.95 2019/01/04 23:58:00 cashy Exp $\n"
+                     " */\n"
+            );
+                    /** END END END Don't remove */
+            fclose( js_file );
+        }
+        else
+        {
+            RB_Panic( "Can't open %s for writing\n", js_name );
+        }
+    }
+}
+
+
+void RB_InsertJS(
+    FILE *dest_doc,
+    char *filename )
+{
+    if ( css_name )
+    {
+        char               *r = RB_HTML_RelativeAddress( filename, js_name );
+
+        assert( r );
+        assert( strlen( r ) );
+        fprintf( dest_doc,
+                 "<script src=\"%s\"></script>\n",
+                 r );
+    }
+}
 
 
 void HTML_Generate_Begin_Paragraph(

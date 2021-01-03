@@ -539,7 +539,8 @@ void RB_TimeStamp(
     char                timeBuffer[255];
 
     time( &ttp );
-    strftime( timeBuffer, 255, "%a %b %d %Y %H:%M:%S\n", localtime( &ttp ) );
+    //strftime( timeBuffer, 255, "%a %b %d %Y %H:%M:%S\n", localtime( &ttp ) );
+    strftime(timeBuffer, 255, "%Y-%m-%d %H:%M:%S", localtime( &ttp ) );
     fprintf( f, "%s", timeBuffer );
 }
 
@@ -1413,6 +1414,24 @@ int snprintf(
     va_end( ap );
 
     return ( retval );
+}
+#endif
+/*******/
+
+/****f* Utilities/strtolower
+ * FUNCTION
+ *   Convert string to lowercase
+ * SOURCE
+ */
+#ifndef HAVE_STRTOLOWER
+void strtolower(
+    char *str
+    )
+{
+    for(int i = 0; str[i]; i++){
+        str[i] = tolower(str[i]);
+    }
+    return;
 }
 #endif
 /*******/

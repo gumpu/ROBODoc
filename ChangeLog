@@ -1,3 +1,10 @@
+Jan 2019 V4.99.44
+   Istvan Kispal
+   o Added --js option for using Javascript library in HTML mode
+   o Added --keyword-case-insensitive option for handling keywords insensitive (for languages like SQL)
+   o Use relative path displaying sourcefiles page
+   o Fixig makefile.mingw-cygwin in order to build under cygwin environment correctly
+
 Apr 2015 V4.99.43
    Frans Slothouber
    o Bug fix for a failing   make install
@@ -104,7 +111,7 @@ Sep 2006
   o Corrected return value of main()
   
 Sep 2006 - V4.99.28
-  Michèle Garoche
+  Michï¿½le Garoche
   o Improved Mac support (for FINK)
 
 Aug 2006 - V4.99.28

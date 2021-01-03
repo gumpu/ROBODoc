@@ -57,7 +57,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * SOURCE
  */
 
-#define MAX_ITEM_NAME_LENGTH 1024
+#define MAX_ITEM_NAME_LENGTH 10240
 char                item_name_buffer[MAX_ITEM_NAME_LENGTH];
 
 /*****/

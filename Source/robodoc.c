@@ -222,7 +222,7 @@ char                use[] =
 /*           1         2         3         4         5         6         7         8
     12345678901234567890123456789012345678901234567890123456789012345678901234567890 */
     "ROBODoc Version " VERSION "    autodocs formatter ($Revision: 1.115 $)\n"
-    "(c) 1994-2010 Frans Slothouber, Petteri Kettunen, \n"
+    "(c) 1994-2018 Frans Slothouber, Petteri Kettunen, \n"
     "              Gergely Budai and Jacco van Weert\n"
     "ROBODoc comes with ABSOLUTELY NO WARRANTY.\n"
     "This is free software, and you are welcome to redistribute it\n"
@@ -241,6 +241,7 @@ char                use_options1[] =
     "   --cobol          Allow hyphen in identifiers. Breaks cmode indexing.\n"
     "   --config         Print configuration info and exit.\n"
     "   --css            Specify the stylesheet to use.\n"
+    "   --js             Specify the javascript library to use.\n"
     "   --ext EXTENSION  Set extension for generated files.\n"
     "   --footless       Do not create the foot of a document.\n"
     "   --headless       Do not create the head of a document.\n"
@@ -289,6 +290,9 @@ char                use_options3[] =
     "                         keywords,non_alpha\n"
     "                    Enable only specific syntax highlighting features in\n"
     "                    SOURCE items (html only)\n"
+    "   --keywords_case_insensitive\n"
+    "                    Resolve keywords case insensitive\n"
+    "                    (html only)\n"
     "   --dotname NAME   Specify the name (and path / options) of DOT tool\n"
     "   --masterindex title,filename\n"
     "                    Specify the tile and filename for master index page\n"
@@ -308,7 +312,7 @@ char                use_authors[] =
     "Authors/Contributors:\n"
     "   Frans Slothouber, Jacco van Weert, Petteri Kettunen, Bernd Koesling,\n"
     "   Thomas Aglassinger, Anthon Pang, Stefan Kost, David Druffner, Sasha Vasko,\n"
-    "   Kai Hofmann, Thierry Pierron, Friedrich Haase, Gergely Budai.\n";
+    "   Kai Hofmann, Thierry Pierron, Friedrich Haase, Gergely Budai, Istvan Kispal.\n";
 /********/
 
 
@@ -388,6 +392,8 @@ int main(
     struct RB_Directory *srctree = NULL;
     char               *optstr = NULL;
     char               *used_rc_file = NULL;
+    int                 i;
+
 /*
    TODO, make setlocale work.
     char * loc;
@@ -465,6 +471,7 @@ int main(
     document->charset = Find_Parameterized_Option( "--charset" );
     document->extension = Find_Parameterized_Option( "--ext" );
     document->css = Find_Parameterized_Option( "--css" );
+    document->js = Find_Parameterized_Option( "--js" );
     document->compress = Find_Parameterized_Option( "--compress" );
     document->section = Find_Parameterized_Option( "--mansection" );
     document_title = Find_Parameterized_Option( "--documenttitle" );
@@ -477,6 +484,15 @@ int main(
     course_of_action = document->actions;       /* a global */
     debugmode = document->debugmode;    /* a global */
 
+    /* Make keywords hash table (if necessarry) */
+    if (course_of_action.do_keywords_case_insensitive){
+        for ( i = 0; i < configuration.keywords.number; i++ )
+        {
+            strtolower(configuration.keywords.names[i]);
+        }
+    }
+    add_keywords_to_hash_table(  );
+
     RB_Say( "Using %s for defaults\n", SAY_INFO, used_rc_file );
     free( used_rc_file );       /* No longer necessary */
     used_rc_file = NULL;
@@ -484,6 +500,11 @@ int main(
     if ( document->css )
     {
         document->css = Path_Convert_Win32_to_Unix( document->css );
+    }
+
+    if ( document->js )
+    {
+        document->js = Path_Convert_Win32_to_Unix( document->js );
     }
 
     if ( ( document->actions.do_index ) && output_mode == TROFF )
@@ -1311,6 +1332,11 @@ actions_t Find_Actions(
                                     "--source_line_numbers" ) )
         {
             actions.do_source_line_numbers = TRUE;
+        }
+        else if ( !RB_Str_Case_Cmp( configuration.options.names[parameter_nr],
+                                    "--keywords_case_insensitive" ) )
+        {
+            actions.do_keywords_case_insensitive = TRUE;
         }
         else
         {

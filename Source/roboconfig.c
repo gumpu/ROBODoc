@@ -54,6 +54,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include "headertypes.h"
 #include "util.h"
@@ -435,49 +436,120 @@ void add_to_keywords_hash_table(
     /* Insert entry into hash table */
     *curr = tmp;
 }
-
 /*****/
 
-
-/****f* Configuration/Find_Keyword
+/****f* Configuration/Find_Keyword_Case_Sensitive
  * FUNCTION
- *   Find a keyword in the hash table
+ *   Find a keyword in the hash table case sensitive
  * SYNOPSIS
  */
-char               *Find_Keyword(
+char               *Find_Keyword_Case_Sensitive(
     char *keyword,
-    int len )
+    int len
+    )
 /*
  * INPUTS
  *   - keyword -- The keyword string
  *   - len     -- The length of the keyword string
  * RETURN VALUE
- *   - pointer to the found keyword string in hash table or
+ *   - pointer to real keyword
  *   - NULL if the keyword is not found
  * SOURCE
  */
 {
-    unsigned long       hash;
-    struct keywords_hash_s *curr;
+    unsigned long            hash;
+    struct keywords_hash_s  *curr;
+    char                    *keyword_found;
+    int                      keyword_found_flag;
 
-    /* Calculate hash value */
-    hash = Hash_Keyword( keyword, len );
+    keyword_found_flag = 0;
+    keyword_found = RB_malloc(len+1);
+    if (keyword_found){
+        strncpy(keyword_found, keyword, len);
+        keyword_found[len] = '\0';
+    
+        /* Calculate hash value */
+        hash = Hash_Keyword( keyword, len );
 
-    /* Seek through hash table row */
-    for ( curr = keywords_hash[hash]; curr; curr = curr->next )
-    {
-        /* Check for keyword in row element */
-        if ( !strncmp( keyword, curr->keyword, len ) )
+        /* Seek through hash table row */
+        for ( curr = keywords_hash[hash]; curr; curr = curr->next )
         {
-            /* Found it! */
-            return curr->keyword;
+            /* Check for keyword in row element */
+            if ( !strncmp( keyword, curr->keyword, len ) )
+            {
+                /* Found it! */
+                keyword_found[strlen(curr->keyword)] = '\0';
+                keyword_found_flag = 1;
+                break;
+            }
+        }
+        if (!keyword_found_flag && keyword_found){
+            free(keyword_found);
+            keyword_found = NULL;
         }
     }
-
-    /* Keyword not found */
-    return NULL;
+    return keyword_found;
 }
+/*****/
 
+/****f* Configuration/Find_Keyword_Case_Insensitive
+ * FUNCTION
+ *   Find a keyword in the hash table case insensitive
+ * SYNOPSIS
+ */
+char               *Find_Keyword_Case_Insensitive(
+    char *keyword,
+    int len
+    )
+/*
+ * INPUTS
+ *   - keyword -- The keyword string
+ *   - len     -- The length of the keyword string
+ * RETURN VALUE
+ *   - pointer to real keyword
+ *   - NULL if the keyword is not found
+ * SOURCE
+ */
+{
+    unsigned long            hash;
+    struct keywords_hash_s  *curr;
+    char                    *keyword_lower;
+    char                    *keyword_found;
+    int                      keyword_found_flag;
+
+    keyword_found_flag = 0;
+    keyword_lower = RB_malloc(len+1);
+    keyword_found = RB_malloc(len+1);
+    if (keyword_lower && keyword_found){
+        strncpy(keyword_lower, keyword, len);
+        keyword_lower[len] = '\0';
+        strtolower(keyword_lower);
+        strncpy(keyword_found, keyword, len);
+        keyword_found[len] = '\0';
+    
+        /* Calculate hash value */
+        hash = Hash_Keyword( keyword_lower, len );
+
+        /* Seek through hash table row */
+        for ( curr = keywords_hash[hash]; curr; curr = curr->next )
+        {
+            /* Check for keyword in row element */
+            if ( !strncasecmp( keyword_lower, curr->keyword, len ) )
+            {
+                /* Found it! */
+                keyword_found[strlen(curr->keyword)] = '\0';
+                keyword_found_flag = 1;
+                break;
+            }
+        }
+        free(keyword_lower);
+        if (!keyword_found_flag && keyword_found){
+            free(keyword_found);
+            keyword_found = NULL;
+        }
+    }
+    return keyword_found;
+}
 /*****/
 
 /****f* Configuration/add_keywords_to_hash_table
@@ -699,7 +771,7 @@ char               *ReadConfiguration(
     Install_Custom_HeaderTypes(  );
 
     /* Make keywords hash table (if necessarry) */
-    add_keywords_to_hash_table(  );
+    //add_keywords_to_hash_table(  );
 
     assert( configuration.items.number );
 

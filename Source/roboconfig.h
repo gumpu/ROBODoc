@@ -176,7 +176,10 @@ void                Free_Configuration(
     void );
 void                Install_C_Syntax(
     void );
-char               *Find_Keyword(
+char               *Find_Keyword_Case_Sensitive(
+    char *keyword,
+    int len );
+char               *Find_Keyword_Case_Insensitive(
     char *keyword,
     int len );
 char               *Find_Parameter_Exact(
@@ -188,6 +191,8 @@ char               *Find_Parameter_Partial(
 char               *Find_Parameter_Char(
     struct Parameters *params,
     char param );
+void add_keywords_to_hash_table(
+    void );
 
 extern struct RB_Configuration configuration;
 
