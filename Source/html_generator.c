@@ -515,7 +515,8 @@ int RB_HTML_Generate_Extra(
     /*  Check for links, etc... */
     if ( incomment || in_linecomment || !Works_Like_SourceItem( item_type ) )
     {
-        if ( strncmp( "http://", cur_char, 7 ) == 0 )
+        if ( strncmp( "http://", cur_char, 7 ) == 0
+	     || strncmp( "https://", cur_char, 8 ) == 0)
         {
             sscanf( cur_char, "%s", link );
             RB_Say( "found link %s\n", SAY_DEBUG, link );
@@ -722,7 +723,7 @@ void RB_HTML_Generate_TOC_2(
          * hierarchy of the headers.
          */
         fprintf( dest_doc, "<ul>\n" );
-        for ( i = 0; i < count; ++i )
+        for ( i = count -1 ; i >= 0; i-- )
         {
             header = headers[i];
             if ( owner == NULL )
