@@ -50,7 +50,6 @@ EXTRA_DIST = \
 else
 EXTRA_DIST = \
 	INSTALL.cygwin \
-	INSTALL.Debian \
 	UPGRADE \
 	Docs/robodoc_example.rc \
 	Docs/manual.html \
