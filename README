@@ -1,4 +1,4 @@
-ROBODoc Version 4.99.43 May 2015
+ROBODoc Version 4.99.44 February 2021
 
 ROBODoc is program documentation tool. The idea is to include for
 every function or procedure a standard header containing all
@@ -21,18 +21,18 @@ Forth, Tcl/Tk, C++, Java -- basically any program in which you
 can use remarks/comments.
 
   o For information on how to build and install see INSTALL
-  o For information on how to use ROBODoc see Docs/manual.html. 
+  o For information on how to use ROBODoc see Docs/manual.html.
   o Blank headers for various languages can be found in Headers/
   o For an example on how ROBODoc can be used see
     the ROBODoc source code in Source/
   o For licence information see COPYING
   o For a change log see  Source/robodoc.c
- 
+
 Many people contributed to ROBODoc, to name a few:
 
-o Petteri Kettunen <petterik -a-t- iki.fi> 
+o Petteri Kettunen <petterik -a-t- iki.fi>
   Bug fixes, FOLD, C features.
-o Bernd Koesling <KOESSI -a-t- CHESSY.aworld.de> 
+o Bernd Koesling <KOESSI -a-t- CHESSY.aworld.de>
   Bug fixes, functional improvements, code cleanup.
 o Anthon Pang  <apang -a-t- mindlink.net>
   RTF support, Bug fixes.
@@ -43,6 +43,6 @@ o Stefan Kost <kost -a-t- imn.htwk-leipzig.de>
 
 Questions, found a bug or a typo; send an email to [rfsber -a-t- xs4all.nl]
 
-(c) 1994-2015  Frans Slothouber, Petteri Kettunen, and Jacco van Weert 
+(c) 1994-2021  Frans Slothouber, Petteri Kettunen, and Jacco van Weert
 
 

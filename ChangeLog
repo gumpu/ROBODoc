@@ -1,4 +1,7 @@
-Jan 2019 V4.99.44
+Feb 2021 V4.99.44
+   Janus Weil
+   o linkify https URLs
+   o fix reverse ordering of TOC items
    Istvan Kispal
    o Added --js option for using Javascript library in HTML mode
    o Added --keyword-case-insensitive option for handling keywords insensitive (for languages like SQL)
@@ -9,7 +12,7 @@ Apr 2015 V4.99.43
    Frans Slothouber
    o Bug fix for a failing   make install
 
-Sep 2014 V4.99.42Cobol 
+Sep 2014 V4.99.42Cobol
    ROBODoc was modified to be more friendly to COBOL sources, by adding
    dash to identifiers through a --cobol switch.  This will break some
    uses of ROBODoc, tripping on code expressions that use the minus
@@ -103,13 +106,13 @@ Feb 2007 - V4.99.30
   o Using bitfields in stead of and-ing with a define.
   o Function name separator can be configured to be something
     different than ','
-  o Added a configuration block that allows the used to 
+  o Added a configuration block that allows the used to
     specify which items are pre-formatted by default.
 
 Sep 2006
   Frans Slothouber
   o Corrected return value of main()
-  
+
 Sep 2006 - V4.99.28
   Mich�le Garoche
   o Improved Mac support (for FINK)
@@ -135,7 +138,7 @@ Jun 2006 - V4.99.26
   o Merged patch from Gergely Budai. (Adds syntax colouring, better
     Latex output, and better tab control).
   o changed output of --test format to xml. (Easier to parse).
-  o Masterindex no longer contains links to source files when 
+  o Masterindex no longer contains links to source files when
     --one_file_per_header is used.
 
 Jun 2006 - V4.99.24
@@ -187,7 +190,7 @@ Frans Slothouber
   o Fixed the makefile for mingw (thanks to Brian Elmegaard)
   o Fixed a bug that caused robodoc to find headers even if
     there were none. [1055886]
-  o Fixed a bug that caused robodoc to crash if single line source 
+  o Fixed a bug that caused robodoc to crash if single line source
     item was found. [1056681]
 
 Sep 2004 - V4.99.6
@@ -212,8 +215,8 @@ o Added patch send in by Ernst Bokkelkamp that adds
 o Updated documentation.
 
 May 2004 - V4.99.1
- o Merged a patch by Bernhard Schoenhammer that adds a 
-    accept files: 
+ o Merged a patch by Bernhard Schoenhammer that adds a
+    accept files:
    block to the robodoc.rc file.
  o Solved bug [972456] Case problem with creating links.
  o Fixed a bug [975543] that caused the Doc dir to be included when it was
@@ -285,7 +288,7 @@ January 2004 - V4.0.18
  Frans Slothouber
  o Update of the user manual and documentation
  o Note that:
-    If you were using an 'extensions:' block in your robodoc.rc file, 
+    If you were using an 'extensions:' block in your robodoc.rc file,
     you have to replace this with an 'ignore files:' block with all
     extensions prefixed with '*'.  So, if you were using
 
@@ -304,7 +307,7 @@ December 2003 - V4.0.17
  o Added directory tree shaped master index for the sourcefiles.
  o Added filtering of files and directories based on wildcard
    expressions.
- Michael Felke 
+ Michael Felke
  o Support for lotus script, clean-up of headers.c and headers.h
 
 December 2003 - V4.0.15
@@ -324,7 +327,7 @@ December 2003 - V4.0.13
 December 2003 - V4.0.12
  David White
  o Updated makefile for borland C
- o Added marker for Aspen Custom Modeller (ACM) 
+ o Added marker for Aspen Custom Modeller (ACM)
  Frans Slothouber
  o Added more documentation
  o a .css file is now also used in singledoc mode
@@ -345,10 +348,10 @@ December 2003 - V4.0.12
  o Fixed bug 772213 assert fires if header is not closed
  o Added user configurable header types (section "header types"
    in robodoc.rc file).
- o Added lock mode (--lock). Per source file robodoc locks on the 
-   first headermarker it finds and will recognize only that particular headermarker 
+ o Added lock mode (--lock). Per source file robodoc locks on the
+   first headermarker it finds and will recognize only that particular headermarker
    for the remaining part of the file.
-   In addition it locks on the first remark marker in each header and 
+   In addition it locks on the first remark marker in each header and
    will recognize only that particular remark marker for the remaining
    part of the header.
  Petteri Kettunen
@@ -356,7 +359,7 @@ December 2003 - V4.0.12
 
 September 2003 - V4.0.11
  Frans Slothouber
- o Added a table for header types. This will allow custom 
+ o Added a table for header types. This will allow custom
    header types.
  o The master index table for HTML output is split up in
    several pages.  One for each header type.
@@ -401,7 +404,7 @@ July 2003 - V4.0.6
  Kai
  o Added a makefile for djgpp GCC under win32.
 
-July 2003 - V4.0.5 
+July 2003 - V4.0.5
  Frans Slothouber
  o Fix for bug 761688, rtf output goes only 4 sections deep.
  o Added the option --tabsize n
@@ -416,7 +419,7 @@ June 2003 - V4.0.4
  Frans Slothouber
  o Merged changes to the html generator from Kai.
 
-June 2003 - V4.0.3  
+June 2003 - V4.0.3
  Frans Slothouber
  o Fix for bug -- ./configure crashes.
  o Fix for bug -- Wrong version number is shown when compiled without using
@@ -466,7 +469,7 @@ April 2003 - V4.0.0
 July 2002 - V3.2.4
  o Indented headers
  o 2 character header types
- Modifications by Nathan Prewitt  
+ Modifications by Nathan Prewitt
  o To allow further classification
    of internal headers as internal functions, internal classes,
    internal variables, etc.
@@ -485,7 +488,7 @@ March 2002 - Frans Slothouber (V3.2.4Beta2)
  o Indented most of the sourcecode.
 
 March 2002 - Frans Slothouber (V3.2.4Beta1)
- o Documentation updates.  
+ o Documentation updates.
  o added a target docclean in the makefile in Source/ to clean
    all temporary files.
  o updated documentation
@@ -495,7 +498,7 @@ August 2001  DCD Changes - V3.2.4 with docbook support:
   o Added support for Docbook SGML - Robodoc can now produce
     output in Docbook SGML using the DBSGML command line switch,
     allowing standardized conversion to a host of formats
-    including HTML (single and multiple), RTF, ASCII, LATEX, 
+    including HTML (single and multiple), RTF, ASCII, LATEX,
     and PDF. Docbook also
     allows you to use external style sheets in which you can
     change the look of your document. See www.docbook.org for more
@@ -559,7 +562,7 @@ December 1999 - v3.1f
 December 1999 - Frans Slothouber (v3.1e)
  o Moved the C example in Examples to Examples/C
  o Added an C++ example in Examples/CPP
- o Added empty headers for C++ in Headers/ 
+ o Added empty headers for C++ in Headers/
  o More documentation.
  o added markers for HTML.
  o modified the RB_Find_Link() function to also words that include
@@ -631,7 +634,7 @@ August 1999 - Frans Slothouber: v3.1
    in <stdlib.h>
  o Fixed a memory leak in RB_Analyse_Document()
 
-Modifications by Petteri Kettunen  
+Modifications by Petteri Kettunen
 August 1999 - v3.0m+
   o Support for folding in SOURCE items, HTML only.
   o indent -kr
@@ -723,30 +726,30 @@ Modifications by FNC Slothouber.
  o ! GoldEd's foldmarks == RoboDoc marker !
  o quoted source parsing enhanced
 
-01-Aug-1995 - Koessi  - v2.0?  
+01-Aug-1995 - Koessi  - v2.0?
  o more robust parsing, less enforcer-hits
  o removed self-referencing links !
  o remarked most changes with *koessi*
  o added GoldEd-foldmarks
  o compiled successfully with SAS-C 6.3
 
-24-May-1995 - Frans Slothouber - v2.0e  
+24-May-1995 - Frans Slothouber - v2.0e
  o Fixed a bug that cause the CleanUp Routine to lock up.
  o Improved the HTML output, should work faster now.
 
-15-May-1995 - Frans Slothouber - v2.0d  
+15-May-1995 - Frans Slothouber - v2.0d
  o New Defaults file.
  o Added Verbose option.
 
-12-May-1995 - Frans Slothouber - v2.0c  
+12-May-1995 - Frans Slothouber - v2.0c
  o Bug fixes.
 
-10-May-1995 - Frans Slothouber -  v2.0a  
+10-May-1995 - Frans Slothouber -  v2.0a
  o Program completely rewritten
  o added SOURCE item and LaTeX output.
  o added TAB converter.
 
-20-Apr-95 - Jacco van Weert    -  v1.1a:  
+20-Apr-95 - Jacco van Weert    -  v1.1a:
  o INTERNALONLY option added.
  o Sort problem solved.
 
@@ -756,9 +759,9 @@ Modifications by FNC Slothouber.
 
 Mar-95  - Jacco van Weert      -  v1.0a:  Final version
 
-2-Feb-95  - Jacco van Weert    -  v0.93:  
+2-Feb-95  - Jacco van Weert    -  v0.93:
  o Mungwall hit, solved.
- o When item headers, are also available in body then parts are 
+ o When item headers, are also available in body then parts are
    duplicated solved.
 
 26-Jan-95     -  v0.92:  2nd test beta-version

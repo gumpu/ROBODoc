@@ -11,7 +11,7 @@ AUTOMAKE_OPTIONS = dist-zip dist-bzip2
 
 SUBDIRS = Source Docs
 
-# TODO: if we define docdir configure.in do we still need to define 
+# TODO: if we define docdir configure.in do we still need to define
 #       it here and in Docs/makefile.am ?
 
 #if FINK
@@ -67,11 +67,7 @@ EXTRA_DIST = \
 	Examples/PerlExample/Source/Cargo.txt \
 	Examples/PerlExample/Source/Loader.txt \
 	Examples/PerlExample/Source/SmartLoader.pm \
-	Examples/PerlExample/Source/TruckPacker.pl \
-	Win32/robodoc.dsp \
-	Win32/robodoc.dsw \
-	Win32/robodoc.sln \
-	Win32/robodoc.vcproj
+	Examples/PerlExample/Source/TruckPacker.pl
 endif
 
 #

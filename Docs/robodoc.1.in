@@ -11,7 +11,7 @@
 .if n .sp 1
 .if t .sp .5
 ..
-.TH ROBODoc "1" "Sep 2014" "@PACKAGE_STRING@"
+.TH ROBODoc "1" "Feb 2021" "@PACKAGE_STRING@"
 
 .SH NAME
 ROBODoc \- Extract documentation from source code.
@@ -39,8 +39,8 @@ Show the copyright message.
 Print version information and exit.
 
 .IP --doc
-Define the documentation directory or documentation file.  
-A directory should start with a '/' or a './' and 
+Define the documentation directory or documentation file.
+A directory should start with a '/' or a './' and
 should not include any '..'.
 
 .IP --src
@@ -94,7 +94,7 @@ Creates a document called myproject.html from all source files
 in the current directory.
 
 .EX
-robodoc --src ./myproject/ 
+robodoc --src ./myproject/
       --doc ./myprojectdoc --multidoc --html --index
 .EE
 
