@@ -1,4 +1,0 @@
-Debian users can install ROBODoc using apt-get as follows:
-
-	apt-get install robodoc
-
