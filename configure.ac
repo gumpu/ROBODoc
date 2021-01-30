@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 dnl TODO FS   Document this.
 dnl TODO FS   Figure out how this really works.
 
-AC_INIT([robodoc], [4.99.44])
+AC_INIT([robodoc], [4.99.45])
 AC_CONFIG_SRCDIR([Source/robodoc.h])
 AM_INIT_AUTOMAKE
 

@@ -12,11 +12,11 @@ on a Debian based system with:
 
 Once installed there are two ways of building ROBODoc under Linux. Which one
 to choose depends on how you got ROBODoc sources of.  If you downloaded
-the official source distribution (robodoc-4.99.44.zip) you can build ROBODoc using:
+the official source distribution (robodoc-4.99.45.zip) you can build ROBODoc using:
 
     sudo apt install unzip
-    unzip robodoc-4.99.44.zip
-    cd robodoc-4.99.44
+    unzip robodoc-4.99.45.zip
+    cd robodoc-4.99.45
     ./configure
     make
 
