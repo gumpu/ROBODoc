@@ -1,6 +1,5 @@
 # vi: ff=unix
 ## Process this file with automake to produce Makefile.in
-# $Id: makefile.am,v 1.32 2010/05/12 12:38:14 gumpu Exp $
 #
 # Information for automake
 # TODO: Figure out how this works, and how this works with
@@ -44,6 +43,7 @@ endif
 if FINK
 EXTRA_DIST = \
 	UPGRADE \
+	README.md \
 	Docs/robodoc_example.rc \
 	Docs/manual.html \
 	Docs/manual.css
@@ -51,6 +51,7 @@ else
 EXTRA_DIST = \
 	INSTALL.cygwin \
 	UPGRADE \
+	README.md \
 	Docs/robodoc_example.rc \
 	Docs/manual.html \
 	Docs/manual.css \

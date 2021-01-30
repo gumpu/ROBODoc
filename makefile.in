@@ -15,7 +15,6 @@
 @SET_MAKE@
 
 # vi: ff=unix
-# $Id: makefile.am,v 1.32 2010/05/12 12:38:14 gumpu Exp $
 #
 # Information for automake
 # TODO: Figure out how this works, and how this works with
@@ -385,6 +384,7 @@ doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README.md UPGRADE
 @FINK_FALSE@EXTRA_DIST = \
 @FINK_FALSE@	INSTALL.cygwin \
 @FINK_FALSE@	UPGRADE \
+@FINK_FALSE@	README.md \
 @FINK_FALSE@	Docs/robodoc_example.rc \
 @FINK_FALSE@	Docs/manual.html \
 @FINK_FALSE@	Docs/manual.css \
@@ -404,6 +404,7 @@ doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README.md UPGRADE
 
 @FINK_TRUE@EXTRA_DIST = \
 @FINK_TRUE@	UPGRADE \
+@FINK_TRUE@	README.md \
 @FINK_TRUE@	Docs/robodoc_example.rc \
 @FINK_TRUE@	Docs/manual.html \
 @FINK_TRUE@	Docs/manual.css
