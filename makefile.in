@@ -362,7 +362,7 @@ SUBDIRS = Source Docs
 #else
 #docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
 #endif
-doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README UPGRADE
+doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README.md UPGRADE
 @FINK_TRUE@contributiondir = ${docdir}/Contributions
 @FINK_TRUE@dist_contribution_DATA = \
 @FINK_TRUE@	Contributions/robodoc2pod.pl \
@@ -384,7 +384,6 @@ doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README UPGRADE
 
 @FINK_FALSE@EXTRA_DIST = \
 @FINK_FALSE@	INSTALL.cygwin \
-@FINK_FALSE@	INSTALL.Debian \
 @FINK_FALSE@	UPGRADE \
 @FINK_FALSE@	Docs/robodoc_example.rc \
 @FINK_FALSE@	Docs/manual.html \

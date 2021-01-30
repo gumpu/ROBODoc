@@ -20,7 +20,7 @@ SUBDIRS = Source Docs
 #docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
 #endif
 
-doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README UPGRADE
+doc_DATA = AUTHORS COPYING ChangeLog INSTALL NEWS README.md UPGRADE
 
 if FINK
 contributiondir = ${docdir}/Contributions

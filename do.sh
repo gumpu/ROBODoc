@@ -12,7 +12,7 @@
 #
 
 rm -f *~
-rm -f makefile.in
+# rm -f makefile.in
 rm -f *.tar.gz *.zip
 rm -f *.log aclocal.m4 config.cache
 rm -fr autom4te.cache
