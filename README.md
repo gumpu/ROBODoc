@@ -22,7 +22,8 @@ can use remarks/comments.
 
 ## More information
 
-- For information on how to build and install see INSTALL
+- For information on how to build and install see INSTALL.md
+- For information to tailer the build and install see INSTALL
 - For information on how to use ROBODoc see Docs/manual.html.
 - Blank headers for various languages can be found in Headers/
 - For an example on how ROBODoc can be used see the ROBODoc source code in Source/
