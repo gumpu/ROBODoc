@@ -1,5 +1,9 @@
 #!/bin/bash
 #
+# Use this file to build ROBODoc when you used git clone to
+# get the ROBODoc sources
+#
+#
 # If a ./do.sh under cygwin gives
 #  : command not found
 #  : command not found
@@ -12,7 +16,7 @@
 #
 
 rm -f *~
-# rm -f makefile.in
+rm -f makefile.in
 rm -f *.tar.gz *.zip
 rm -f *.log aclocal.m4 config.cache
 rm -fr autom4te.cache
@@ -26,6 +30,7 @@ rm -f configure config.status
 # autoreconf calls all needed autotools
 # -f consider all autotool files obsolete
 # -i copy missing auxiliary files
+automake
 autoreconf -f -i
 
 # distcheck creates all distribution packages and does some sanity checks on it
