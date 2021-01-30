@@ -1,5 +1,7 @@
 # ROBODoc Version 4.99.44 February 2021
 
+![The Idea](/Docs/robodoc.png)
+
 ROBODoc is program documentation tool. The idea is to include for
 every function or procedure a standard header containing all
 sorts of information about the procedure or function.  ROBODoc
@@ -23,7 +25,7 @@ can use remarks/comments.
 ## More information
 
 - For information on how to build and install see INSTALL.md
-- For information to tailer the build and install see INSTALL
+- For information to tailor the build and install see INSTALL
 - For information on how to use ROBODoc see Docs/manual.html.
 - Blank headers for various languages can be found in Headers/
 - For an example on how ROBODoc can be used see the ROBODoc source code in Source/
