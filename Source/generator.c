@@ -85,6 +85,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
+#include <sys/unistd.h>
 
 #include "globals.h"
 #include "robodoc.h"
@@ -1951,6 +1952,61 @@ static void Generate_Item(
             RB_Close_Pipe( tool );
             tool = NULL;
         }
+        /* FILTER start */
+        else if ( !Works_Like_SourceItem( item_type ) &&
+                  ( item_line->kind == ITEM_LINE_FILTER_START ) )
+        {
+	    char pipe_str[TEMP_BUF_SIZE], *p;
+	    const char var_name[] = "%output_mode%";
+	    Format_Line( f, item_line->format );
+
+	    snprintf( pipe_str, sizeof( pipe_str ),
+			  "%s > t.%s.%d", line, DOT_GRAPH_NAME, dot_nr );
+
+	    while ( ( p = strstr( pipe_str, var_name ) ) != NULL ) {
+	      char temp[TEMP_BUF_SIZE], *mode_str;
+	      int off = p - pipe_str, l;
+
+	      strcpy( temp, pipe_str + off + sizeof( var_name ) - 1 );
+	      switch ( output_mode ) {
+		case ASCII: mode_str = "ascii"; break;
+		case LATEX: mode_str= "latex"; break;
+		case HTML: mode_str = "html"; break;
+		case RTF: mode_str = "rtf"; break;
+		case TROFF: mode_str = "troff"; break;
+		case XMLDOCBOOK: mode_str = "xmldocbook"; break;
+		default: mode_str = "raw"; break;
+	      }
+	      l = strlen( mode_str );
+	      strcpy( pipe_str + off, mode_str );
+	      strcpy( pipe_str + off + l, temp );
+	    }
+	    tool = RB_Open_Pipe( pipe_str );
+        }
+        /* FILTER end */
+        else if ( !Works_Like_SourceItem( item_type ) &&
+                  ( item_line->kind == ITEM_LINE_FILTER_END ) )
+        {
+            if ( tool )
+            {
+	      char pipe_str[TEMP_BUF_SIZE];
+	      /* Close pipe */
+	      RB_Close_Pipe( tool );
+	      snprintf( pipe_str, sizeof( pipe_str ), "t.%s.%d", DOT_GRAPH_NAME, dot_nr );
+	      tool = fopen( pipe_str, "r" );
+	      if ( tool ) {
+		char buf[TEMP_BUF_SIZE];
+		int cnt;
+		while ( ( cnt = fread( buf, 1, sizeof( buf ), tool ) ) > 0 ) {
+		  fwrite( buf, 1, cnt, f );
+		}
+		fclose( tool );
+	      }
+	      unlink( pipe_str );
+	      tool = NULL;
+            }
+        }
+
         /* DOT start */
         else if ( !Works_Like_SourceItem( item_type ) &&
                   ( item_line->kind == ITEM_LINE_DOT_START ) )
