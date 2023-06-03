@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <ctype.h>
 
 #include <sys/param.h>
-#include <sys/unistd.h>
+#include <unistd.h>
 
 #include "troff_generator.h"
 #include "util.h"
