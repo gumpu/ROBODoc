@@ -250,6 +250,16 @@ not '/usr/local'.  It is recommended to use the following options:
 
      ./configure --prefix=/boot/common
 
+   On AIX it is recommended to use the GNU Make. If the GNU CC is not
+installed the following options are used to work with the IBM XL C compiler:
+
+     ./configure CC="c99 -D_XOPEN_SOURCE" --prefix=/opt/freeware
+     gmake
+
+Not setting of _XOPEN_SOURCE is preventing compilation on AIX platforms.
+Additional software available to all users is mostly installed to
+'/opt/freeware' and not to '/usr/local'.
+
 Specifying the System Type
 ==========================
 
