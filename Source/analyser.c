@@ -177,6 +177,22 @@ static char        *Is_Tool(
 
             return ( s + 5 );
         }
+        /* Check if filter starts or ends */
+        if ( !strncmp( "filter ", s, 7 ) )
+        {
+            if ( *tool_active )
+            {
+                *itemkind = ITEM_LINE_FILTER_END;
+                *tool_active = 0;
+            }
+            else
+            {
+                *itemkind = ITEM_LINE_FILTER_START;
+                *tool_active = 1;
+            }
+
+            return ( s + 7 );
+        }
         /* Check if DOT starts or ends */
         if ( !strncmp( "dot ", s, 4 ) )
         {

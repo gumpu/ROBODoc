@@ -77,7 +77,9 @@ enum ItemLineKind
     ITEM_LINE_DOT_START,        /* Similar to TOOL_START but use DOT tool */
     ITEM_LINE_DOT_END,          /* End line of a DOT item */
     ITEM_LINE_DOT_FILE,         /* DOT file to include */
-    ITEM_LINE_INCLUDE           /* file to include */
+    ITEM_LINE_INCLUDE,          /* file to include */
+    ITEM_LINE_FILTER_START,     /* Similar to TOOL_START but use as a filter */
+    ITEM_LINE_FILTER_END        /* End of FILTER item */
 };
 
 /*****/
